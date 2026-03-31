@@ -159,7 +159,56 @@ const ORD=[
 {id:"O4",cat:"Mobilisation",type:"ord",q:"Remettez les moments de mobilisation dans le bon ordre chronologique :",items:[{id:"m1",l:"Au lancement et cadrage (sensibilisation/vulgarisation)"},{id:"m2",l:"Au lancement de la collecte (responsabilisation)"},{id:"m3",l:"À l'issue du profil GES (restitution intermédiaire)"},{id:"m4",l:"Pour la construction du plan de transition (coconstruction)"},{id:"m5",l:"En synthèse de la démarche (communication finale)"}],correct:["m1","m2","m3","m4","m5"],e:"(1) Lancement/cadrage : sensibiliser et vulgariser les enjeux. (2) Avant la collecte : responsabiliser les détenteurs de données. (3) Après le profil GES : restitution intermédiaire des résultats. (4) Plan de transition : coconstruire les actions avec les PP. (5) Synthèse : communication finale."},
 ];
 
-const TF = [];    // Vrai/Faux — à remplir plus tard
+const TF = [
+  {id:"TF1",type:"tf",cat:"Historique",
+    q:"Le Bilan Carbone® a été officiellement formalisé par l'ADEME en 2004.",
+    a:true,
+    e:"Exact. 2004 = formalisation officielle par l'ADEME avec Jean-Marc Jancovici (Manicore). 2002 = travaux préparatoires. 2011 = création de l'ABC."},
+  {id:"TF2",type:"tf",cat:"Historique",
+    q:"La marque Bilan Carbone® est déposée uniquement en France.",
+    a:false,
+    e:"FAUX. La marque® est déposée à l'INPI en France ET dans toute l'Union Européenne."},
+  {id:"TF3",type:"tf",cat:"Objectifs & Principes",
+    q:"La démarche Bilan Carbone® est obligatoire pour les entreprises de plus de 500 salariés.",
+    a:false,
+    e:"FAUX. Le BC® est entièrement VOLONTAIRE. C'est le BEGES réglementaire qui est obligatoire pour les organisations de +500 salariés. Le BC® peut y répondre mais reste une démarche volontaire."},
+  {id:"TF4",type:"tf",cat:"Objectifs & Principes",
+    q:"La comptabilité carbone est une mesure scientifiquement rigoureuse des émissions de GES.",
+    a:false,
+    e:"FAUX. La comptabilité carbone est un CALCUL, basé sur la science, mais incertain par nature. Elle n'est pas rigoureusement scientifique mais suffisante pour passer à l'action."},
+  {id:"TF5",type:"tf",cat:"Les 7 Étapes",
+    q:"La démarche Bilan Carbone® v9 est structurée en 7 étapes.",
+    a:true,
+    e:"Exact. Les 7 étapes : (1) Cadrage, (2) Périmètre, (3) Mobilisation, (4) Comptabilisation, (5) Plan de transition, (6) Synthèse et restitution, (7) Évaluation."},
+  {id:"TF6",type:"tf",cat:"Les 7 Étapes",
+    q:"L'évaluation (étape 7) est obligatoire pour tous les niveaux de maturité.",
+    a:false,
+    e:"FAUX. L'évaluation (étape 7) est FACULTATIVE et volontaire. Le BC® doit pouvoir être évalué à tout moment, mais l'audit n'est pas une obligation."},
+  {id:"TF7",type:"tf",cat:"Niveaux de Maturité",
+    q:"Une organisation peut directement viser le niveau Avancé sans commencer par le niveau Initial.",
+    a:true,
+    e:"Exact. L'organisation peut viser directement le niveau correspondant à ses objectifs et sa maturité. Un questionnaire de maturité aide à trouver le bon point de départ."},
+  {id:"TF8",type:"tf",cat:"Niveaux de Maturité",
+    q:"Au niveau Avancé, un seul critère manquant est toléré.",
+    a:true,
+    e:"Exact. Au niveau Avancé, un seul critère manquant est toléré. Cela reflète la logique d'amélioration continue : progresser, pas atteindre la perfection absolue."},
+  {id:"TF9",type:"tf",cat:"Comptabilisation",
+    q:"L'unité standard pour exprimer les émissions dans un BC® est la tonne de CO₂ (tCO₂).",
+    a:false,
+    e:"FAUX. L'unité est la TONNE CO₂ ÉQUIVALENT (tCO₂e). Elle agrège différents GES selon leur PRG-100. tCO₂ sans 'e' = uniquement le CO₂, ce n'est pas l'unité standard."},
+  {id:"TF10",type:"tf",cat:"Comptabilisation",
+    q:"Le SO₂ est un gaz à effet de serre comptabilisé obligatoirement dans un Bilan Carbone®.",
+    a:false,
+    e:"FAUX. Le SO₂ est un polluant atmosphérique (pluies acides) mais PAS un GES au sens du BC®. Les GES obligatoires sont : CO₂, CH₄, N₂O, SF₆, HFC, PFC et NF₃."},
+  {id:"TF11",type:"tf",cat:"Périmètre",
+    q:"Le périmètre temporel classique d'un Bilan Carbone® est d'une année complète.",
+    a:true,
+    e:"Exact. Le périmètre temporel classique = 1 an, pour refléter l'activité dans sa globalité. Pour répondre au BEGES-R, le périmètre doit obligatoirement être une année complète."},
+  {id:"TF12",type:"tf",cat:"Plan de Transition",
+    q:"Le plan de transition est obligatoire uniquement pour le niveau Avancé.",
+    a:false,
+    e:"FAUX. Le plan de transition est OBLIGATOIRE À TOUS LES NIVEAUX (Initial, Standard, Avancé). Sans plan de transition, un BC® est incomplet selon la v9."},
+];
 const MULTI = []; // Multi-réponses — à remplir plus tard
 const MATCH = []; // Associations — à remplir plus tard
 const BLANK = []; // Texte à trous — à remplir plus tard
@@ -505,7 +554,7 @@ function buildQuiz(){
       ));
     }
   } else if (curQ.type === "tf") {
-    children.push(p({style:{color:"#8A9DB5"}}, "Type TF — à implémenter"));
+    children.push(buildTF(curQ));
   } else if (curQ.type === "multi") {
     children.push(p({style:{color:"#8A9DB5"}}, "Type Multi — à implémenter"));
   } else if (curQ.type === "match") {
@@ -542,6 +591,7 @@ function buildQuiz(){
     const ok=isOrd?state.dragOk[curQ.id]:(state.sel===curQ.a);
     children.push(div({className:"feedback "+(ok?"ok":"ko")},
       span({},ok?"✓ Bonne réponse !":"✗ Mauvaise réponse"),
+      buildStarBtn(curQ.id),
     ));
     children.push(btn({className:"exp-btn",onClick:()=>setState({showExp:!state.showExp})},
       state.showExp?"▲ Masquer l'explication":"▼ Voir l'explication"
@@ -553,6 +603,61 @@ function buildQuiz(){
   }
 
   return div({},...children);
+}
+
+// ── VRAI / FAUX ───────────────────────────────────────────────────────────────
+function buildTF(q) {
+  const { conf, sel, showExp, quizMode } = state;
+  const isStudy = quizMode === "study";
+  const children = [p({ class: "q-text" }, q.q)];
+
+  const tfRow = div({ style: { display: "flex", gap: "10px", marginBottom: "16px" } }, [
+    btn({
+      class: `opt${sel === 1 ? " selected" : ""}${conf ? " locked" : ""}${conf && q.a === true ? " correct" : ""}${conf && sel === 1 && q.a !== true ? " wrong" : ""}`,
+      style: { flex: "1", justifyContent: "center", fontSize: "16px", fontWeight: "700" },
+      onclick: conf ? null : () => setState({ sel: 1 }),
+    }, [span({ class: "letter" }, "V"), "Vrai", conf && q.a === true ? span({ class: "tick" }, "✓") : null]),
+    btn({
+      class: `opt${sel === 0 ? " selected" : ""}${conf ? " locked" : ""}${conf && q.a === false ? " correct" : ""}${conf && sel === 0 && q.a !== false ? " wrong" : ""}`,
+      style: { flex: "1", justifyContent: "center", fontSize: "16px", fontWeight: "700" },
+      onclick: conf ? null : () => setState({ sel: 0 }),
+    }, [span({ class: "letter" }, "F"), "Faux", conf && q.a === false ? span({ class: "tick" }, "✓") : null]),
+  ]);
+  children.push(tfRow);
+
+  if (conf) {
+    const ok = (sel === 1 && q.a === true) || (sel === 0 && q.a === false);
+    children.push(div({ class: `feedback ${ok ? "ok" : "ko"}` }, [
+      span({ style: { fontSize: "18px" } }, ok ? "✅" : "❌"),
+      span({ style: { fontWeight: "600", fontSize: "14px" } }, ok ? "Bonne réponse !" : `Incorrect — Réponse : ${q.a ? "Vrai" : "Faux"}`),
+      buildStarBtn(q.id),
+    ]));
+    if (isStudy || showExp) children.push(div({ class: "exp-box" }, q.e));
+    if (!isStudy && !showExp) children.push(btn({ class: "exp-btn", onclick: () => setState({ showExp: true }) }, "▼ Voir l'explication"));
+  }
+
+  children.push(div({ class: "actions" }, [
+    !conf
+      ? btn({ class: "btn", style: { opacity: sel === null ? 0.4 : 1 }, onclick: sel !== null ? confirmTF : null }, "Valider →")
+      : btn({ class: "btn", onclick: next }, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
+  ]));
+  return div({}, children);
+}
+
+function confirmTF() {
+  const q = state.qs[state.cur];
+  const ok = (state.sel === 1 && q.a === true) || (state.sel === 0 && q.a === false);
+  setState(s => ({ conf: true, score: ok ? s.score + 1 : s.score, ans: [...s.ans, { q, sel: s.sel, ok }] }));
+}
+
+function buildStarBtn(id) {
+  const starred = isStarred(id);
+  return btn({
+    class: "btn-sm",
+    style: { marginLeft: "auto", background: "none", border: "none", fontSize: "16px", cursor: "pointer", padding: "0 4px" },
+    onclick: () => toggleStar(id),
+    title: starred ? "Retirer des favoris" : "Ajouter aux favoris",
+  }, starred ? "⭐" : "☆");
 }
 
 // ── RÉSULTATS ─────────────────────────────────────────────────────────────────
