@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🥖 QCM Bilan Carbone des Pains</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:linear-gradient(135deg,#0A1520,#0F1E30,#0D1A28);font-family:Georgia,Palatino,serif;color:#E8F4EC;display:flex;align-items:flex-start;justify-content:center;padding:20px 14px 40px}
+.card{width:100%;max-width:680px;background:rgba(16,28,45,0.97);border-radius:18px;border:1px solid #1E3048;padding:28px 24px;box-shadow:0 20px 50px rgba(0,0,0,0.6)}
+h1{font-size:24px;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px}
+.subtitle{color:#52B788;font-size:14px;font-style:italic;margin-bottom:14px}
+.desc{color:#8A9DB5;font-size:14px;line-height:1.6;max-width:440px;margin:0 auto 20px}
+.chips{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:22px}
+.chip{display:flex;align-items:center;gap:4px;border-radius:20px;padding:3px 9px;border:1px solid}
+.chip-dot{width:7px;height:7px;border-radius:50%}
+.chip span{font-size:10px;color:#8A9DB5}
+.btn{background:linear-gradient(135deg,#2D6A4F,#40916C);color:#fff;border:none;border-radius:9px;padding:10px 22px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:disabled{opacity:0.4;cursor:default}
+.btn-sm{background:#1A2B3C;color:#8A9DB5;border:1px solid #2A3A52;border-radius:7px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:inherit}
+.btn-dark{background:#1A2335}
+.btn-mid{background:#2A3A52}
+.progress-wrap{height:3px;background:#1E3048;border-radius:2px;margin-bottom:14px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,#2D6A4F,#52B788);border-radius:2px;transition:width 0.4s ease}
+.quiz-meta{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.counter{color:#6A7D90;font-size:13px}
+.badge{font-size:11px;color:#fff;border-radius:11px;padding:2px 9px;font-weight:600}
+.ord-badge{font-size:11px;color:#E9A23B;border:1px solid #E9A23B;border-radius:8px;padding:2px 7px}
+.score-chip{margin-left:auto;color:#52B788;font-size:13px;font-weight:700}
+.q-text{color:#E8F4EC;font-size:17px;line-height:1.6;margin-bottom:20px;font-weight:500}
+.options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:9px;font-size:14px;line-height:1.4;cursor:pointer;border:1px solid #2A3A52;background:#1A2335;color:#C8D8E8;transition:all 0.12s;font-family:inherit;width:100%;text-align:left}
+.opt:hover:not(.locked){background:#162A4A;border-color:#52B788;color:#fff}
+.opt.selected{background:#162A4A;border-color:#52B788;color:#fff}
+.opt.correct{background:#1B3A2A;border-color:#52B788;color:#52B788}
+.opt.wrong{background:#3A1B1B;border-color:#E07A5F;color:#E07A5F}
+.opt.locked{cursor:default}
+.letter{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.tick{margin-left:auto;font-size:15px}
+.feedback{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:9px;border:1px solid;margin-bottom:12px}
+.feedback.ok{background:#1B3A2A;border-color:#52B788;color:#52B788}
+.feedback.ko{background:#3A1B1B;border-color:#E07A5F;color:#E07A5F}
+.exp-btn{background:none;border:none;color:#52B788;cursor:pointer;font-size:12px;padding:3px 0;margin-bottom:5px;font-family:inherit}
+.exp-box{background:#0F1E30;border:1px solid #1E3048;border-radius:9px;padding:12px 14px;color:#8ABFDB;font-size:13px;line-height:1.7;margin-bottom:12px;font-style:italic}
+.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+/* Drag order */
+.drag-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:9px;border:1px solid #2A3A52;background:#1A2335;color:#C8D8E8;cursor:grab;user-select:none;margin-bottom:6px;transition:all 0.12s;font-size:14px}
+.drag-item.dragging{background:#1E3860;border-color:#52B788}
+.drag-item.correct-pos{background:#1B3A2A;border-color:#52B788;color:#52B788;cursor:default}
+.drag-item.wrong-pos{background:#3A1B1B;border-color:#E07A5F;color:#E07A5F;cursor:default}
+.drag-num{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.drag-hint{color:#8A9DB5;font-size:13px;margin-bottom:8px;font-style:italic}
+/* Filtre */
+.cat-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;cursor:pointer;border:1px solid #2A3A52;background:#131D2A;margin-bottom:5px}
+.cat-row.active{background:rgba(82,183,136,0.05)}
+.cat-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;background:#2A3A52}
+.cat-name{color:#6A7D90;flex:1;font-size:13px}
+.cat-row.active .cat-name{color:#C8D8E8}
+.cat-count{color:#3A4A5A;font-size:12px}
+.cat-row.active .cat-count{color:#52B788}
+.cat-check{font-size:16px;margin-left:6px}
+.total-count{text-align:center;color:#52B788;margin-bottom:12px;font-size:14px}
+/* Résultats */
+.results-header{text-align:center;margin-bottom:22px}
+.big-score{font-size:50px;font-weight:800;margin:0 0 4px}
+.pct{color:#8A9DB5;font-size:15px}
+.theme-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.theme-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.theme-name{font-size:12px;flex:1;color:#C8D8E8}
+.mini-bar-wrap{width:100px;height:5px;background:#1E3048;border-radius:3px;overflow:hidden;flex-shrink:0}
+.mini-bar{height:100%;border-radius:3px}
+.theme-score{font-size:12px;font-weight:700;min-width:36px;text-align:right}
+.section-title{color:#8A9DB5;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.flex-center{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+/* Review */
+.review-header{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.review-counter{color:#52B788;font-size:14px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="card" id="app"></div>
+
+<script>
+// ── DONNÉES ──────────────────────────────────────────────────────────────────
+const Q=[
+{id:1,cat:"Historique",type:"mcq",q:"En quelle année les premières versions du Bilan Carbone® ont-elles été développées ?",o:["1997","2002","2004","2011"],a:1,e:"2002 = premières versions de travail. 2004 = formalisation officielle par l'ADEME avec Jean-Marc Jancovici. 2011 = création de l'ABC. Ces 3 dates sont distinctes et importantes à retenir."},
+{id:2,cat:"Historique",type:"mcq",q:"En quelle année la méthode Bilan Carbone® a-t-elle été officiellement formalisée par l'ADEME ?",o:["2000","2002","2004","2008"],a:2,e:"2004 = formalisation officielle. 2002 = travaux préparatoires. Co-développée avec Jean-Marc Jancovici du bureau d'étude Manicore."},
+{id:3,cat:"Historique",type:"mcq",q:"En quelle année l'ABC (Association pour la transition Bas Carbone) a-t-elle été créée ?",o:["2004","2008","2011","2018"],a:2,e:"L'ABC a été créée en 2011 par l'ADEME et l'APCC pour reprendre la gouvernance de la méthode. Elle regroupe plus de 1 000 organisations engagées pour le climat."},
+{id:4,cat:"Historique",type:"mcq",q:"Quel est le numéro de la version actuelle de la méthode mise en application en 2025 ?",o:["Version 7","Version 8","Version 9","Version 10"],a:2,e:"La v9 a été publiée en juillet 2024 et mise en application en 2025. La v8 datait de 2018. La méthode a connu 8 évolutions depuis sa création en 2004."},
+{id:5,cat:"Historique",type:"mcq",q:"La démarche Bilan Carbone® est-elle obligatoire ou volontaire ?",o:["Obligatoire pour toutes les entreprises","Obligatoire pour les +500 salariés","Volontaire — aucune obligation légale","Obligatoire pour les entreprises cotées"],a:2,e:"Le BC® est entièrement VOLONTAIRE. À ne pas confondre avec le BEGES réglementaire (obligatoire pour +500 salariés, collectivités >50k hab.). Le BC® peut répondre aux exigences BEGES mais reste une démarche volontaire."},
+{id:6,cat:"Historique",type:"mcq",q:"Le Bilan Carbone® désigne officiellement :",o:["Uniquement une méthode de calcul","Une méthode + outils + formations + une marque déposée","Un label RSE attribué par l'État","Uniquement une marque déposée par l'ADEME"],a:1,e:"Le BC® désigne 4 éléments : (1) méthode développée par l'ABC, (2) outils (tableurs, logiciels), (3) formations par organismes habilités, (4) marque® déposée à l'INPI en France et dans l'UE."},
+{id:7,cat:"Historique",type:"mcq",q:"Quelle est la durée moyenne d'une mission Bilan Carbone® ?",o:["Quelques jours","Quelques semaines","Quelques mois","Plusieurs années"],a:2,e:"Quelques mois en moyenne : cadrage + gouvernance, collecte des données (souvent la phase la plus longue, 1-2 mois), analyse, comptabilisation, puis restitution."},
+{id:8,cat:"Objectifs & Principes",type:"mcq",q:"Quelle est la philosophie centrale du Bilan Carbone® ?",o:["Mesurer pour publier","Compter pour agir","Réduire pour compenser","Agir pour communiquer"],a:1,e:"« Compter pour agir » : la comptabilisation n'est pas une fin en soi mais un outil au service de l'action et de la réduction. Cela distingue le BC® d'un simple exercice de reporting RSE."},
+{id:9,cat:"Objectifs & Principes",type:"mcq",q:"Quels sont les 3 grands objectifs de la méthode Bilan Carbone® ?",o:["Mesurer, Compenser, Communiquer","Mobiliser, Comptabiliser, Élaborer un plan de transition","Réduire, Certifier, Publier","Inventorier, Analyser, Compenser"],a:1,e:"Les 3 objectifs INDISSOCIABLES : (1) MOBILISER les PP internes et externes, (2) COMPTABILISER les émissions directes et indirectes, (3) Élaborer un PLAN DE TRANSITION ambitieux, pilotable, opérationnel et cohérent."},
+{id:10,cat:"Objectifs & Principes",type:"mcq",q:"Lequel NE fait PAS partie des 5 principes de reporting du BC® ?",o:["Exactitude","Significativité","Compensabilité","Transparence"],a:2,e:"Les 5 principes de reporting : Cohérence, Exactitude, Significativité, Évaluation, Transparence. La 'Compensabilité' n'en fait pas partie — le BC® est orienté RÉDUCTION des émissions."},
+{id:11,cat:"Objectifs & Principes",type:"mcq",q:"Lequel NE fait PAS partie des 4 principes d'analyse stratégique du BC® ?",o:["Stratégie bas carbone","Anticipation","Rentabilité financière","Pragmatisme"],a:2,e:"Les 4 principes d'analyse stratégique : Stratégie bas carbone, Vision long terme, Anticipation, Pragmatisme. La 'Rentabilité financière' n'est pas un principe de la méthode."},
+{id:12,cat:"Objectifs & Principes",type:"mcq",q:"Le BC® niveau Avancé couvre les exigences CSRD ESRS E1 à hauteur de :",o:["L'intégralité","La majeure partie","La moitié environ","Il n'est pas compatible CSRD"],a:1,e:"Le BC® niveau Avancé couvre LA MAJEURE PARTIE (pas l'intégralité) de la CSRD ESRS E1. Les niveaux Initial et Standard ont une couverture partielle. Cette compatibilité est un atout : un seul BC® peut alimenter plusieurs référentiels."},
+{id:13,cat:"Objectifs & Principes",type:"mcq",q:"Le BC® mesure-t-il la responsabilité climatique d'une organisation ?",o:["Oui, c'est son objectif principal","Non — il identifie le potentiel d'action pour dimensionner le plan de transition","Oui, mais uniquement pour les émissions directes","Non, c'est réservé aux États"],a:1,e:"Le BC® ne mesure PAS la responsabilité climatique. Il identifie le POTENTIEL D'ACTION pour dimensionner le plan de transition. L'objectif : transformer l'organisation pour l'adapter au monde bas carbone de demain."},
+{id:14,cat:"Les 7 Étapes",type:"mcq",q:"Combien d'étapes compte la démarche Bilan Carbone® v9 ?",o:["5","6","7","8"],a:2,e:"7 étapes : (1) Cadrage, (2) Périmètre, (3) Mobilisation, (4) Comptabilisation, (5) Plan de transition, (6) Synthèse et restitution, (7) Évaluation. La v9 est une démarche complète de transition bas carbone, pas seulement une méthode de calcul."},
+{id:15,cat:"Les 7 Étapes",type:"mcq",q:"Quelle étape a remplacé la 'sensibilisation des acteurs' dans la v9 ?",o:["La communication externe","La mobilisation des acteurs","La formation obligatoire","Le reporting réglementaire"],a:1,e:"La 'sensibilisation' laisse place à la 'MOBILISATION'. Ce changement est intentionnel : mettre en MOUVEMENT et en ACTION les organisations. La mobilisation est transversale à toutes les étapes, pas seulement ponctuelle."},
+{id:16,cat:"Les 7 Étapes",type:"mcq",q:"Quelles actions font partie de l'étape de cadrage (étape 1) ?",o:["Calculer les émissions GES et sélectionner les FE","Mobiliser la Direction, nommer un·e coordinateur·rice, structurer la gouvernance","Rédiger le rapport final et le publier sur l'OCCF","Définir les objectifs de réduction à 2030"],a:1,e:"Cadrage (étape 1) : mobiliser la Direction, nommer un·e coordinateur·rice interne, structurer la gouvernance (comité de pilotage, équipe projet), définir le niveau de maturité visé. Calcul des émissions = étape 4. Objectifs = étape 5. Publication = étape 6."},
+{id:17,cat:"Les 7 Étapes",type:"mcq",q:"La mobilisation dans le Bilan Carbone® intervient :",o:["Uniquement au début (cadrage)","Uniquement lors de la restitution finale","De façon transversale tout au long de la démarche","Uniquement auprès de l'équipe projet"],a:2,e:"La mobilisation est TRANSVERSALE : elle intervient à chaque étape (cadrage, périmètre, comptabilisation, plan de transition, restitution). La v9 exige une mobilisation EN CONTINU. Elle concerne les PP internes ET externes."},
+{id:18,cat:"Niveaux de Maturité",type:"mcq",q:"Quels sont les 3 niveaux de maturité introduits dans la v9 ?",o:["Bronze, Argent, Or","Débutant, Intermédiaire, Expert","Initial, Standard, Avancé","Basique, Confirmé, Certifié"],a:2,e:"La v9 introduit : INITIAL (premier bilan ou org. peu mature), STANDARD (démarche régulière avec plan d'action structuré), AVANCÉ (pilotage stratégique complet intégré à la stratégie globale)."},
+{id:19,cat:"Niveaux de Maturité",type:"mcq",q:"À quelle fréquence minimale le BC® niveau Avancé doit-il être renouvelé ?",o:["Tous les 4 ans","Tous les 3 ans","Tous les 2 ans","Tous les ans"],a:3,e:"Fréquences : Initial → max 4 ans. Standard → 2 ans. Avancé → TOUS LES ANS. La fréquence croissante traduit l'ambition : au niveau Avancé, le BC® est un véritable outil de pilotage stratégique annuel."},
+{id:20,cat:"Niveaux de Maturité",type:"mcq",q:"Une entreprise réalise son BC® tous les 2 ans. Peut-elle se positionner en niveau Avancé ?",o:["Oui, si elle respecte tous les autres critères","Non — le niveau Avancé exige un renouvellement annuel","Oui, la fréquence n'est pas un critère","Oui, si son bilan a été évalué par un tiers"],a:1,e:"NON. Tous les 2 ans = niveau STANDARD. Le niveau Avancé exige un renouvellement ANNUEL. La fréquence est bien un critère discriminant entre les niveaux."},
+{id:21,cat:"Niveaux de Maturité",type:"mcq",q:"Pour le niveau Initial, quel % minimal des émissions indirectes doit être couvert ?",o:["60%","70%","80%","100%"],a:2,e:"Niveau Initial : 100% des émissions directes + entre 80% et 100% des émissions indirectes. Le seuil de 80% est aligné avec le BEGES-R et ISO 14064-1. 70% est INSUFFISANT."},
+{id:22,cat:"Niveaux de Maturité",type:"mcq",q:"Au niveau Standard, comment les objectifs de réduction sont-ils exprimés ?",o:["En valeur absolue uniquement","En intensité relative uniquement","En valeur absolue ET en intensité relative","Aucune exigence de forme"],a:2,e:"Standard : objectifs en VALEUR ABSOLUE (ex : -30% tCO₂e d'ici 2030) ET en INTENSITÉ RELATIVE (ex : -20% tCO₂e/€CA). Initial = valeur absolue uniquement."},
+{id:23,cat:"Niveaux de Maturité",type:"mcq",q:"À partir de quel niveau la coconstruction devient-elle obligatoire ?",o:["Initial","Standard","Avancé","Elle n'est jamais obligatoire"],a:1,e:"La COCONSTRUCTION est obligatoire à partir du niveau STANDARD. Au niveau Initial, la mobilisation peut se limiter à 3 temps (lancement, collecte, restitution) sans coconstruction obligatoire."},
+{id:24,cat:"Niveaux de Maturité",type:"mcq",q:"Au niveau Avancé, quelle exigence s'applique à la direction ?",o:["Aucune exigence particulière","Valider uniquement les données chiffrées","Être informée du lancement","Au moins 1 membre doit être porteur ET formé BC® Décideurs"],a:3,e:"Niveau Avancé : au moins 1 MEMBRE DE LA DIRECTION doit être porteur de la démarche ET avoir suivi la formation BC® Décideurs. Cela traduit l'intégration du BC® à la stratégie globale."},
+{id:25,cat:"Niveaux de Maturité",type:"mcq",q:"L'Approbateur dans la démarche BC® est :",o:["Le consultant externe","La personne interne responsable de la mission qui s'assure que les objectifs sont atteints","L'évaluateur tiers","Le dirigeant qui signe le rapport"],a:1,e:"L'Approbateur est INTERNE à l'organisation, responsable de la mission, s'assurant que les objectifs sont atteints. À distinguer du coordinateur (pilote opérationnel), du consultant externe et de l'évaluateur tiers (auditeur)."},
+{id:26,cat:"Niveaux de Maturité",type:"mcq",q:"Une organisation respecte tous les critères Avancés sauf A3. Peut-elle se positionner Avancé ?",o:["Non, tous les critères sont absolument obligatoires","Oui — un seul critère manquant est toléré","Uniquement si A3 est compensé par d'autres critères","Non, elle doit se positionner en Initial"],a:1,e:"OUI, un seul critère manquant est toléré au niveau Avancé. Cela reflète la logique d'amélioration continue : progresser, pas atteindre la perfection absolue. Le critère manquant doit être documenté."},
+{id:27,cat:"Niveaux de Maturité",type:"mcq",q:"En niveau Initial, l'organisation peut-elle se limiter à 3 temps de mobilisation ?",o:["Non, il en faut au minimum 5","Oui — 3 temps suffisent au niveau Initial","Non, sans nombre minimal mais mobilisation continue","Oui, uniquement si le budget est limité"],a:1,e:"OUI, au niveau Initial : 3 temps de mobilisation suffisent — (1) Lancement, (2) Présentation en cours de collecte, (3) Restitution finale. Aux niveaux Standard et Avancé, des phases supplémentaires (notamment coconstruction) sont exigées."},
+{id:28,cat:"Niveaux de Maturité",type:"mcq",q:"Au niveau Initial, les objectifs de réduction doivent être :",o:["Uniquement court terme, sans référence nationale","Moyen ET long terme (2030 et 2050), valeur absolue, cohérents avec la SNBC","En intensité relative, selon des standards sectoriels","Librement définis sans contrainte"],a:1,e:"Niveau Initial : objectifs MOYEN TERME (ex : 2030) ET LONG TERME (ex : 2050), en VALEUR ABSOLUE, cohérents avec la SNBC. L'intensité relative et les standards sectoriels internationaux sont des exigences des niveaux supérieurs."},
+{id:29,cat:"Cadrage",type:"mcq",q:"Qu'est-ce que l'outil RACI dans le pilotage d'un BC® ?",o:["Un outil de calcul des émissions par poste","Un outil pour structurer et clarifier les rôles et responsabilités des parties prenantes","Un référentiel de certification","Un système de notation de la qualité des données"],a:1,e:"RACI = Responsible (réalise), Accountable (approuve), Consulted (consulté), Informed (informé). C'est un outil de GOUVERNANCE de projet, pas de calcul carbone. Il aide à clarifier qui fait quoi dans la démarche BC®."},
+{id:30,cat:"Cadrage",type:"mcq",q:"Une organisation peut-elle viser directement le niveau Avancé sans commencer par l'Initial ?",o:["Non, obligatoirement par l'Initial","Oui, elle peut viser le niveau correspondant à ses objectifs et maturité","Oui, mais uniquement si elle a déjà réalisé un BEGES","Non, les niveaux doivent être atteints séquentiellement"],a:1,e:"OUI, l'organisation peut viser directement le niveau correspondant à ses objectifs et maturité. Elle doit ensuite PROGRESSER à chaque itération. Le questionnaire de maturité aide à trouver le bon point de départ."},
+{id:31,cat:"Cadrage",type:"mcq",q:"Qu'est-ce qu'une démarche Bilan Carbone® collective ?",o:["Un bilan réalisé par plusieurs personnes d'une même organisation","Plusieurs organisations s'associent pour réaliser chacune LEUR bilan en mutualisant ressources et pratiques","Un bilan pour un territoire et ses organisations","Une démarche imposée par une fédération à ses membres"],a:1,e:"La démarche collective = plusieurs ORGANISATIONS distinctes s'associent pour réaliser chacune son PROPRE BC®. Utile pour des organisations d'un même secteur ou territoire. Chaque organisation garde SON bilan individuel."},
+{id:32,cat:"Cadrage",type:"mcq",q:"Quels sont les livrables attendus à l'issue de l'étape 1 (Cadrage) ?",o:["Le profil GES complet et la cartographie des flux","Description de l'org. (SIRET/SIREN/NAF/ETP), niveau de maturité, présentation du coordinateur et de l'équipe projet","Le plan de transition et les fiches actions","Les facteurs d'émission sélectionnés"],a:1,e:"Livrables cadrage (étape 1) : description de l'organisation (raison sociale, SIRET, SIREN, code NAF, ETP), présentation du coordinateur·ice et réalisateur (n° de formé + date de formation), niveau de maturité choisi."},
+{id:33,cat:"Périmètre",type:"mcq",q:"Quels sont les 4 éléments constitutifs du périmètre d'un BC® ?",o:["Stratégique, financier, opérationnel, réglementaire","Émissions comptabilisées, périmètre organisationnel, périmètre temporel, périmètre opérationnel","Scope 1, 2, 3, 4","Amont, aval, direct, indirect"],a:1,e:"Les 4 périmètres : (1) ÉMISSIONS COMPTABILISÉES (quels GES ?), (2) PÉRIMÈTRE ORGANISATIONNEL (quelles entités ?), (3) PÉRIMÈTRE TEMPOREL (quelle période ?), (4) PÉRIMÈTRE OPÉRATIONNEL (quels postes d'émissions ?)."},
+{id:34,cat:"Périmètre",type:"mcq",q:"Dans le périmètre organisationnel, que faut-il inclure à 100% quel que soit le niveau de maturité ?",o:["Toutes les émissions indirectes de la chaîne de valeur","100% des équipements et installations sous contrôle opérationnel de l'organisation","Uniquement les bâtiments propriété de l'organisation","Les filiales avec +50% du capital"],a:1,e:"Quel que soit le niveau de maturité, 100% des équipements et installations sous CONTRÔLE OPÉRATIONNEL (exploités et utilisés) doivent être inclus. Tout autre choix doit être justifié. Correspond à l'approche 'contrôle opérationnel' du BEGES-R et ISO 14064-1."},
+{id:35,cat:"Périmètre",type:"mcq",q:"Quelle est la durée classique du périmètre temporel d'un BC® ?",o:["6 mois","1 an — pour refléter l'activité dans sa globalité","3 ans glissants","5 ans"],a:1,e:"Périmètre temporel CLASSIQUE = 1 AN. Un BC® peut couvrir une période particulière (événement, projet, chantier). Pour le reporting BEGES-R, le périmètre doit être d'une année complète."},
+{id:36,cat:"Périmètre",type:"mcq",q:"Quels types de flux doivent être cartographiés dans un BC® ?",o:["Uniquement énergie et matières premières","Flux d'énergie, fluides, matières premières, personnes, produits (biens et services) et déchets","Uniquement flux financiers et énergie","Uniquement les flux entrants"],a:1,e:"TOUS les flux entrants, internes ET sortants : énergie, fluides, matières premières, personnes (déplacements), produits (biens achetés/vendus/sous-traités) et déchets. L'exhaustivité est clé : un flux oublié = des émissions non comptabilisées."},
+{id:37,cat:"Périmètre",type:"mcq",q:"La cartographie des flux est obligatoire pour quel(s) niveau(x) ?",o:["Uniquement le niveau Avancé","Niveaux Standard et Avancé uniquement","Tous les niveaux : Initial, Standard et Avancé","Elle est toujours optionnelle"],a:2,e:"La cartographie des flux est exigée pour LES TROIS niveaux (critères F1, F2, F3). Seule la cartographie QUANTIFIÉE (avec valeurs chiffrées des émissions) est optionnelle — recommandée pour Standard et Avancé."},
+{id:38,cat:"Périmètre",type:"mcq",q:"Quelle est la bonne séquence pour élaborer la cartographie des flux ?",o:["Préciser les données d'activité → Cartographier → Schématiser → Finaliser","Calculer les émissions → Cartographier → Définir le périmètre → Finaliser","Schématiser l'organigramme → Cartographier les flux → Préciser les données d'activité → Finaliser","Finaliser → Cartographier → Schématiser → Préciser les données"],a:2,e:"Séquence : (1) Schématiser l'organigramme → périmètre ORGANISATIONNEL. (2) Cartographier les flux → périmètre OPÉRATIONNEL. (3) Préciser les données d'activité → prépare la COLLECTE. (4) Finaliser. Processus ITÉRATIF."},
+{id:39,cat:"Périmètre",type:"mcq",q:"Quelles sont les 2 grandes catégories de risques liés au changement climatique ?",o:["Risques financiers et risques opérationnels","Risques de transition et risques physiques","Risques réglementaires et risques technologiques","Risques court terme et risques long terme"],a:1,e:"(1) RISQUES DE TRANSITION — liés aux évolutions des sociétés et modèles éco (réglementaires, d'image, de marché, économiques). (2) RISQUES PHYSIQUES — directement liés à la modification du climat (événements extrêmes, changements progressifs). Identification exigée dès le niveau Initial."},
+{id:40,cat:"Périmètre",type:"mcq",q:"Combien de critères de significativité permettent d'identifier les émissions indirectes prioritaires ?",o:["3","4","5","6"],a:3,e:"6 critères : (1) Ampleur/importance quantitative, (2) Influence et leviers d'action, (3) Importance stratégique et vulnérabilité, (4) Lignes directrices du secteur, (5) Sous-traitance (activités externalisées), (6) Engagement du personnel."},
+{id:41,cat:"Périmètre",type:"mcq",q:"Qu'est-ce que la 'double matérialité' requise au niveau Avancé ?",o:["Comptabiliser émissions directes ET indirectes simultanément","Mesurer l'impact de l'org. sur l'environnement ET l'incidence de la dégradation de l'environnement sur l'org.","Réaliser deux bilans par an pour croiser les résultats","Appliquer deux méthodes pour valider"],a:1,e:"Double matérialité = analyser dans les 2 sens : (1) L'impact de l'org. sur l'environnement (matérialité d'impact), (2) L'incidence de la dégradation de l'environnement sur l'org. (matérialité financière). Aligné avec la CSRD."},
+{id:42,cat:"Mobilisation",type:"mcq",q:"Quelles sont les 4 phases de mobilisation définies par la méthode BC® ?",o:["Communication, Formation, Action, Évaluation","Sensibilisation/vulgarisation, Responsabilisation, Coconstruction, Restitution/communication","Diagnostic, Planification, Mise en œuvre, Bilan","Interne, Externe, Hiérarchique, Opérationnelle"],a:1,e:"Les 4 phases : (1) SENSIBILISATION/VULGARISATION — comprendre pour agir. (2) RESPONSABILISATION — donner un rôle à chacun. (3) COCONSTRUCTION — co-bâtir le plan d'action avec les PP. (4) RESTITUTION ET COMMUNICATION — permettre l'appropriation des résultats."},
+{id:43,cat:"Mobilisation",type:"mcq",q:"À quelle étape de la démarche BC® la coconstruction du plan de transition est-elle réalisée ?",o:["Étape 1 — Cadrage","Étape 2 — Périmètre","Étape 4 — Comptabilisation","Étape 5 — Plan de transition"],a:3,e:"Calendrier : Étape 1 → sensibilisation. Étape 2 → responsabilisation des détenteurs de données. Étape 4 → restitution intermédiaire. Étape 5 (Plan de transition) → COCONSTRUCTION des actions. Étape 6 → communication finale."},
+{id:44,cat:"Mobilisation",type:"mcq",q:"Quelles sont les 6 catégories de parties prenantes à mobiliser dans un BC® ?",o:["Direction, RH, Finance, Production, Commercial, Juridique","Équipe projet, Direction, Collaborateurs internes, Fournisseurs, Clients, Autres partenaires externes","Actionnaires, Salariés, Clients, État, Banques, Médias","Équipe carbone, RSE, qualité, achats, communication, direction"],a:1,e:"Les 6 catégories : (1) Équipe projet/porteurs internes, (2) Direction, (3) Collaborateurs internes (employés, bénévoles), (4) PP externes AMONT (fournisseurs), (5) PP externes AVAL (clients), (6) Autres partenaires externes (financiers, techniques, acteurs locaux, fédérations)."},
+{id:45,cat:"Mobilisation",type:"mcq",q:"Combien de phases de mobilisation distinctes la méthode prévoit-elle (sous-étapes 3.1.1 à ...) ?",o:["3 phases","4 phases","5 phases","6 phases"],a:2,e:"5 phases de mobilisation (3.1.1 à 3.1.5) : (3.1.1) Au lancement/cadrage, (3.1.2) Au lancement de la collecte, (3.1.3) À l'issue du profil GES, (3.1.4) Pour la construction du plan de transition, (3.1.5) En synthèse de la démarche. Timing indicatif."},
+{id:46,cat:"Mobilisation",type:"mcq",q:"Sur les formats et outils de mobilisation, que prévoit la méthode ?",o:["Elle impose des formats et outils spécifiques","Elle exige le contenu et les messages, mais laisse libre le choix des formats et outils","Elle n'impose aucune exigence de contenu","Elle recommande uniquement des présentations PowerPoint"],a:1,e:"La méthode exige le CONTENU et les MESSAGES nécessaires pour passer à l'action. En revanche, les MOYENS (formats, outils) restent à l'appréciation du pilote de la démarche."},
+{id:47,cat:"Comptabilisation",type:"mcq",q:"Quelle est la formule de base du calcul des émissions d'une source ?",o:["Émissions = Données d'activité ÷ Facteur d'émission","Émissions = Données d'activité × Facteur d'émission ± Incertitude","Émissions = Facteur d'émission × Surface × Durée","Émissions = Données d'activité + Facteur d'émission − Compensation"],a:1,e:"Formule fondamentale : DA × FE = Résultat ± Incertitude. La DONNÉE D'ACTIVITÉ est la quantité physique mesurée (litres, km, tonnes…). Le FACTEUR D'ÉMISSION convertit en tCO₂e. L'INCERTITUDE est toujours associée."},
+{id:48,cat:"Comptabilisation",type:"mcq",q:"Quelle est l'unité standard pour exprimer les émissions de GES dans un BC® ?",o:["Tonnes de CO₂ (tCO₂)","Tonne CO₂ équivalent (tCO₂e)","Kilogrammes de carbone (kgC)","Tonnes d'équivalent pétrole (tep)"],a:1,e:"L'unité est la TONNE CO₂ ÉQUIVALENT (tCO₂e). Elle agrège différents GES aux pouvoirs de réchauffement très différents. tCO₂ sans 'e' = uniquement le CO₂ — ce n'est pas l'unité standard du BC®."},
+{id:49,cat:"Comptabilisation",type:"mcq",q:"Quel indicateur permet de convertir les différents GES en tCO₂e ?",o:["Le potentiel d'acidification (PA)","Le pouvoir de réchauffement global à 100 ans (PRG-100)","L'indice de réchauffement climatique (IRC)","Le facteur de conversion carbone (FCC)"],a:1,e:"Le PRG-100 mesure le forçage radiatif d'un GES vs CO₂ sur 100 ans. Exemples : CH₄ ≈ 28, N₂O ≈ 265, SF₆ ≈ 23 900. Valeurs mises à jour régulièrement par le GIEC."},
+{id:50,cat:"Comptabilisation",type:"mcq",q:"Quels gaz doivent OBLIGATOIREMENT être comptabilisés dans un BC® ?",o:["CO₂ et CH₄ uniquement","CO₂, CH₄, N₂O, SF₆, HFC, PFC et NF₃","CO₂, CH₄, N₂O et SO₂","Tous les gaz polluants atmosphériques"],a:1,e:"Gaz obligatoires : CO₂, CH₄, N₂O, SF₆, HFC, PFC et NF₃. Le NF₃ n'est pas dans le Protocole de Kyoto mais le BC® l'inclut. Le SO₂ est un polluant (pluies acides) mais PAS un GES au sens du BC®."},
+{id:51,cat:"Comptabilisation",type:"mcq",q:"Qu'est-ce que le 'profil d'émission' (ou profil GES) dans un BC® ?",o:["Le résumé des objectifs de réduction","La répartition des émissions quantifiées sur les différents postes du BC®","La liste des facteurs d'émission utilisés","Le classement des émissions par niveau d'incertitude"],a:1,e:"Le PROFIL D'ÉMISSION = répartition des émissions quantifiées sur les postes BC®. C'est LE livrable central de l'étape 4. Il doit inclure les incertitudes et le taux de ratios monétaires. C'est ce profil ANONYMISÉ qui est déposé sur l'OCCF."},
+{id:52,cat:"Comptabilisation",type:"mcq",q:"La comptabilité carbone est-elle une mesure scientifiquement rigoureuse ?",o:["Oui, si les bonnes méthodes sont appliquées","Non — c'est un calcul basé sur la science, incertain par nature mais suffisant pour agir","Oui, uniquement pour les émissions directes mesurées par capteurs","Non, c'est uniquement une estimation politique"],a:1,e:"La comptabilité carbone N'EST PAS une mesure mais un CALCUL. Elle est 'basée sur la science', pas rigoureusement scientifique. Incertaine par nature — mais suffisante pour PASSER À L'ACTION et réduire les émissions."},
+{id:53,cat:"Comptabilisation",type:"mcq",q:"Quelle est la différence entre une 'source d'émission' et un 'poste d'émissions' ?",o:["Aucune différence, synonymes","Source = unité physique/processus émettant des GES ; poste = regroupement de plusieurs sources homogènes","Source = obligatoirement comptabilisée ; poste = optionnel","Source = émissions directes ; poste = émissions indirectes"],a:1,e:"SOURCE D'ÉMISSION = unité physique ou processus rejetant des GES (ex : un véhicule, une chaudière). POSTE D'ÉMISSIONS = regroupement de plusieurs sources homogènes (ex : 'déplacements domicile-travail'). GHG Protocol parle de 'scopes' et 'catégories'."},
+{id:54,cat:"Comptabilisation",type:"mcq",q:"Quelle base de données de facteurs d'émission est la référence nationale française ?",o:["IPCC Database","Base Carbone® de l'ADEME","GHG Protocol Database","Ecoinvent"],a:1,e:"La BASE CARBONE® de l'ADEME est la référence nationale française pour les facteurs d'émission. Accessible gratuitement en ligne. En l'absence de FE dans la Base Carbone®, d'autres sources peuvent être utilisées — à condition de les documenter."},
+{id:55,cat:"Comptabilisation",type:"mcq",q:"Quels sont les livrables attendus à l'issue de l'étape 4 (Comptabilisation) ?",o:["Le plan d'action et les fiches actions","Matrice de collecte, FE documentés, incertitudes, taux de ratios monétaires, et profil GES","Cartographie des flux et liste des risques","Rapport d'évaluation externe"],a:1,e:"Livrables étape 4 : (1) MATRICE DE COLLECTE (données + description du processus), (2) FACTEURS D'ÉMISSION documentés (spécifiques et ratios monétaires + sources), (3) INCERTITUDES, (4) TAUX DE RATIOS MONÉTAIRES, (5) PROFIL GES en tCO₂e. Ce dernier est le livrable central."},
+{id:56,cat:"Plan de Transition",type:"mcq",q:"Le plan de transition dans la v9 est :",o:["Optionnel pour tous les niveaux","Obligatoire et au cœur de la méthode, avec des exigences adaptées à chaque niveau","Obligatoire uniquement pour le niveau Avancé","Un simple document de communication sans indicateurs"],a:1,e:"Le plan de transition est OBLIGATOIRE À TOUS LES NIVEAUX et au cœur de la v9. Sans plan de transition, un BC® est INCOMPLET. La v9 est plus exigeante sur son existence, mais l'adapte aux 3 niveaux de maturité."},
+{id:57,cat:"Plan de Transition",type:"mcq",q:"Quels sont les 3 éléments obligatoires d'un plan de transition BC® ?",o:["Un budget, un responsable RSE, et une date de clôture","Des objectifs de réduction, une série d'actions détaillées et quantifiées, et une trajectoire crédible","Une certification externe, des KPI financiers, et un rapport annuel","Une analyse concurrentielle, des benchmarks sectoriels, et des projections financières"],a:1,e:"Plan de transition = (1) OBJECTIFS DE RÉDUCTION alignés sur les scénarios climatiques, (2) ACTIONS détaillées, quantifiées, avec responsables, (3) TRAJECTOIRE crédible par rapport aux actions et objectifs. Des INDICATEURS de suivi permettent le pilotage."},
+{id:58,cat:"Plan de Transition",type:"mcq",q:"Quels sont les 4 adjectifs qualifiant le plan de transition attendu par le BC® ?",o:["Chiffré, publié, certifié, exhaustif","Ambitieux, pilotable, opérationnel, cohérent avec la comptabilisation","Conforme, audité, transparent, international","Court terme, long terme, stratégique, financier"],a:1,e:"Le plan de transition doit être : (1) AMBITIEUX — aligné sur les objectifs climatiques, (2) PILOTABLE — avec des indicateurs de suivi, (3) OPÉRATIONNEL — actions concrètes avec responsables, (4) COHÉRENT avec la comptabilisation — les actions ciblent les postes d'émissions identifiés dans le bilan."},
+{id:59,cat:"Plan de Transition",type:"mcq",q:"Les actions d'adaptation au changement climatique doivent-elles faire partie du plan de transition ?",o:["Non, uniquement la réduction des émissions (atténuation)","Oui — le plan intègre des actions d'adaptation aux risques physiques et de transition","Uniquement pour le secteur agricole","Oui, mais uniquement au niveau Avancé"],a:1,e:"OUI, le plan de transition BC® doit intégrer des actions d'ADAPTATION (pas seulement de réduction/atténuation). Les risques identifiés en étape 2.5 doivent se traduire en actions concrètes. Au niveau Avancé, des objectifs d'adaptation EXPLICITES sont requis."},
+{id:60,cat:"Plan de Transition",type:"mcq",q:"Quels sont les livrables attendus à l'issue de l'étape 5 (Plan de transition) ?",o:["Le profil GES final et les incertitudes","Objectifs, fiches actions, trajectoire, et indicateurs de suivi/mise en œuvre/performance","Le rapport d'évaluation externe","La cartographie des risques et opportunités mise à jour"],a:1,e:"Livrables étape 5 : (1) OBJECTIFS du plan de transition, (2) PLAN D'ACTION via les fiches actions, (3) TRAJECTOIRE de décarbonation, (4) INDICATEURS — de suivi (pilotage), de mise en œuvre (avancement) et de performance (résultats)."},
+{id:61,cat:"Synthèse & Restitution",type:"mcq",q:"En combien d'étapes se déroule la restitution d'un Bilan Carbone® ?",o:["1 étape","2 à 3 étapes","4 étapes","5 étapes"],a:1,e:"Restitution en 2 à 3 étapes : (1) RESTITUTION INTERNE — par le pilote, avec tous les livrables BC® archivés, (2) RESTITUTION ET PUBLICATION — dépôt anonyme du profil GES sur l'OCCF + publication externe optionnelle, (3) RESTITUTION AVEC ÉVALUATION VOLONTAIRE — si l'org. fait auditer son bilan par un évaluateur indépendant."},
+{id:62,cat:"Synthèse & Restitution",type:"mcq",q:"Qu'est-ce que l'OCCF et quel rôle joue-t-il ?",o:["L'Organisme de Certification Carbone Français — délivre les labels BC®","L'Observatoire de la Comptabilité Carbone en France — le profil GES anonymisé y est déposé obligatoirement","L'Office de Contrôle Carbon Footprint — audite tous les bilans","L'Outil de Calcul Carbone Français — base de données des FE"],a:1,e:"L'OCCF = plateforme où chaque organisation DOIT déposer son profil GES ANONYMISÉ. Ce dépôt contribue à la connaissance publique sur les émissions sectorielles. C'est une exigence du principe de TRANSPARENCE du BC®."},
+{id:63,cat:"Synthèse & Restitution",type:"mcq",q:"Quels sont les 2 objectifs de l'évaluation (étape 7) ?",o:["Calculer le coût du bilan et préparer le prochain","Vérifier que le bilan respecte les exigences BC® et confirmer le niveau de maturité","Communiquer en externe et obtenir un label RSE","Comparer avec les bilans des concurrents"],a:1,e:"L'évaluation (étape 7, facultative) : (1) VÉRIFIER que le bilan respecte les exigences méthodologiques BC®, (2) CONFIRMER le niveau de maturité — utile pour savoir quelle démarche complémentaire (ACT, SBTi…) peut être amorcée ensuite."},
+{id:64,cat:"Synthèse & Restitution",type:"mcq",q:"L'évaluation (audit) d'un Bilan Carbone® est-elle obligatoire ?",o:["Oui, pour tous les niveaux","Oui, uniquement pour le niveau Avancé","Non — facultative, mais le BC® doit pouvoir être évalué à tout moment","Non, réservée aux organisations de +500 salariés"],a:2,e:"L'évaluation (étape 7) est FACULTATIVE mais le BC® doit être structuré pour POUVOIR ÊTRE ÉVALUÉ à tout moment. Elle peut être demandée pour : conformité réglementaire, assurance sur la fiabilité, contrôle qualité de bilans de PP, transparence de la communication."},
+{id:65,cat:"Synthèse & Restitution",type:"mcq",q:"Les 3 piliers A, B, C de l'action climatique peuvent-ils être combinés pour calculer une 'empreinte nette' ?",o:["Oui — empreinte nette = émissions induites – évitées – séquestrées","Non — les 3 piliers sont strictement NON COMBINABLES","Oui, mais uniquement B et C peuvent se soustraire à A","Oui, si l'org. est Avancée et les 3 piliers ont été audités"],a:1,e:"Les 3 piliers sont STRICTEMENT NON COMBINABLES : ni additionnables, ni soustrayables. Pilier A (émissions induites) = BC® les réduit. Piliers B (émissions évitées) et C (séquestration) = calculables séparément mais ne se soustraient pas du Pilier A."},
+{id:66,cat:"Synthèse & Restitution",type:"mcq",q:"Avec quels référentiels le Bilan Carbone® est-il compatible ?",o:["Uniquement ISO 14001 et EMAS","ISO 14064-1, GHG Protocol, BEGES réglementaire français, et CSRD ESRS E1","GHG Protocol uniquement","Aucun — le BC® est un standard autonome"],a:1,e:"Le BC® est compatible avec : ISO 14064-1-2:2019, le GHG Protocol, le BEGES réglementaire français, et la CSRD ESRS E1 (niveau Avancé). Il est aussi utilisable pour NZI, ACT, SBTi. Un seul BC® peut alimenter plusieurs référentiels simultanément."},
+{id:67,cat:"Synthèse & Restitution",type:"mcq",q:"Que signifie 'Bilan Carbone® évalué' pour une organisation ?",o:["L'organisation a simplement déposé son profil GES sur l'OCCF","L'organisation a fait auditer son bilan par un évaluateur indépendant avec un résultat positif","L'organisation a atteint le niveau Avancé de maturité","L'organisation a obtenu la certification ISO 14064-1"],a:1,e:"Un 'BC® évalué' signifie que l'organisation a fait AUDITER son bilan par des évaluateurs INDÉPENDANTS avec un résultat POSITIF. Suit le processus du Guide d'évaluation (bilancarbone-evaluation.com). Un simple dépôt OCCF ne suffit pas."},
+];
+
+const ORD=[
+{id:"O1",cat:"Les 7 Étapes",type:"ord",q:"Remettez les 7 étapes du Bilan Carbone® dans le bon ordre :",items:[{id:"e1",l:"Cadrage"},{id:"e2",l:"Périmètre"},{id:"e3",l:"Mobilisation"},{id:"e4",l:"Comptabilisation"},{id:"e5",l:"Plan de transition"},{id:"e6",l:"Synthèse et restitution"},{id:"e7",l:"Évaluation"}],correct:["e1","e2","e3","e4","e5","e6","e7"],e:"(1) Cadrage — niveau de maturité et pilotage. (2) Périmètre — 4 périmètres et cartographie des flux. (3) Mobilisation — engager les PP (transversale à toutes les étapes). (4) Comptabilisation — calculer les émissions. (5) Plan de transition — objectifs et actions. (6) Synthèse/Restitution — communiquer et publier sur l'OCCF. (7) Évaluation — audit qualité FACULTATIF."},
+{id:"O2",cat:"Périmètre",type:"ord",q:"Remettez les 4 étapes d'élaboration de la cartographie des flux dans le bon ordre :",items:[{id:"f1",l:"Schématiser l'organigramme (bâtiments, filiales, clients, fournisseurs)"},{id:"f2",l:"Cartographier les flux entrants, internes et sortants"},{id:"f3",l:"Préciser les données d'activité associées à chaque flux"},{id:"f4",l:"Finaliser la cartographie des flux"}],correct:["f1","f2","f3","f4"],e:"(1) Schématiser l'organigramme → périmètre ORGANISATIONNEL. (2) Cartographier les flux → périmètre OPÉRATIONNEL. (3) Préciser les données d'activité → prépare la COLLECTE et la matrice de collecte. (4) Finaliser. Processus ITÉRATIF."},
+{id:"O3",cat:"Plan de Transition",type:"ord",q:"Remettez les 5 sous-étapes du plan de transition dans le bon ordre :",items:[{id:"p1",l:"Définition des objectifs"},{id:"p2",l:"Construction du plan d'action"},{id:"p3",l:"Définition de la trajectoire de transition"},{id:"p4",l:"Mise en œuvre du plan de transition"},{id:"p5",l:"Suivi et pilotage du plan de transition"}],correct:["p1","p2","p3","p4","p5"],e:"(5.1) DÉFINITION DES OBJECTIFS — vision 2030/2050, trajectoire top-down. (5.2) CONSTRUCTION DU PLAN D'ACTION — fiches actions, potentiels de réduction. (5.3) DÉFINITION DE LA TRAJECTOIRE — approche bottom-up. (5.4) MISE EN ŒUVRE des actions. (5.5) SUIVI ET PILOTAGE — indicateurs, tableau de bord."},
+{id:"O4",cat:"Mobilisation",type:"ord",q:"Remettez les moments de mobilisation dans le bon ordre chronologique :",items:[{id:"m1",l:"Au lancement et cadrage (sensibilisation/vulgarisation)"},{id:"m2",l:"Au lancement de la collecte (responsabilisation)"},{id:"m3",l:"À l'issue du profil GES (restitution intermédiaire)"},{id:"m4",l:"Pour la construction du plan de transition (coconstruction)"},{id:"m5",l:"En synthèse de la démarche (communication finale)"}],correct:["m1","m2","m3","m4","m5"],e:"(1) Lancement/cadrage : sensibiliser et vulgariser les enjeux. (2) Avant la collecte : responsabiliser les détenteurs de données. (3) Après le profil GES : restitution intermédiaire des résultats. (4) Plan de transition : coconstruire les actions avec les PP. (5) Synthèse : communication finale."},
+];
+
+const TF = [];    // Vrai/Faux — à remplir plus tard
+const MULTI = []; // Multi-réponses — à remplir plus tard
+const MATCH = []; // Associations — à remplir plus tard
+const BLANK = []; // Texte à trous — à remplir plus tard
+
+// ── CATÉGORIES ────────────────────────────────────────────────────────────────
+const CATS = [...new Set([
+  ...Q.map(q => q.cat),
+  ...ORD.map(q => q.cat),
+  // TF/MULTI/MATCH/BLANK sont vides pour l'instant, seront ajoutées automatiquement quand remplies
+])];
+
+// Palette de couleurs par catégorie
+const CC = {
+  "Historique":           "#E07A5F",
+  "Objectifs & Principes":"#52B788",
+  "Les 7 Étapes":         "#81B29A",
+  "Niveaux de Maturité":  "#F2CC8F",
+  "Cadrage":              "#3D405B",
+  "Périmètre":            "#E9A23B",
+  "Mobilisation":         "#8ABFDB",
+  "Comptabilisation":     "#C77DFF",
+  "Plan de Transition":   "#52B788",
+  "Synthèse & Restitution":"#F28482",
+};
+
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+// ── LOCALSTORAGE ──────────────────────────────────────────────────────────────
+const LS_KEY = "qcm_bc_v2";
+
+function loadLS() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    return raw ? JSON.parse(raw) : { starred: [], attempts: {}, successes: {}, lastSession: null };
+  } catch { return { starred: [], attempts: {}, successes: {}, lastSession: null }; }
+}
+
+function saveLS(ls) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(ls)); } catch {}
+}
+
+function toggleStar(id) {
+  const ls = state.ls;
+  const idx = ls.starred.indexOf(id);
+  if (idx === -1) ls.starred.push(id);
+  else ls.starred.splice(idx, 1);
+  saveLS(ls);
+  setState({ ls });
+}
+
+function isStarred(id) { return state.ls.starred.includes(String(id)); }
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let state = {
+  mode: "menu",
+  quizMode: "study", // study | exam
+  timerActive: false,
+  timerDuration: 45 * 60,
+  timerElapsed: 0,
+  timerInterval: null,
+  selCats: new Set(CATS),
+  inclOrd: true,
+  inclTF: true,
+  inclMulti: true,
+  inclMatch: true,
+  inclBlank: true,
+  filterStarred: false,
+  qs: [], cur: 0, sel: null, conf: false, score: 0, ans: [], showExp: false,
+  revIdx: 0,
+  dragItems: {}, dragIdx: null, dragDone: {}, dragOk: {},
+  matchSel: {},
+  matchDone: {},
+  matchOk: {},
+  blankVal: {},
+  blankDone: {},
+  blankOk: {},
+  ls: loadLS(),
+};
+
+function setState(patch){
+  if(typeof patch === "function") patch = patch(state);
+  state = {...state, ...patch};
+  render();
+}
+
+// ── LOGIQUE ───────────────────────────────────────────────────────────────────
+function start() {
+  const cats = state.selCats;
+  const starred = state.filterStarred ? new Set(state.ls.starred.map(String)) : null;
+
+  const filterQ = (arr) => {
+    let res = arr.filter(q => cats.has(q.cat));
+    if (starred) res = res.filter(q => starred.has(String(q.id)));
+    return shuf(res);
+  };
+
+  const mcq = filterQ(Q);
+  const ord = state.inclOrd ? filterQ(ORD) : [];
+  const tf  = state.inclTF  ? filterQ(TF)  : [];
+  const multi = state.inclMulti ? filterQ(MULTI) : [];
+  const match = state.inclMatch ? filterQ(MATCH) : [];
+  const blank = state.inclBlank ? filterQ(BLANK) : [];
+  const all = shuf([...mcq, ...ord, ...tf, ...multi, ...match, ...blank]);
+
+  const di = {}, dd = {}, dok = {};
+  all.filter(q => q.type === "ord").forEach(q => {
+    di[q.id] = shuf(q.items); dd[q.id] = false; dok[q.id] = false;
+  });
+
+  const ms = {}, md = {}, mok = {};
+  all.filter(q => q.type === "match").forEach(q => {
+    ms[q.id] = { leftIdx: null, pairs: {} };
+    md[q.id] = false; mok[q.id] = false;
+  });
+
+  const bv = {}, bd = {}, bok = {};
+  all.filter(q => q.type === "blank").forEach(q => {
+    bv[q.id] = ""; bd[q.id] = false; bok[q.id] = false;
+  });
+
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  let interval = null;
+  if (state.timerActive) {
+    interval = setInterval(() => {
+      setState(s => ({ timerElapsed: s.timerElapsed + 1 }));
+    }, 1000);
+  }
+
+  setState({
+    mode: "quiz", qs: all, cur: 0, sel: null, conf: false,
+    score: 0, ans: [], showExp: false,
+    dragItems: di, dragDone: dd, dragOk: dok,
+    matchSel: ms, matchDone: md, matchOk: mok,
+    blankVal: bv, blankDone: bd, blankOk: bok,
+    timerElapsed: 0, timerInterval: interval,
+  });
+}
+
+function confirm_answer(){
+  if(state.sel===null)return;
+  const q=state.qs[state.cur];
+  const ok=state.sel===q.a;
+  setState({conf:true,score:state.score+(ok?1:0),ans:[...state.ans,{id:q.id,sel:state.sel,ok}]});
+}
+
+function next() {
+  if (state.cur + 1 >= state.qs.length) {
+    if (state.timerInterval) clearInterval(state.timerInterval);
+    const ls = state.ls;
+    ls.lastSession = { score: state.score, total: state.qs.length, date: new Date().toISOString().slice(0,10) };
+    saveLS(ls);
+    setState({ mode: "results", timerInterval: null });
+  } else {
+    setState({ cur: state.cur + 1, sel: null, conf: false, showExp: false });
+  }
+}
+
+function tog(cat){
+  const s=new Set(state.selCats);
+  s.has(cat)?s.delete(cat):s.add(cat);
+  setState({selCats:s});
+}
+
+function pct(n,d){return d===0?0:Math.round(n/d*100);}
+
+// ── DRAG & DROP (ORD) ─────────────────────────────────────────────────────────
+function dragStart(qid,idx){setState({dragIdx:idx});}
+function dragOver(e,qid,idx){
+  e.preventDefault();
+  if(state.dragIdx===null||state.dragIdx===idx)return;
+  const items=[...state.dragItems[qid]];
+  const moved=items.splice(state.dragIdx,1)[0];
+  items.splice(idx,0,moved);
+  setState({dragItems:{...state.dragItems,[qid]:items},dragIdx:idx});
+}
+function dragEnd(){setState({dragIdx:null});}
+function submitDrag(qid){
+  const q=state.qs.find(x=>x.id===qid);
+  const current=state.dragItems[qid];
+  const ok=current.every((item,i)=>item.id===q.correct[i]);
+  const newDone={...state.dragDone,[qid]:true};
+  const newOk={...state.dragOk,[qid]:ok};
+  setState({dragDone:newDone,dragOk:newOk,conf:true,score:state.score+(ok?1:0),ans:[...state.ans,{id:qid,ok}]});
+}
+
+// ── DOM HELPERS ───────────────────────────────────────────────────────────────
+function h(tag,attrs,...children){
+  const el=document.createElement(tag);
+  if(attrs)Object.entries(attrs).forEach(([k,v])=>{
+    if(k==="style"&&typeof v==="object")Object.assign(el.style,v);
+    else if(k.startsWith("on"))el.addEventListener(k.slice(2).toLowerCase(),v);
+    else if(k==="className")el.className=v;
+    else el.setAttribute(k,v);
+  });
+  children.flat().forEach(c=>{
+    if(c==null)return;
+    el.appendChild(typeof c==="string"?document.createTextNode(c):c);
+  });
+  return el;
+}
+const div=(...a)=>h("div",...a);
+const span=(...a)=>h("span",...a);
+const btn=(...a)=>h("button",...a);
+const p=(...a)=>h("p",...a);
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function render(){
+  const app=document.getElementById("app");
+  const newNode=buildView();
+  app.replaceChildren(newNode);
+}
+
+function buildView(){
+  switch(state.mode){
+    case"menu":   return buildMenu();
+    case"filter": return buildFilter();
+    case"quiz":   return buildQuiz();
+    case"results":return buildResults();
+    case"review": return buildReview();
+    default:      return buildMenu();
+  }
+}
+
+// ── MENU ──────────────────────────────────────────────────────────────────────
+function buildMenu(){
+  const total=Q.length+ORD.length;
+  const chips=CATS.map(cat=>
+    div({className:"chip",style:{borderColor:CC[cat]||"#2A3A52",background:"rgba(0,0,0,0.2)"}},
+      div({className:"chip-dot",style:{background:CC[cat]||"#2A3A52"}}),
+      span({},cat)
+    )
+  );
+  return div({},
+    h("h1",{},"🥖 QCM Bilan Carbone"),
+    p({className:"subtitle"},"Maîtrisez la méthode Bilan Carbone® v9"),
+    p({className:"desc"},`${total} questions • ${CATS.length} thèmes • Méthode ABC v9`),
+    div({className:"chips"},...chips),
+    div({style:{display:"flex",gap:"8px",justifyContent:"center",flexWrap:"wrap"}},
+      btn({className:"btn",onClick:start},"▶ Commencer"),
+      btn({className:"btn-sm",onClick:()=>setState({mode:"filter"})},"⚙ Filtrer"),
+    )
+  );
+}
+
+// ── FILTRE ────────────────────────────────────────────────────────────────────
+function buildFilter(){
+  const cnt =
+    Q.filter(q => state.selCats.has(q.cat)).length +
+    (state.inclOrd   ? ORD.filter(o => state.selCats.has(o.cat)).length : 0) +
+    (state.inclTF    ? TF.filter(q => state.selCats.has(q.cat)).length  : 0) +
+    (state.inclMulti ? MULTI.filter(q => state.selCats.has(q.cat)).length : 0) +
+    (state.inclMatch ? MATCH.filter(q => state.selCats.has(q.cat)).length : 0) +
+    (state.inclBlank ? BLANK.filter(q => state.selCats.has(q.cat)).length : 0);
+
+  const rows=CATS.map(cat=>{
+    const active=state.selCats.has(cat);
+    const catCnt=Q.filter(q=>q.cat===cat).length+(ORD.filter(o=>o.cat===cat).length);
+    return div({className:"cat-row"+(active?" active":""),onClick:()=>tog(cat)},
+      div({className:"cat-dot",style:{background:active?(CC[cat]||"#52B788"):"#2A3A52"}}),
+      span({className:"cat-name"},cat),
+      span({className:"cat-count"},catCnt+" q"),
+      span({className:"cat-check"},active?"✓":""),
+    );
+  });
+
+  const inclRow=(label,key)=>div({
+    style:{display:"flex",alignItems:"center",gap:"8px",padding:"8px 12px",borderRadius:"9px",background:"#131D2A",border:"1px solid #2A3A52",marginBottom:"5px",cursor:"pointer"},
+    onClick:()=>setState({[key]:!state[key]})
+  },
+    span({style:{flex:1,fontSize:"13px",color:state[key]?"#C8D8E8":"#6A7D90"}},label),
+    span({style:{fontSize:"16px"}},state[key]?"✓":""),
+  );
+
+  return div({},
+    div({style:{display:"flex",alignItems:"center",gap:"10px",marginBottom:"16px"}},
+      btn({className:"btn-sm",onClick:()=>setState({mode:"menu"})},"← Retour"),
+      h("h1",{style:{fontSize:"18px"}},"Filtres"),
+    ),
+    p({className:"section-title"},"Thèmes"),
+    ...rows,
+    p({className:"section-title",style:{marginTop:"14px"}},"Types de questions"),
+    inclRow("Inclure les questions Ordonnancement (ORD)","inclOrd"),
+    inclRow("Inclure les questions Vrai/Faux (TF)","inclTF"),
+    inclRow("Inclure les questions Multi-réponses (MULTI)","inclMulti"),
+    inclRow("Inclure les questions Associations (MATCH)","inclMatch"),
+    inclRow("Inclure les questions Texte à trous (BLANK)","inclBlank"),
+    p({className:"total-count"},`${cnt} question${cnt>1?"s":""} sélectionnée${cnt>1?"s":""}`),
+    div({className:"flex-center"},
+      btn({className:"btn",onClick:start,disabled:cnt===0},"▶ Lancer le quiz"),
+      btn({className:"btn-sm",onClick:()=>setState({mode:"menu"})},"← Menu"),
+    )
+  );
+}
+
+// ── QUIZ ──────────────────────────────────────────────────────────────────────
+function buildQuiz(){
+  const curQ=state.qs[state.cur];
+  if(!curQ)return div({},"Aucune question.");
+  const progress=((state.cur)/(state.qs.length))*100;
+  const children=[];
+
+  // Progress + meta
+  children.push(div({className:"progress-wrap"},div({className:"progress-bar",style:{width:progress+"%"}})));
+  const metaItems=[
+    span({className:"counter"},`${state.cur+1} / ${state.qs.length}`),
+  ];
+  if(curQ.type==="ord") metaItems.push(span({className:"ord-badge"},"Ordonnancement"));
+  if(curQ.cat) metaItems.push(span({className:"badge",style:{background:CC[curQ.cat]||"#2A3A52"}},curQ.cat));
+  metaItems.push(span({className:"score-chip"},`Score: ${state.score}`));
+  children.push(div({className:"quiz-meta"},...metaItems));
+
+  // Question text
+  children.push(p({className:"q-text"},curQ.q));
+
+  // Question body by type
+  if (curQ.type === "ord") {
+    const qid=curQ.id;
+    const items=state.dragItems[qid]||curQ.items;
+    const done=state.dragDone[qid];
+    const allOk=state.dragOk[qid];
+    if(!done) children.push(p({className:"drag-hint"},"Glissez-déposez les éléments dans le bon ordre."));
+    items.forEach((item,idx)=>{
+      let cls="drag-item";
+      if(done){
+        cls+=item.id===curQ.correct[idx]?" correct-pos":" wrong-pos";
+      }
+      const el=div({
+        className:cls,
+        draggable:done?"false":"true",
+        onDragstart:done?null:()=>dragStart(qid,idx),
+        onDragover:done?null:(e)=>dragOver(e,qid,idx),
+        onDragend:done?null:dragEnd,
+      },
+        div({className:"drag-num"},idx+1),
+        span({},item.l),
+        done?span({style:{marginLeft:"auto"}},item.id===curQ.correct[idx]?"✓":"✗"):"",
+      );
+      children.push(el);
+    });
+    if(!done){
+      children.push(div({className:"actions"},
+        btn({className:"btn",onClick:()=>submitDrag(qid)},"Valider l'ordre"),
+      ));
+    }
+  } else if (curQ.type === "tf") {
+    children.push(p({style:{color:"#8A9DB5"}}, "Type TF — à implémenter"));
+  } else if (curQ.type === "multi") {
+    children.push(p({style:{color:"#8A9DB5"}}, "Type Multi — à implémenter"));
+  } else if (curQ.type === "match") {
+    children.push(p({style:{color:"#8A9DB5"}}, "Type Match — à implémenter"));
+  } else if (curQ.type === "blank") {
+    children.push(p({style:{color:"#8A9DB5"}}, "Type Blank — à implémenter"));
+  } else {
+    // mcq
+    const opts=curQ.o.map((opt,i)=>{
+      let cls="opt";
+      if(state.conf){
+        cls+=" locked";
+        if(i===curQ.a) cls+=" correct";
+        else if(i===state.sel) cls+=" wrong";
+      } else if(state.sel===i) cls+=" selected";
+      return btn({className:cls,onClick:state.conf?null:()=>setState({sel:i})},
+        span({className:"letter"},"ABCD"[i]),
+        span({style:{flex:1}},opt),
+        state.conf&&i===curQ.a?span({className:"tick"},"✓"):"",
+        state.conf&&i===state.sel&&i!==curQ.a?span({className:"tick"},"✗"):"",
+      );
+    });
+    children.push(div({className:"options"},...opts));
+    if(!state.conf){
+      children.push(div({className:"actions"},
+        btn({className:"btn",disabled:state.sel===null,onClick:confirm_answer},"Valider"),
+      ));
+    }
+  }
+
+  // Feedback (after conf)
+  if(state.conf){
+    const isOrd=curQ.type==="ord";
+    const ok=isOrd?state.dragOk[curQ.id]:(state.sel===curQ.a);
+    children.push(div({className:"feedback "+(ok?"ok":"ko")},
+      span({},ok?"✓ Bonne réponse !":"✗ Mauvaise réponse"),
+    ));
+    children.push(btn({className:"exp-btn",onClick:()=>setState({showExp:!state.showExp})},
+      state.showExp?"▲ Masquer l'explication":"▼ Voir l'explication"
+    ));
+    if(state.showExp) children.push(div({className:"exp-box"},curQ.e));
+    children.push(div({className:"actions"},
+      btn({className:"btn",onClick:next},state.cur+1>=state.qs.length?"Voir les résultats":"Question suivante →"),
+    ));
+  }
+
+  return div({},...children);
+}
+
+// ── RÉSULTATS ─────────────────────────────────────────────────────────────────
+function buildResults(){
+  const total=state.qs.length;
+  const score=state.score;
+  const p100=pct(score,total);
+  const color=p100>=70?"#52B788":p100>=50?"#F2CC8F":"#E07A5F";
+
+  // Par catégorie
+  const catStats={};
+  state.ans.forEach(a=>{
+    const q=state.qs.find(x=>x.id===a.id);
+    if(!q)return;
+    if(!catStats[q.cat])catStats[q.cat]={ok:0,total:0};
+    catStats[q.cat].total++;
+    if(a.ok)catStats[q.cat].ok++;
+  });
+
+  const themeRows=Object.entries(catStats).map(([cat,s])=>{
+    const p=pct(s.ok,s.total);
+    const c=p>=70?"#52B788":p>=50?"#F2CC8F":"#E07A5F";
+    return div({className:"theme-row"},
+      div({className:"theme-dot",style:{background:CC[cat]||"#2A3A52"}}),
+      span({className:"theme-name"},cat),
+      div({className:"mini-bar-wrap"},div({className:"mini-bar",style:{width:p+"%",background:c}})),
+      span({className:"theme-score",style:{color:c}},`${s.ok}/${s.total}`),
+    );
+  });
+
+  return div({},
+    div({className:"results-header"},
+      div({className:"big-score",style:{color}},score+"/"+total),
+      p({className:"pct"},p100+"% de réussite"),
+    ),
+    p({className:"section-title"},"Par thème"),
+    ...themeRows,
+    div({className:"flex-center",style:{marginTop:"18px"}},
+      btn({className:"btn",onClick:start},"Recommencer"),
+      btn({className:"btn-sm",onClick:()=>setState({mode:"review",revIdx:0})},"📋 Réviser"),
+      btn({className:"btn-sm",onClick:()=>setState({mode:"menu"})},"Menu"),
+    )
+  );
+}
+
+// ── RÉVISION ──────────────────────────────────────────────────────────────────
+function buildReview(){
+  const idx=state.revIdx;
+  const q=state.qs[idx];
+  const a=state.ans[idx];
+  if(!q)return div({},"Fin de la révision.");
+  const isOrd=q.type==="ord";
+
+  return div({},
+    div({className:"review-header"},
+      span({className:"review-counter"},`Révision ${idx+1}/${state.qs.length}`),
+      span({style:{color:a&&a.ok?"#52B788":"#E07A5F",fontSize:"14px"}},a&&a.ok?"✓":"✗"),
+    ),
+    p({className:"q-text"},q.q),
+    isOrd?div({},
+      ...(state.dragItems[q.id]||q.items).map((item,i)=>
+        div({className:"drag-item "+(a&&a.ok?"correct-pos":"wrong-pos")},
+          div({className:"drag-num"},i+1),
+          span({},item.l),
+        )
+      )
+    ):div({className:"options"},
+      ...q.o.map((opt,i)=>btn({
+        className:"opt locked"+(i===q.a?" correct":"")+(a&&!a.ok&&i===a.sel?" wrong":""),
+      },
+        span({className:"letter"},"ABCD"[i]),
+        span({style:{flex:1}},opt),
+        i===q.a?span({className:"tick"},"✓"):"",
+      ))
+    ),
+    div({className:"exp-box",style:{marginTop:"12px"}},q.e),
+    div({className:"actions"},
+      idx>0?btn({className:"btn-sm",onClick:()=>setState({revIdx:idx-1})},"← Préc."):"",
+      idx+1<state.qs.length
+        ?btn({className:"btn",onClick:()=>setState({revIdx:idx+1})},"Suiv. →")
+        :btn({className:"btn",onClick:()=>setState({mode:"results"})},"← Résultats"),
+    )
+  );
+}
+
+render();
+</script>
+</body>
+</html>
