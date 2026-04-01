@@ -609,7 +609,7 @@ function buildQuiz(){
 function buildTF(q) {
   const { conf, sel, showExp, quizMode } = state;
   const isStudy = quizMode === "study";
-  const children = [p({ class: "q-text" }, q.q)];
+  const children = [];
 
   const tfRow = div({ style: { display: "flex", gap: "10px", marginBottom: "16px" } }, [
     btn({
@@ -647,7 +647,7 @@ function buildTF(q) {
 function confirmTF() {
   const q = state.qs[state.cur];
   const ok = (state.sel === 1 && q.a === true) || (state.sel === 0 && q.a === false);
-  setState(s => ({ conf: true, score: ok ? s.score + 1 : s.score, ans: [...s.ans, { q, sel: s.sel, ok }] }));
+  setState(s => ({ conf: true, score: ok ? s.score + 1 : s.score, ans: [...s.ans, { id: q.id, sel: s.sel, ok }] }));
 }
 
 function buildStarBtn(id) {
