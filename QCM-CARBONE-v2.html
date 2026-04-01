@@ -728,10 +728,14 @@ function buildQuiz(){
         span({},ok?"✓ Bonne réponse !":"✗ Mauvaise réponse"),
         buildStarBtn(curQ.id),
       ));
-      children.push(btn({className:"exp-btn",onClick:()=>setState({showExp:!state.showExp})},
-        state.showExp?"▲ Masquer l'explication":"▼ Voir l'explication"
-      ));
-      if(state.showExp) children.push(div({className:"exp-box"},curQ.e));
+      if(!ok) {
+        children.push(div({className:"exp-box"},curQ.e));
+      } else {
+        children.push(btn({className:"exp-btn",onClick:()=>setState({showExp:!state.showExp})},
+          state.showExp?"▲ Masquer l'explication":"▼ Voir l'explication"
+        ));
+        if(state.showExp) children.push(div({className:"exp-box"},curQ.e));
+      }
       children.push(div({className:"actions"},
         btn({className:"btn",onClick:next},state.cur+1>=state.qs.length?"Voir les résultats":"Question suivante →"),
       ));
@@ -769,8 +773,12 @@ function buildTF(q) {
         span({ style: { fontWeight: "600", fontSize: "14px" } }, ok ? "Bonne réponse !" : `Incorrect — Réponse : ${q.a ? "Vrai" : "Faux"}`),
         buildStarBtn(q.id),
       ]));
-      if (showExp) children.push(div({ class: "exp-box" }, q.e));
-      if (!showExp) children.push(btn({ class: "exp-btn", onclick: () => setState({ showExp: true }) }, "▼ Voir l'explication"));
+      if (!ok) {
+        children.push(div({ class: "exp-box" }, q.e));
+      } else {
+        if (showExp) children.push(div({ class: "exp-box" }, q.e));
+        else children.push(btn({ class: "exp-btn", onclick: () => setState({ showExp: true }) }, "▼ Voir l'explication"));
+      }
     }
   }
 
@@ -849,10 +857,12 @@ function buildMulti(q) {
         span({}, ok ? "✓ Bonne réponse !" : "✗ Incomplet ou incorrect"),
         buildStarBtn(q.id),
       ));
-      children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:!showExp})},
-        showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
-      ));
-      if (showExp) children.push(div({className:"exp-box"}, q.e));
+      if (!ok) {
+        children.push(div({className:"exp-box"}, q.e));
+      } else {
+        if (showExp) children.push(div({className:"exp-box"}, q.e));
+        else children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:true})}, "▼ Voir l'explication"));
+      }
     }
     children.push(div({className:"actions"},
       btn({className:"btn", onClick:next}, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
@@ -973,10 +983,12 @@ function buildMatch(q) {
         span({}, allOk ? "✓ Toutes les associations sont correctes !" : "✗ Certaines associations sont incorrectes"),
         buildStarBtn(qid),
       ));
-      children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:!state.showExp})},
-        state.showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
-      ));
-      if (state.showExp) children.push(div({className:"exp-box"}, q.e));
+      if (!allOk) {
+        children.push(div({className:"exp-box"}, q.e));
+      } else {
+        if (state.showExp) children.push(div({className:"exp-box"}, q.e));
+        else children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:true})}, "▼ Voir l'explication"));
+      }
     }
     children.push(div({className:"actions"},
       btn({className:"btn", onClick:next}, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
@@ -1053,10 +1065,12 @@ function buildBlank(q) {
         span({}, allOk ? "✓ Bonne réponse !" : "✗ Réponse incorrecte"),
         buildStarBtn(qid),
       ));
-      children.push(btn({ className: "exp-btn", onClick: () => setState({ showExp: !state.showExp }) },
-        state.showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
-      ));
-      if (state.showExp) children.push(div({ className: "exp-box" }, q.e));
+      if (!allOk) {
+        children.push(div({ className: "exp-box" }, q.e));
+      } else {
+        if (state.showExp) children.push(div({ className: "exp-box" }, q.e));
+        else children.push(btn({ className: "exp-btn", onClick: () => setState({ showExp: true }) }, "▼ Voir l'explication"));
+      }
     }
     children.push(div({ className: "actions" },
       btn({ className: "btn", onClick: next }, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
