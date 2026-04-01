@@ -1069,9 +1069,11 @@ function buildBlank(q) {
   const isExam = state.quizMode === "exam";
   const children = [];
 
+  // Bouton créé en premier pour que les inputs puissent le référencer
+  const validateBtn = !done ? btn({ className: "btn", onClick: () => confirmBlank(qid) }, "Valider") : null;
+
   // Parse q.q, replace each [_] with an input
   const parts = q.q.split("[_]");
-  const inputRefs = [];
   const lineDiv = div({ style: { lineHeight: "2.2", fontSize: "15px", color: "#E8F4EC", marginBottom: "16px" } });
 
   parts.forEach((part, i) => {
@@ -1085,12 +1087,12 @@ function buildBlank(q) {
         placeholder: "…",
         style: { verticalAlign: "middle", margin: "0 4px" },
       });
+      // Mutation directe sans setState → pas de re-render → pas de perte de focus
       inp.addEventListener("input", () => {
-        const newVals = { ...(state.blankVal[qid] || {}) };
-        newVals[i] = inp.value;
-        setState({ blankVal: { ...state.blankVal, [qid]: newVals } });
+        if (!state.blankVal[qid]) state.blankVal[qid] = {};
+        state.blankVal[qid][i] = inp.value;
+        if (validateBtn) validateBtn.disabled = q.blanks.some((_, j) => !(state.blankVal[qid][j]||"").trim());
       });
-      inputRefs.push({ inp, idx: i });
       lineDiv.appendChild(inp);
 
       if (done) {
@@ -1106,18 +1108,7 @@ function buildBlank(q) {
   children.push(lineDiv);
 
   if (!done) {
-    const validateBtn = btn({
-      className: "btn",
-      onClick: () => confirmBlank(qid),
-    }, "Valider");
-    // Disable if any field is empty
-    const checkDisabled = () => {
-      const cur = state.blankVal[qid] || {};
-      const anyEmpty = q.blanks.some((_, i) => !(cur[i]||"").trim());
-      validateBtn.disabled = anyEmpty;
-    };
-    checkDisabled();
-    // Re-check on each render (button will be recreated); initial state
+    validateBtn.disabled = q.blanks.some((_, i) => !(vals[i]||"").trim());
     children.push(div({ className: "actions" }, validateBtn));
   }
 
