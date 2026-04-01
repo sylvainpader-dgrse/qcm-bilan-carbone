@@ -84,6 +84,16 @@ h1{font-size:24px;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px}
 /* Review */
 .review-header{display:flex;align-items:center;gap:10px;margin-bottom:18px}
 .review-counter{color:#52B788;font-size:14px;font-weight:700}
+/* Blank */
+.blank-input{background:#0F1E30;border:1px solid #2A3A52;border-radius:6px;color:#E8F4EC;padding:3px 8px;font-size:14px;width:120px;font-family:inherit;outline:none}
+.blank-input.ok{border-color:#52B788;color:#52B788}
+.blank-input.ko{border-color:#E07A5F;color:#E07A5F}
+.blank-correction{font-size:12px;color:#E07A5F;margin-top:2px}
+/* Mode toggle */
+.mode-toggle{display:flex;gap:0;border-radius:9px;overflow:hidden;border:1px solid #2A3A52;margin-bottom:14px;align-self:center}
+.mode-btn{padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all 0.15s}
+.mode-btn.active{background:linear-gradient(135deg,#2D6A4F,#40916C);color:#fff}
+.mode-btn:not(.active){background:#1A2335;color:#6A7D90}
 </style>
 </head>
 <body>
@@ -284,13 +294,25 @@ const MATCH = [
   ],
   e:"Le plan de transition doit être : ambitieux (objectifs climatiques), pilotable (indicateurs de suivi), opérationnel (actions et responsables), cohérent (lié à la comptabilisation). La trajectoire bottom-up est construite à l'étape 5.3 et doit rester cohérente avec les actions du plan."},
 ]; // Associations
-const BLANK = []; // Texte à trous — à remplir plus tard
+const BLANK = [
+{id:"BL1",cat:"Historique",type:"blank",q:"Le Bilan Carbone® a été officiellement formalisé par l'ADEME en [_] avec Jean-Marc Jancovici.",blanks:["2004"],e:"2004 = formalisation officielle par l'ADEME avec Jean-Marc Jancovici (Manicore). 2002 = travaux préparatoires. 2011 = création de l'ABC."},
+{id:"BL2",cat:"Historique",type:"blank",q:"L'ABC (Association pour la transition Bas Carbone) a été créée en [_]. La version actuelle de la méthode, mise en application en 2025, est la version [_].",blanks:["2011","9"],e:"2011 = création de l'ABC par l'ADEME et l'APCC. La v9 a été publiée en juillet 2024 et mise en application en 2025."},
+{id:"BL3",cat:"Objectifs & Principes",type:"blank",q:"La philosophie centrale du Bilan Carbone® se résume par la formule « [_] pour agir ».",blanks:["Compter"],e:"« Compter pour agir » : la comptabilisation n'est pas une fin en soi mais un outil au service de l'action et de la réduction."},
+{id:"BL4",cat:"Objectifs & Principes",type:"blank",q:"Le principe de reporting qui exige de couvrir les émissions les plus importantes s'appelle la [_].",blanks:["Significativité"],e:"Les 5 principes de reporting : Cohérence, Exactitude, Significativité, Évaluation, Transparence. La Significativité impose de couvrir les émissions les plus importantes."},
+{id:"BL5",cat:"Les 7 Étapes",type:"blank",q:"La démarche Bilan Carbone® v9 comprend [_] étapes. La première est le [_].",blanks:["7","Cadrage"],e:"7 étapes : (1) Cadrage, (2) Périmètre, (3) Mobilisation, (4) Comptabilisation, (5) Plan de transition, (6) Synthèse et restitution, (7) Évaluation."},
+{id:"BL6",cat:"Les 7 Étapes",type:"blank",q:"Dans la v9, la « sensibilisation des acteurs » a été remplacée par la « [_] des acteurs », pour mettre en mouvement les organisations.",blanks:["Mobilisation"],e:"La 'MOBILISATION' remplace la 'sensibilisation' — l'objectif est de mettre en MOUVEMENT et en ACTION. La mobilisation est transversale à toutes les étapes."},
+{id:"BL7",cat:"Périmètre & Données",type:"blank",q:"Le périmètre temporel classique d'un Bilan Carbone® est de [_] an(s). Les 6 critères de significativité permettent d'identifier les émissions indirectes [_].",blanks:["1","prioritaires"],e:"Périmètre temporel classique = 1 an. Les 6 critères de significativité : ampleur quantitative, influence/leviers, importance stratégique, lignes directrices du secteur, sous-traitance, engagement du personnel."},
+{id:"BL8",cat:"Comptabilisation",type:"blank",q:"La formule fondamentale de la comptabilité carbone est : Données d'activité × [_] = Résultat ± Incertitude. L'unité standard est la [_].",blanks:["Facteur d'émission","tCO₂e"],e:"Formule : DA × FE = Résultat ± Incertitude. L'unité est la TONNE CO₂ ÉQUIVALENT (tCO₂e), qui agrège différents GES selon leur PRG-100."},
+]; // Texte à trous
 
 // ── CATÉGORIES ────────────────────────────────────────────────────────────────
 const CATS = [...new Set([
   ...Q.map(q => q.cat),
   ...ORD.map(q => q.cat),
-  // TF/MULTI/MATCH/BLANK sont vides pour l'instant, seront ajoutées automatiquement quand remplies
+  ...TF.map(q => q.cat),
+  ...MULTI.map(q => q.cat),
+  ...MATCH.map(q => q.cat),
+  ...BLANK.map(q => q.cat),
 ])];
 
 // Palette de couleurs par catégorie
@@ -508,22 +530,45 @@ function buildView(){
 
 // ── MENU ──────────────────────────────────────────────────────────────────────
 function buildMenu(){
-  const total=Q.length+ORD.length;
+  const total=Q.length+ORD.length+TF.length+MULTI.length+MATCH.length+BLANK.length;
   const chips=CATS.map(cat=>
     div({className:"chip",style:{borderColor:CC[cat]||"#2A3A52",background:"rgba(0,0,0,0.2)"}},
       div({className:"chip-dot",style:{background:CC[cat]||"#2A3A52"}}),
       span({},cat)
     )
   );
+
+  const modeToggle=div({className:"mode-toggle"},
+    btn({className:"mode-btn"+(state.quizMode==="study"?" active":""),onClick:()=>setState({quizMode:"study"})},"Étude"),
+    btn({className:"mode-btn"+(state.quizMode==="exam"?" active":""),onClick:()=>setState({quizMode:"exam"})},"Examen"),
+  );
+
+  const timerToggle=div({
+    style:{display:"flex",alignItems:"center",gap:"8px",marginBottom:"12px",cursor:"pointer"},
+    onClick:()=>setState({timerActive:!state.timerActive})
+  },
+    span({style:{fontSize:"18px"}},state.timerActive?"☑":"☐"),
+    span({style:{fontSize:"13px",color:"#8A9DB5"}},"Timer 45 min"),
+  );
+
+  const actionBtns=[
+    btn({className:"btn",onClick:()=>{setState({filterStarred:false});start();}},"▶ Commencer"),
+    btn({className:"btn-sm",onClick:()=>setState({mode:"filter"})},"⚙ Filtrer"),
+  ];
+  if(state.ls.starred.length>0){
+    actionBtns.push(btn({className:"btn-sm",onClick:()=>{setState({filterStarred:true});start();}},"⭐ À revoir ("+state.ls.starred.length+")"));
+  }
+
   return div({},
     h("h1",{},"🥖 QCM Bilan Carbone"),
     p({className:"subtitle"},"Maîtrisez la méthode Bilan Carbone® v9"),
-    p({className:"desc"},`${total} questions • ${CATS.length} thèmes • Méthode ABC v9`),
+    p({className:"desc"},`${total} questions • 6 types • ${CATS.length} thèmes • BC® v9`),
     div({className:"chips"},...chips),
-    div({style:{display:"flex",gap:"8px",justifyContent:"center",flexWrap:"wrap"}},
-      btn({className:"btn",onClick:start},"▶ Commencer"),
-      btn({className:"btn-sm",onClick:()=>setState({mode:"filter"})},"⚙ Filtrer"),
-    )
+    div({style:{display:"flex",flexDirection:"column",alignItems:"center",marginBottom:"8px"}},
+      modeToggle,
+      timerToggle,
+    ),
+    div({style:{display:"flex",gap:"8px",justifyContent:"center",flexWrap:"wrap"}},...actionBtns),
   );
 }
 
@@ -539,7 +584,9 @@ function buildFilter(){
 
   const rows=CATS.map(cat=>{
     const active=state.selCats.has(cat);
-    const catCnt=Q.filter(q=>q.cat===cat).length+(ORD.filter(o=>o.cat===cat).length);
+    const catCnt=Q.filter(q=>q.cat===cat).length+ORD.filter(o=>o.cat===cat).length
+      +TF.filter(q=>q.cat===cat).length+MULTI.filter(q=>q.cat===cat).length
+      +MATCH.filter(q=>q.cat===cat).length+BLANK.filter(q=>q.cat===cat).length;
     return div({className:"cat-row"+(active?" active":""),onClick:()=>tog(cat)},
       div({className:"cat-dot",style:{background:active?(CC[cat]||"#52B788"):"#2A3A52"}}),
       span({className:"cat-name"},cat),
@@ -589,8 +636,17 @@ function buildQuiz(){
   const metaItems=[
     span({className:"counter"},`${state.cur+1} / ${state.qs.length}`),
   ];
-  if(curQ.type==="ord") metaItems.push(span({className:"ord-badge"},"Ordonnancement"));
   if(curQ.cat) metaItems.push(span({className:"badge",style:{background:CC[curQ.cat]||"#2A3A52"}},curQ.cat));
+  const typeLabels={mcq:"MCQ",ord:"ORD",tf:"V/F",multi:"MULTI",match:"ASSOC",blank:"TROUS"};
+  const typeColors={mcq:"#3D5A80",ord:"#E9A23B",tf:"#6B4226",multi:"#5B2D8E",match:"#1B6CA8",blank:"#2D6A4F"};
+  metaItems.push(span({className:"badge",style:{background:typeColors[curQ.type]||"#2A3A52"}},typeLabels[curQ.type]||curQ.type));
+  if(state.timerActive){
+    const remaining=state.timerDuration-state.timerElapsed;
+    const m=Math.floor(Math.abs(remaining)/60);
+    const s=Math.abs(remaining)%60;
+    const over=remaining<0;
+    metaItems.push(span({style:{color:over?"#E07A5F":"#8A9DB5",fontSize:"12px"}},(over?"⏱ +":"⏱ ")+m+":"+(s<10?"0"+s:s)));
+  }
   metaItems.push(span({className:"score-chip"},`Score: ${state.score}`));
   children.push(div({className:"quiz-meta"},...metaItems));
 
@@ -634,7 +690,7 @@ function buildQuiz(){
   } else if (curQ.type === "match") {
     children.push(...buildMatch(curQ));
   } else if (curQ.type === "blank") {
-    children.push(p({style:{color:"#8A9DB5"}}, "Type Blank — à implémenter"));
+    children.push(...buildBlank(curQ));
   } else {
     // mcq
     const opts=curQ.o.map((opt,i)=>{
@@ -660,20 +716,26 @@ function buildQuiz(){
   }
 
   // Feedback (after conf) — uniquement pour mcq et ord (tf, multi, match gèrent leur propre feedback)
-  if(state.conf && curQ.type !== "tf" && curQ.type !== "multi" && curQ.type !== "match"){
+  if(state.conf && curQ.type !== "tf" && curQ.type !== "multi" && curQ.type !== "match" && curQ.type !== "blank"){
     const isOrd=curQ.type==="ord";
     const ok=isOrd?state.dragOk[curQ.id]:(state.sel===curQ.a);
-    children.push(div({className:"feedback "+(ok?"ok":"ko")},
-      span({},ok?"✓ Bonne réponse !":"✗ Mauvaise réponse"),
-      buildStarBtn(curQ.id),
-    ));
-    children.push(btn({className:"exp-btn",onClick:()=>setState({showExp:!state.showExp})},
-      state.showExp?"▲ Masquer l'explication":"▼ Voir l'explication"
-    ));
-    if(state.showExp) children.push(div({className:"exp-box"},curQ.e));
-    children.push(div({className:"actions"},
-      btn({className:"btn",onClick:next},state.cur+1>=state.qs.length?"Voir les résultats":"Question suivante →"),
-    ));
+    if(state.quizMode === "exam"){
+      children.push(div({className:"actions"},
+        btn({className:"btn",onClick:next},state.cur+1>=state.qs.length?"Voir les résultats":"Question suivante →"),
+      ));
+    } else {
+      children.push(div({className:"feedback "+(ok?"ok":"ko")},
+        span({},ok?"✓ Bonne réponse !":"✗ Mauvaise réponse"),
+        buildStarBtn(curQ.id),
+      ));
+      children.push(btn({className:"exp-btn",onClick:()=>setState({showExp:!state.showExp})},
+        state.showExp?"▲ Masquer l'explication":"▼ Voir l'explication"
+      ));
+      if(state.showExp) children.push(div({className:"exp-box"},curQ.e));
+      children.push(div({className:"actions"},
+        btn({className:"btn",onClick:next},state.cur+1>=state.qs.length?"Voir les résultats":"Question suivante →"),
+      ));
+    }
   }
 
   return div({},...children);
@@ -701,13 +763,15 @@ function buildTF(q) {
 
   if (conf) {
     const ok = (sel === 1 && q.a === true) || (sel === 0 && q.a === false);
-    children.push(div({ class: `feedback ${ok ? "ok" : "ko"}` }, [
-      span({ style: { fontSize: "18px" } }, ok ? "✅" : "❌"),
-      span({ style: { fontWeight: "600", fontSize: "14px" } }, ok ? "Bonne réponse !" : `Incorrect — Réponse : ${q.a ? "Vrai" : "Faux"}`),
-      buildStarBtn(q.id),
-    ]));
-    if (isStudy || showExp) children.push(div({ class: "exp-box" }, q.e));
-    if (!isStudy && !showExp) children.push(btn({ class: "exp-btn", onclick: () => setState({ showExp: true }) }, "▼ Voir l'explication"));
+    if (isStudy) {
+      children.push(div({ class: `feedback ${ok ? "ok" : "ko"}` }, [
+        span({ style: { fontSize: "18px" } }, ok ? "✅" : "❌"),
+        span({ style: { fontWeight: "600", fontSize: "14px" } }, ok ? "Bonne réponse !" : `Incorrect — Réponse : ${q.a ? "Vrai" : "Faux"}`),
+        buildStarBtn(q.id),
+      ]));
+      if (showExp) children.push(div({ class: "exp-box" }, q.e));
+      if (!showExp) children.push(btn({ class: "exp-btn", onclick: () => setState({ showExp: true }) }, "▼ Voir l'explication"));
+    }
   }
 
   children.push(div({ class: "actions" }, [
@@ -780,14 +844,16 @@ function buildMulti(q) {
 
   if (conf) {
     const ok = q.a.length === sel.size && q.a.every(i => sel.has(i));
-    children.push(div({className:"feedback " + (ok ? "ok" : "ko")},
-      span({}, ok ? "✓ Bonne réponse !" : "✗ Incomplet ou incorrect"),
-      buildStarBtn(q.id),
-    ));
-    children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:!showExp})},
-      showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
-    ));
-    if (showExp) children.push(div({className:"exp-box"}, q.e));
+    if (state.quizMode === "study") {
+      children.push(div({className:"feedback " + (ok ? "ok" : "ko")},
+        span({}, ok ? "✓ Bonne réponse !" : "✗ Incomplet ou incorrect"),
+        buildStarBtn(q.id),
+      ));
+      children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:!showExp})},
+        showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
+      ));
+      if (showExp) children.push(div({className:"exp-box"}, q.e));
+    }
     children.push(div({className:"actions"},
       btn({className:"btn", onClick:next}, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
     ));
@@ -902,20 +968,115 @@ function buildMatch(q) {
   }
 
   if (done) {
-    children.push(div({className:"feedback " + (allOk ? "ok" : "ko")},
-      span({}, allOk ? "✓ Toutes les associations sont correctes !" : "✗ Certaines associations sont incorrectes"),
-      buildStarBtn(qid),
-    ));
-    children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:!state.showExp})},
-      state.showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
-    ));
-    if (state.showExp) children.push(div({className:"exp-box"}, q.e));
+    if (state.quizMode === "study") {
+      children.push(div({className:"feedback " + (allOk ? "ok" : "ko")},
+        span({}, allOk ? "✓ Toutes les associations sont correctes !" : "✗ Certaines associations sont incorrectes"),
+        buildStarBtn(qid),
+      ));
+      children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:!state.showExp})},
+        state.showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
+      ));
+      if (state.showExp) children.push(div({className:"exp-box"}, q.e));
+    }
     children.push(div({className:"actions"},
       btn({className:"btn", onClick:next}, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
     ));
   }
 
   return children;
+}
+
+// ── TEXTE À TROUS (BLANK) ─────────────────────────────────────────────────────
+function buildBlank(q) {
+  const qid = q.id;
+  const done = state.blankDone[qid];
+  const allOk = state.blankOk[qid];
+  const vals = state.blankVal[qid] || {};
+  const isExam = state.quizMode === "exam";
+  const children = [];
+
+  // Parse q.q, replace each [_] with an input
+  const parts = q.q.split("[_]");
+  const inputRefs = [];
+  const lineDiv = div({ style: { lineHeight: "2.2", fontSize: "15px", color: "#E8F4EC", marginBottom: "16px" } });
+
+  parts.forEach((part, i) => {
+    lineDiv.appendChild(document.createTextNode(part));
+    if (i < q.blanks.length) {
+      const inp = h("input", {
+        className: "blank-input" + (done ? (((vals[i]||"").trim().toLowerCase() === q.blanks[i].trim().toLowerCase()) ? " ok" : " ko") : ""),
+        type: "text",
+        value: vals[i] || "",
+        disabled: done,
+        placeholder: "…",
+        style: { verticalAlign: "middle", margin: "0 4px" },
+      });
+      inp.addEventListener("input", () => {
+        const newVals = { ...(state.blankVal[qid] || {}) };
+        newVals[i] = inp.value;
+        setState({ blankVal: { ...state.blankVal, [qid]: newVals } });
+      });
+      inputRefs.push({ inp, idx: i });
+      lineDiv.appendChild(inp);
+
+      if (done) {
+        const correct = (vals[i]||"").trim().toLowerCase() === q.blanks[i].trim().toLowerCase();
+        if (!correct) {
+          const correction = div({ className: "blank-correction" }, "✗ Réponse attendue : " + q.blanks[i]);
+          lineDiv.appendChild(correction);
+        }
+      }
+    }
+  });
+
+  children.push(lineDiv);
+
+  if (!done) {
+    const validateBtn = btn({
+      className: "btn",
+      onClick: () => confirmBlank(qid),
+    }, "Valider");
+    // Disable if any field is empty
+    const checkDisabled = () => {
+      const cur = state.blankVal[qid] || {};
+      const anyEmpty = q.blanks.some((_, i) => !(cur[i]||"").trim());
+      validateBtn.disabled = anyEmpty;
+    };
+    checkDisabled();
+    // Re-check on each render (button will be recreated); initial state
+    children.push(div({ className: "actions" }, validateBtn));
+  }
+
+  if (done) {
+    if (!isExam) {
+      children.push(div({ className: "feedback " + (allOk ? "ok" : "ko") },
+        span({}, allOk ? "✓ Bonne réponse !" : "✗ Réponse incorrecte"),
+        buildStarBtn(qid),
+      ));
+      children.push(btn({ className: "exp-btn", onClick: () => setState({ showExp: !state.showExp }) },
+        state.showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
+      ));
+      if (state.showExp) children.push(div({ className: "exp-box" }, q.e));
+    }
+    children.push(div({ className: "actions" },
+      btn({ className: "btn", onClick: next }, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
+    ));
+  }
+
+  return children;
+}
+
+function confirmBlank(qid) {
+  const q = state.qs.find(x => x.id === qid);
+  const vals = state.blankVal[qid] || {};
+  const ok = q.blanks.every((b, i) => (vals[i]||"").trim().toLowerCase() === b.trim().toLowerCase());
+  setState(s => ({
+    conf: true,
+    blankDone: {...s.blankDone, [qid]: true},
+    blankOk: {...s.blankOk, [qid]: ok},
+    score: ok ? s.score + 1 : s.score,
+    ans: [...s.ans, {id: qid, ok}]
+  }));
 }
 
 function confirmMatch(qid) {
