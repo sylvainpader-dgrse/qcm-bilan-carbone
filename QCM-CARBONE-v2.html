@@ -523,6 +523,18 @@ function next() {
   }
 }
 
+function prev() {
+  if (state.cur === 0) return;
+  const wasConf = state.conf;
+  const lastAns = wasConf ? state.ans[state.ans.length - 1] : null;
+  setState({
+    cur: state.cur - 1,
+    sel: null, conf: false, showExp: false,
+    score: lastAns && lastAns.ok ? state.score - 1 : state.score,
+    ans: wasConf ? state.ans.slice(0, -1) : state.ans,
+  });
+}
+
 function tog(cat){
   const s=new Set(state.selCats);
   s.has(cat)?s.delete(cat):s.add(cat);
@@ -710,6 +722,7 @@ function buildQuiz(){
     metaItems.push(span({style:{color:over?"#E07A5F":"#8A9DB5",fontSize:"12px"}},(over?"⏱ +":"⏱ ")+m+":"+(s<10?"0"+s:s)));
   }
   metaItems.push(span({className:"score-chip"},`Score: ${state.score}`));
+  if(state.cur > 0) metaItems.push(btn({className:"btn-sm",onClick:prev,style:{marginLeft:"4px",padding:"3px 10px",fontSize:"12px"}},"← Précédent"));
   children.push(div({className:"quiz-meta"},...metaItems));
 
   // Question text
