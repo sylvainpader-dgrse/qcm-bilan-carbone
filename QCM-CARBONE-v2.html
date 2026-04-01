@@ -401,6 +401,7 @@ function h(tag,attrs,...children){
     if(k==="style"&&typeof v==="object")Object.assign(el.style,v);
     else if(k.startsWith("on"))el.addEventListener(k.slice(2).toLowerCase(),v);
     else if(k==="className")el.className=v;
+    else if(typeof v==="boolean"){if(v)el.setAttribute(k,"");else el.removeAttribute(k);}
     else el.setAttribute(k,v);
   });
   children.flat().forEach(c=>{
