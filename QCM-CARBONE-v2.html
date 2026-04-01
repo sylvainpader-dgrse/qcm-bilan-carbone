@@ -50,6 +50,15 @@ h1{font-size:24px;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px}
 .drag-item.wrong-pos{background:#3A1B1B;border-color:#E07A5F;color:#E07A5F;cursor:default}
 .drag-num{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 .drag-hint{color:#8A9DB5;font-size:13px;margin-bottom:8px;font-style:italic}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+.match-left{padding:8px 12px;border-radius:8px;border:1px solid #2A3A52;background:#1A2335;color:#C8D8E8;font-size:13px;cursor:pointer;text-align:left;font-family:inherit}
+.match-left.sel{border-color:#52B788;background:#162A4A;color:#fff}
+.match-left.done-ok{border-color:#52B788;background:#1B3A2A;color:#52B788;cursor:default}
+.match-left.done-ko{border-color:#E07A5F;background:#3A1B1B;color:#E07A5F;cursor:default}
+.match-right{padding:8px 12px;border-radius:8px;border:1px solid #2A3A52;background:#131D2A;color:#8A9DB5;font-size:13px;cursor:pointer;text-align:left;font-family:inherit}
+.match-right.linked{border-color:#40916C;color:#C8D8E8;background:#1A2B3C}
+.match-right.done-ok{border-color:#52B788;background:#1B3A2A;color:#52B788;cursor:default}
+.match-right.done-ko{border-color:#E07A5F;background:#3A1B1B;color:#E07A5F;cursor:default}
 /* Filtre */
 .cat-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;cursor:pointer;border:1px solid #2A3A52;background:#131D2A;margin-bottom:5px}
 .cat-row.active{background:rgba(82,183,136,0.05)}
@@ -219,7 +228,62 @@ const MULTI = [
 {id:"M7",cat:"Périmètre & Données",type:"multi",q:"Quels types de flux doivent être cartographiés dans un Bilan Carbone® ?",o:["Flux d'énergie et fluides","Flux financiers et comptables","Flux de matières premières","Flux de personnes (déplacements)","Flux de produits (biens et services) et déchets"],a:[0,2,3,4],e:"TOUS les flux entrants, internes ET sortants : énergie, fluides, matières premières, personnes (déplacements), produits (biens achetés/vendus/sous-traités) et déchets. Les flux financiers et comptables ne font pas partie de la cartographie des flux BC®."},
 {id:"M8",cat:"Plan de Transition",type:"multi",q:"Quels sont les 4 adjectifs qualifiant le plan de transition attendu par la méthode BC® ?",o:["Ambitieux","Certifié","Pilotable","Opérationnel","Cohérent avec la comptabilisation","Exhaustif"],a:[0,2,3,4],e:"Le plan de transition doit être : (1) AMBITIEUX — aligné sur les objectifs climatiques, (2) PILOTABLE — avec des indicateurs de suivi, (3) OPÉRATIONNEL — actions concrètes avec responsables, (4) COHÉRENT avec la comptabilisation — les actions ciblent les postes identifiés. Certifié et Exhaustif ne font pas partie de ces 4 adjectifs."},
 ]; // Multi-réponses
-const MATCH = []; // Associations — à remplir plus tard
+const MATCH = [
+{id:"MA1",cat:"Historique",type:"match",
+  q:"Associez chaque année à l'événement correspondant :",
+  pairs:[
+    {left:"2002",right:"Premières versions de travail BC®"},
+    {left:"2004",right:"Formalisation officielle par l'ADEME"},
+    {left:"2011",right:"Création de l'ABC"},
+    {left:"2024",right:"Publication de la v9"},
+  ],
+  e:"2002 = travaux préparatoires. 2004 = formalisation officielle avec Jean-Marc Jancovici. 2011 = création de l'ABC par l'ADEME et l'APCC. 2024 = publication de la v9 (mise en application 2025)."},
+{id:"MA2",cat:"Objectifs & Principes",type:"match",
+  q:"Associez chaque principe de reporting BC® à sa définition :",
+  pairs:[
+    {left:"Cohérence",right:"Comparabilité dans le temps entre bilans"},
+    {left:"Exactitude",right:"Données les plus précises possible"},
+    {left:"Significativité",right:"Couvrir les émissions les plus importantes"},
+    {left:"Transparence",right:"Documenter hypothèses, sources et limites"},
+  ],
+  e:"Les 5 principes de reporting BC® : Cohérence (comparabilité), Exactitude (précision), Significativité (émissions importantes), Évaluation (auditabilité), Transparence (documentation). La Compensabilité n'en fait pas partie."},
+{id:"MA3",cat:"Les 7 Étapes",type:"match",
+  q:"Associez chaque numéro d'étape à son nom dans la démarche BC® v9 :",
+  pairs:[
+    {left:"Étape 1",right:"Cadrage"},
+    {left:"Étape 3",right:"Mobilisation"},
+    {left:"Étape 5",right:"Plan de transition"},
+    {left:"Étape 7",right:"Évaluation"},
+  ],
+  e:"Les 7 étapes : (1) Cadrage, (2) Périmètre, (3) Mobilisation, (4) Comptabilisation, (5) Plan de transition, (6) Synthèse et restitution, (7) Évaluation (facultative)."},
+{id:"MA4",cat:"Périmètre & Données",type:"match",
+  q:"Associez chaque périmètre BC® à ce qu'il définit :",
+  pairs:[
+    {left:"Périmètre organisationnel",right:"Quelles entités sont incluses"},
+    {left:"Périmètre temporel",right:"Quelle période est couverte (classique : 1 an)"},
+    {left:"Périmètre opérationnel",right:"Quels postes d'émissions sont comptabilisés"},
+    {left:"Émissions comptabilisées",right:"Quels gaz à effet de serre sont inclus"},
+  ],
+  e:"Les 4 périmètres BC® : organisationnel (entités), temporel (période, classique 1 an), opérationnel (postes d'émissions), émissions comptabilisées (quels GES). Ensemble ils délimitent exactement le champ du bilan."},
+{id:"MA5",cat:"Comptabilisation",type:"match",
+  q:"Associez chaque poste d'émissions à la catégorie de flux correspondante :",
+  pairs:[
+    {left:"Énergie et fluides",right:"Consommations directes de l'organisation"},
+    {left:"Déplacements de personnes",right:"Flux de personnes entrants et sortants"},
+    {left:"Achats de biens et services",right:"Flux de produits entrants (amont)"},
+    {left:"Déchets",right:"Flux sortants en fin de vie"},
+  ],
+  e:"La cartographie des flux alimente la comptabilisation : énergie/fluides → consommations directes ; déplacements → flux personnes ; achats biens/services → flux produits amont ; déchets → flux sortants. La formule de base : DA × FE = résultat ± incertitude (en tCO₂e)."},
+{id:"MA6",cat:"Plan de Transition",type:"match",
+  q:"Associez chaque concept du plan de transition BC® à sa définition :",
+  pairs:[
+    {left:"Ambitieux",right:"Aligné sur les objectifs climatiques (SNBC, 2°C)"},
+    {left:"Pilotable",right:"Doté d'indicateurs de suivi"},
+    {left:"Opérationnel",right:"Actions concrètes avec responsables désignés"},
+    {left:"Trajectoire",right:"Vision de décarbonation long terme cohérente avec les actions"},
+  ],
+  e:"Le plan de transition doit être : ambitieux (objectifs climatiques), pilotable (indicateurs de suivi), opérationnel (actions et responsables), cohérent (lié à la comptabilisation). La trajectoire bottom-up est construite à l'étape 5.3 et doit rester cohérente avec les actions du plan."},
+]; // Associations
 const BLANK = []; // Texte à trous — à remplir plus tard
 
 // ── CATÉGORIES ────────────────────────────────────────────────────────────────
@@ -568,7 +632,7 @@ function buildQuiz(){
   } else if (curQ.type === "multi") {
     children.push(...buildMulti(curQ));
   } else if (curQ.type === "match") {
-    children.push(p({style:{color:"#8A9DB5"}}, "Type Match — à implémenter"));
+    children.push(...buildMatch(curQ));
   } else if (curQ.type === "blank") {
     children.push(p({style:{color:"#8A9DB5"}}, "Type Blank — à implémenter"));
   } else {
@@ -595,8 +659,8 @@ function buildQuiz(){
     }
   }
 
-  // Feedback (after conf) — uniquement pour mcq et ord (tf et multi gèrent leur propre feedback)
-  if(state.conf && curQ.type !== "tf" && curQ.type !== "multi"){
+  // Feedback (after conf) — uniquement pour mcq et ord (tf, multi, match gèrent leur propre feedback)
+  if(state.conf && curQ.type !== "tf" && curQ.type !== "multi" && curQ.type !== "match"){
     const isOrd=curQ.type==="ord";
     const ok=isOrd?state.dragOk[curQ.id]:(state.sel===curQ.a);
     children.push(div({className:"feedback "+(ok?"ok":"ko")},
@@ -737,6 +801,137 @@ function confirmMulti() {
   const sel = state.sel instanceof Set ? state.sel : new Set();
   const ok = q.a.length === sel.size && q.a.every(i => sel.has(i));
   setState(s => ({ conf: true, score: ok ? s.score + 1 : s.score, ans: [...s.ans, { id: q.id, sel: [...sel], ok }] }));
+}
+
+// ── ASSOCIATIONS (MATCH) ──────────────────────────────────────────────────────
+function shuffle(arr){
+  const a=[...arr.map((_,i)=>i)];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function buildMatch(q) {
+  const qid = q.id;
+  // Init state if needed
+  if (!state.matchSel[qid] || !state.matchSel[qid].rightOrder) {
+    const ms = { ...state.matchSel };
+    ms[qid] = { rightOrder: shuffle(q.pairs), links: {}, selLeft: null };
+    state = { ...state, matchSel: ms };
+  }
+  const ms = state.matchSel[qid];
+  const done = state.matchDone[qid];
+  const allOk = state.matchOk[qid];
+  const { rightOrder, links, selLeft } = ms;
+  const children = [];
+
+  // How many pairs are linked
+  const linkedCount = Object.keys(links).length;
+  const allLinked = linkedCount === q.pairs.length;
+
+  children.push(p({style:{color:"#8A9DB5",fontSize:"13px",marginBottom:"10px",fontStyle:"italic"}},
+    done ? "" : "Cliquez sur un élément gauche, puis sur l'élément droit correspondant."));
+
+  const grid = div({className:"match-grid"});
+
+  q.pairs.forEach((pair, li) => {
+    // Determine if this left is linked
+    const linkedRightOrderIdx = links[li] !== undefined ? links[li] : null;
+    const linkedRightOrigIdx = linkedRightOrderIdx !== null ? rightOrder[linkedRightOrderIdx] : null;
+    const linkedLabel = linkedRightOrigIdx !== null ? q.pairs[linkedRightOrigIdx].right : null;
+
+    let leftCls = "match-left";
+    if (done) {
+      // rightOrder[links[li]] === li means correct
+      const correct = linkedRightOrderIdx !== null && rightOrder[linkedRightOrderIdx] === li;
+      leftCls += correct ? " done-ok" : " done-ko";
+    } else if (selLeft === li) {
+      leftCls += " sel";
+    }
+
+    const leftText = done && linkedLabel
+      ? pair.left + " → " + linkedLabel + (rightOrder[links[li]] === li ? " ✓" : " ✗")
+      : (linkedLabel ? pair.left + " → " + linkedLabel : pair.left);
+
+    grid.appendChild(btn({
+      className: leftCls,
+      disabled: done,
+      onClick: done ? null : () => {
+        const cur = state.matchSel[qid];
+        setState({ matchSel: { ...state.matchSel, [qid]: { ...cur, selLeft: cur.selLeft === li ? null : li } } });
+      },
+    }, leftText));
+
+    // Right side: show the right item at rightOrder[li] position
+    const ri = rightOrder[li]; // original pair index shown in row li
+    // Find if this right slot (position li in rightOrder) is already linked
+    const isLinked = Object.values(links).includes(li);
+
+    let rightCls = "match-right";
+    if (done) {
+      // The correct left for ri is ri itself (pairs[ri].right should match pairs[ri].left)
+      // Find which left chose this right slot (li)
+      const whoLinked = Object.entries(links).find(([,v]) => v === li);
+      if (whoLinked) {
+        const leftIdx = parseInt(whoLinked[0]);
+        rightCls += rightOrder[li] === leftIdx ? " done-ok" : " done-ko";
+      } else {
+        rightCls += " done-ko";
+      }
+    } else if (isLinked) {
+      rightCls += " linked";
+    }
+
+    grid.appendChild(btn({
+      className: rightCls,
+      disabled: done,
+      onClick: done ? null : () => {
+        const cur = state.matchSel[qid];
+        if (cur.selLeft === null) return;
+        const newLinks = { ...cur.links, [cur.selLeft]: li };
+        setState({ matchSel: { ...state.matchSel, [qid]: { ...cur, links: newLinks, selLeft: null } } });
+      },
+    }, q.pairs[ri].right));
+  });
+
+  children.push(grid);
+
+  if (!done) {
+    children.push(div({className:"actions"},
+      btn({className:"btn", disabled: !allLinked, onClick: () => confirmMatch(qid)}, "Valider les associations"),
+    ));
+  }
+
+  if (done) {
+    children.push(div({className:"feedback " + (allOk ? "ok" : "ko")},
+      span({}, allOk ? "✓ Toutes les associations sont correctes !" : "✗ Certaines associations sont incorrectes"),
+      buildStarBtn(qid),
+    ));
+    children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:!state.showExp})},
+      state.showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
+    ));
+    if (state.showExp) children.push(div({className:"exp-box"}, q.e));
+    children.push(div({className:"actions"},
+      btn({className:"btn", onClick:next}, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
+    ));
+  }
+
+  return children;
+}
+
+function confirmMatch(qid) {
+  const q = state.qs.find(x => x.id === qid);
+  const ms = state.matchSel[qid];
+  const realOk = q.pairs.every((_, i) => {
+    const chosenRightOrderIdx = ms.links[i];
+    return ms.rightOrder[chosenRightOrderIdx] === i;
+  });
+  setState(s => ({
+    conf: true,
+    matchDone: { ...s.matchDone, [qid]: true },
+    matchOk: { ...s.matchOk, [qid]: realOk },
+    score: realOk ? s.score + 1 : s.score,
+    ans: [...s.ans, { id: qid, ok: realOk }],
+  }));
 }
 
 // ── RÉSULTATS ─────────────────────────────────────────────────────────────────
