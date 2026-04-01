@@ -209,7 +209,16 @@ const TF = [
     a:false,
     e:"FAUX. Le plan de transition est OBLIGATOIRE À TOUS LES NIVEAUX (Initial, Standard, Avancé). Sans plan de transition, un BC® est incomplet selon la v9."},
 ];
-const MULTI = []; // Multi-réponses — à remplir plus tard
+const MULTI = [
+{id:"M1",cat:"Historique",type:"multi",q:"Quels éléments désigne officiellement le Bilan Carbone® ?",o:["Une méthode développée par l'ABC","Des outils (tableurs, logiciels)","Un label RSE attribué par l'État","Des formations par organismes habilités","Une marque® déposée à l'INPI en France et dans l'UE"],a:[0,1,3,4],e:"Le BC® désigne 4 éléments : (1) méthode développée par l'ABC, (2) outils (tableurs, logiciels), (3) formations par organismes habilités, (4) marque® déposée à l'INPI en France et dans l'UE. L'État ne délivre pas de label RSE BC®."},
+{id:"M2",cat:"Historique",type:"multi",q:"Parmi ces dates, lesquelles sont des jalons importants du Bilan Carbone® ?",o:["2002 — premières versions de travail","2004 — formalisation officielle par l'ADEME","2008 — création de l'ABC","2011 — création de l'ABC","2024 — publication de la v9"],a:[0,1,3,4],e:"2002 = travaux préparatoires. 2004 = formalisation officielle. 2011 = création de l'ABC. 2024 = publication de la v9 (mise en application en 2025). 2008 n'est pas un jalon officiel de la méthode."},
+{id:"M3",cat:"Objectifs & Principes",type:"multi",q:"Quels sont les 3 grands objectifs indissociables de la méthode Bilan Carbone® ?",o:["Mobiliser les parties prenantes internes et externes","Certifier les émissions auprès d'un organisme tiers","Comptabiliser les émissions directes et indirectes","Compenser l'intégralité des émissions résiduelles","Élaborer un plan de transition ambitieux et pilotable"],a:[0,2,4],e:"Les 3 objectifs INDISSOCIABLES : (1) MOBILISER les PP internes et externes, (2) COMPTABILISER les émissions directes et indirectes, (3) Élaborer un PLAN DE TRANSITION ambitieux, pilotable, opérationnel et cohérent. Certification et compensation ne font pas partie des 3 objectifs."},
+{id:"M4",cat:"Objectifs & Principes",type:"multi",q:"Quels sont les 5 principes de reporting du Bilan Carbone® ?",o:["Cohérence","Compensabilité","Exactitude","Significativité","Évaluation","Transparence"],a:[0,2,3,4,5],e:"Les 5 principes de reporting : Cohérence, Exactitude, Significativité, Évaluation, Transparence. La 'Compensabilité' n'en fait pas partie — le BC® est orienté RÉDUCTION des émissions, pas compensation."},
+{id:"M5",cat:"Les 7 Étapes",type:"multi",q:"Quels livrables sont attendus à l'issue de l'étape 1 (Cadrage) ?",o:["Description de l'organisation (SIRET, SIREN, NAF, ETP)","Le profil GES complet en tCO₂e","Présentation du coordinateur et de l'équipe projet","Le niveau de maturité choisi (Initial, Standard ou Avancé)","Les facteurs d'émission sélectionnés"],a:[0,2,3],e:"Livrables cadrage (étape 1) : description de l'organisation (raison sociale, SIRET, SIREN, code NAF, ETP), présentation du coordinateur·ice et réalisateur, niveau de maturité choisi. Le profil GES = étape 4. Les FE = étape 4."},
+{id:"M6",cat:"Les 7 Étapes",type:"multi",q:"Quels livrables sont attendus à l'issue de l'étape 5 (Plan de transition) ?",o:["Les objectifs de réduction du plan de transition","Le profil GES anonymisé déposé sur l'OCCF","Les fiches actions détaillées et quantifiées","La trajectoire de décarbonation","Les indicateurs de suivi, de mise en œuvre et de performance"],a:[0,2,3,4],e:"Livrables étape 5 : (1) OBJECTIFS du plan de transition, (2) PLAN D'ACTION via les fiches actions, (3) TRAJECTOIRE de décarbonation, (4) INDICATEURS — de suivi, de mise en œuvre et de performance. Le dépôt OCCF = étape 6 (Synthèse/Restitution)."},
+{id:"M7",cat:"Périmètre & Données",type:"multi",q:"Quels types de flux doivent être cartographiés dans un Bilan Carbone® ?",o:["Flux d'énergie et fluides","Flux financiers et comptables","Flux de matières premières","Flux de personnes (déplacements)","Flux de produits (biens et services) et déchets"],a:[0,2,3,4],e:"TOUS les flux entrants, internes ET sortants : énergie, fluides, matières premières, personnes (déplacements), produits (biens achetés/vendus/sous-traités) et déchets. Les flux financiers et comptables ne font pas partie de la cartographie des flux BC®."},
+{id:"M8",cat:"Plan de Transition",type:"multi",q:"Quels sont les 4 adjectifs qualifiant le plan de transition attendu par la méthode BC® ?",o:["Ambitieux","Certifié","Pilotable","Opérationnel","Cohérent avec la comptabilisation","Exhaustif"],a:[0,2,3,4],e:"Le plan de transition doit être : (1) AMBITIEUX — aligné sur les objectifs climatiques, (2) PILOTABLE — avec des indicateurs de suivi, (3) OPÉRATIONNEL — actions concrètes avec responsables, (4) COHÉRENT avec la comptabilisation — les actions ciblent les postes identifiés. Certifié et Exhaustif ne font pas partie de ces 4 adjectifs."},
+]; // Multi-réponses
 const MATCH = []; // Associations — à remplir plus tard
 const BLANK = []; // Texte à trous — à remplir plus tard
 
@@ -557,7 +566,7 @@ function buildQuiz(){
   } else if (curQ.type === "tf") {
     children.push(buildTF(curQ));
   } else if (curQ.type === "multi") {
-    children.push(p({style:{color:"#8A9DB5"}}, "Type Multi — à implémenter"));
+    children.push(...buildMulti(curQ));
   } else if (curQ.type === "match") {
     children.push(p({style:{color:"#8A9DB5"}}, "Type Match — à implémenter"));
   } else if (curQ.type === "blank") {
@@ -586,8 +595,8 @@ function buildQuiz(){
     }
   }
 
-  // Feedback (after conf)
-  if(state.conf){
+  // Feedback (after conf) — uniquement pour mcq et ord (tf et multi gèrent leur propre feedback)
+  if(state.conf && curQ.type !== "tf" && curQ.type !== "multi"){
     const isOrd=curQ.type==="ord";
     const ok=isOrd?state.dragOk[curQ.id]:(state.sel===curQ.a);
     children.push(div({className:"feedback "+(ok?"ok":"ko")},
@@ -661,6 +670,75 @@ function buildStarBtn(id) {
   }, starred ? "⭐" : "☆");
 }
 
+// ── MULTI-RÉPONSES ────────────────────────────────────────────────────────────
+function buildMulti(q) {
+  const { conf, showExp } = state;
+  const sel = state.sel instanceof Set ? state.sel : new Set();
+  const children = [];
+
+  children.push(p({style:{color:"#8A9DB5",fontSize:"13px",marginBottom:"10px",fontStyle:"italic"}}, "Plusieurs réponses possibles"));
+
+  const opts = q.o.map((opt, i) => {
+    const isSelected = sel.has(i);
+    const isCorrect = q.a.includes(i);
+    let cls = "opt";
+    if (conf) {
+      cls += " locked";
+      if (isCorrect) cls += " correct";
+      else if (isSelected) cls += " wrong";
+    } else if (isSelected) {
+      cls += " selected";
+    }
+    const tick = conf
+      ? (isCorrect ? span({className:"tick"}, "✓") : (isSelected ? span({className:"tick"}, "✗") : ""))
+      : "";
+    return btn({
+      className: cls,
+      onClick: conf ? null : () => {
+        const cur = state.sel instanceof Set ? new Set(state.sel) : new Set();
+        if (cur.has(i)) cur.delete(i); else cur.add(i);
+        setState({ sel: cur });
+      },
+    },
+      span({className:"letter"}, isSelected ? "☑" : "☐"),
+      span({style:{flex:1}}, opt),
+      tick,
+    );
+  });
+
+  children.push(div({className:"options"}, ...opts));
+
+  if (!conf) {
+    children.push(div({className:"actions"},
+      btn({className:"btn", disabled: sel.size === 0, onClick: confirmMulti}, "Valider"),
+    ));
+  }
+
+  if (conf) {
+    const ok = q.a.length === sel.size && q.a.every(i => sel.has(i));
+    children.push(div({className:"feedback " + (ok ? "ok" : "ko")},
+      span({}, ok ? "✓ Bonne réponse !" : "✗ Incomplet ou incorrect"),
+      buildStarBtn(q.id),
+    ));
+    children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:!showExp})},
+      showExp ? "▲ Masquer l'explication" : "▼ Voir l'explication"
+    ));
+    if (showExp) children.push(div({className:"exp-box"}, q.e));
+    children.push(div({className:"actions"},
+      btn({className:"btn", onClick:next}, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
+    ));
+  }
+
+  return children;
+}
+
+function confirmMulti() {
+  const q = state.qs[state.cur];
+  const sel = state.sel instanceof Set ? state.sel : new Set();
+  const ok = q.a.length === sel.size && q.a.every(i => sel.has(i));
+  setState(s => ({ conf: true, score: ok ? s.score + 1 : s.score, ans: [...s.ans, { id: q.id, sel: [...sel], ok }] }));
+}
+
 // ── RÉSULTATS ─────────────────────────────────────────────────────────────────
 function buildResults(){
   const total=state.qs.length;
@@ -726,13 +804,18 @@ function buildReview(){
         )
       )
     ):div({className:"options"},
-      ...q.o.map((opt,i)=>btn({
-        className:"opt locked"+(i===q.a?" correct":"")+(a&&!a.ok&&i===a.sel?" wrong":""),
-      },
-        span({className:"letter"},"ABCD"[i]),
-        span({style:{flex:1}},opt),
-        i===q.a?span({className:"tick"},"✓"):"",
-      ))
+      ...q.o.map((opt,i)=>{
+        const ans_sel = Array.isArray(a?.sel) ? a.sel : (a?.sel != null ? [a.sel] : []);
+        const isCorrect = q.type === "multi" ? q.a.includes(i) : i === q.a;
+        const isWrong = !isCorrect && ans_sel.includes(i);
+        return btn({
+          className:"opt locked"+(isCorrect?" correct":"")+(isWrong?" wrong":""),
+        },
+          span({className:"letter"}, q.type === "multi" ? (ans_sel.includes(i) ? "☑" : "☐") : "ABCD"[i]),
+          span({style:{flex:1}},opt),
+          isCorrect?span({className:"tick"},"✓"):"",
+        );
+      })
     ),
     div({className:"exp-box",style:{marginTop:"12px"}},q.e),
     div({className:"actions"},
