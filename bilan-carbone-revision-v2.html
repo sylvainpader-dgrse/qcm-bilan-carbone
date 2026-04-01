@@ -1,0 +1,2678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Révision Bilan Carbone® — Certification Niveau 1</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e12;
+    --bg2: #111820;
+    --bg3: #182030;
+    --border: #243040;
+    --accent: #00e0a0;
+    --accent2: #00aaff;
+    --accent3: #ffb300;
+    --danger: #ff4460;
+    --success: #00e0a0;
+    --text: #d8e4f0;
+    --text2: #7a9ab8;
+    --text3: #4a6a88;
+    --s1: #ff6b35;
+    --s2: #ffd166;
+    --s3: #06d6a0;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font: 'IBM Plex Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  
+  /* HEADER */
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .logo span { color: var(--text2); font-weight: 400; }
+  .cert-badge {
+    background: linear-gradient(135deg, #00e0a0, #00aaff);
+    color: #000;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 16px;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none;
+    border: none;
+    color: var(--text2);
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 400;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all .2s;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* LAYOUT */
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+  h2 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+  h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 20px 0 8px; }
+  p { font-size: 14px; color: var(--text2); margin-bottom: 10px; line-height: 1.7; }
+  strong { color: var(--text); font-weight: 600; }
+
+  /* SCOPE PILLS */
+  .scope-1 { background: rgba(255,107,53,.18); color: var(--s1); border: 1px solid rgba(255,107,53,.3); }
+  .scope-2 { background: rgba(255,209,102,.18); color: var(--s2); border: 1px solid rgba(255,209,102,.3); }
+  .scope-3 { background: rgba(6,214,160,.18); color: var(--s3); border: 1px solid rgba(6,214,160,.3); }
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin: 2px 3px 2px 0;
+    letter-spacing: .5px;
+  }
+
+  /* SCOPE GRID */
+  .scope-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+  @media (max-width: 700px) { .scope-grid { grid-template-columns: 1fr; } }
+  .scope-card {
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid;
+  }
+  .scope-card.s1 { background: rgba(255,107,53,.07); border-color: rgba(255,107,53,.3); }
+  .scope-card.s2 { background: rgba(255,209,102,.07); border-color: rgba(255,209,102,.3); }
+  .scope-card.s3 { background: rgba(6,214,160,.07); border-color: rgba(6,214,160,.3); }
+  .scope-number {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .s1 .scope-number { color: var(--s1); }
+  .s2 .scope-number { color: var(--s2); }
+  .s3 .scope-number { color: var(--s3); }
+  .scope-card h3 { font-size: 13px; font-weight: 600; margin: 4px 0 8px; }
+  .scope-card p { font-size: 12px; }
+  .scope-card ul { padding-left: 14px; }
+  .scope-card ul li { font-size: 12px; color: var(--text2); margin: 3px 0; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--bg3);
+    color: var(--text2);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+  }
+  tr:hover td { background: var(--bg3); }
+  .poste-name { color: var(--text); font-weight: 500; }
+  .domaine-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    padding: 1px 6px;
+    border-radius: 2px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text3);
+    margin-bottom: 2px;
+  }
+
+  /* LEVELS */
+  .levels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+  @media (max-width: 700px) { .levels-grid { grid-template-columns: 1fr; } }
+  .level-card {
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+  }
+  .level-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+  }
+  .level-std { background: rgba(122,154,184,.07); border-color: rgba(122,154,184,.25); }
+  .level-std::before { background: var(--text2); }
+  .level-init { background: rgba(0,170,255,.07); border-color: rgba(0,170,255,.3); }
+  .level-init::before { background: var(--accent2); }
+  .level-adv { background: rgba(0,224,160,.07); border-color: rgba(0,224,160,.3); }
+  .level-adv::before { background: var(--accent); }
+  .level-name {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .level-std .level-name { color: var(--text2); }
+  .level-init .level-name { color: var(--accent2); }
+  .level-adv .level-name { color: var(--accent); }
+  .level-card p { font-size: 12px; }
+  .level-card ul { padding-left: 14px; margin-top: 8px; }
+  .level-card ul li { font-size: 12px; color: var(--text2); margin: 4px 0; }
+  .check-item { font-size: 12px; color: var(--text2); margin: 4px 0; padding-left: 16px; position: relative; }
+  .check-item::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .cross-item { font-size: 12px; color: var(--text3); margin: 4px 0; padding-left: 16px; position: relative; }
+  .cross-item::before { content: '—'; position: absolute; left: 0; color: var(--text3); }
+
+  /* FORMULA */
+  .formula-box {
+    background: var(--bg3);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 18px 24px;
+    margin: 16px 0;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--accent);
+    text-align: center;
+    letter-spacing: .5px;
+  }
+  .formula-box .formula-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-family: var(--font);
+  }
+
+  /* GES TABLE */
+  .ges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 16px 0; }
+  @media (max-width: 600px) { .ges-grid { grid-template-columns: 1fr; } }
+  .ges-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .ges-formula {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent3);
+    min-width: 44px;
+  }
+  .ges-info strong { font-size: 13px; color: var(--text); display: block; }
+  .ges-info span { font-size: 11px; color: var(--text3); }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: rgba(0,224,160,.08);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .warning {
+    background: rgba(255,180,0,.08);
+    border-left: 3px solid var(--accent3);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 13px;
+    color: var(--text2);
+  }
+
+  /* QCM */
+  .qcm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .score-display {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .score-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+  .progress-bar {
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 2px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+    transition: width .4s ease;
+  }
+  .question-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .q-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .q-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .q-options { display: flex; flex-direction: column; gap: 10px; }
+  .q-option {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text2);
+    transition: all .15s;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .q-option:hover:not(:disabled) { border-color: var(--accent2); color: var(--text); background: rgba(0,170,255,.08); }
+  .q-option .opt-letter {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    width: 22px; height: 22px;
+    border-radius: 3px;
+    background: var(--bg2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--text3);
+    border: 1px solid var(--border);
+  }
+  .q-option.correct {
+    background: rgba(0,224,160,.12);
+    border-color: var(--success);
+    color: var(--success);
+  }
+  .q-option.correct .opt-letter { background: var(--success); color: #000; border-color: var(--success); }
+  .q-option.wrong {
+    background: rgba(255,68,96,.12);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+  .q-option.wrong .opt-letter { background: var(--danger); color: #fff; border-color: var(--danger); }
+  .q-option.disabled { cursor: default; }
+  .q-option.unselected-correct {
+    background: rgba(0,224,160,.06);
+    border-color: rgba(0,224,160,.4);
+    color: var(--s3);
+    opacity: .7;
+  }
+  .q-explanation {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: var(--bg3);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text2);
+    border-left: 3px solid var(--accent2);
+    display: none;
+  }
+  .q-explanation.show { display: block; }
+  .qcm-nav { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+  .btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .15s;
+    letter-spacing: .3px;
+  }
+  .btn:hover { opacity: .85; }
+  .btn.secondary {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-weight: 400;
+  }
+  .btn.secondary:hover { border-color: var(--text2); color: var(--text); }
+  .btn.danger-btn { background: var(--danger); color: #fff; }
+  .qcm-result {
+    text-align: center;
+    padding: 40px 20px;
+    display: none;
+  }
+  .qcm-result.show { display: block; }
+  .result-score {
+    font-family: var(--font-mono);
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .result-score.pass { color: var(--accent); }
+  .result-score.fail { color: var(--danger); }
+  .result-msg { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .result-detail { font-size: 14px; color: var(--text2); margin-bottom: 32px; }
+
+  /* FICHES */
+  .fiche-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 20px 0; }
+  @media (max-width: 640px) { .fiche-grid { grid-template-columns: 1fr; } }
+  .fiche {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+  }
+  .fiche-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .fiche-list { list-style: none; padding: 0; }
+  .fiche-list li {
+    font-size: 13px;
+    color: var(--text2);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .fiche-list li:last-child { border-bottom: none; }
+  .fiche-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+
+  /* CHIFFRES CLES */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+  @media (max-width: 700px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .kpi-label { font-size: 11px; color: var(--text3); }
+
+  /* TIMELINE */
+  .timeline { margin: 20px 0; }
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    padding: 0 0 20px 0;
+    position: relative;
+  }
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    width: 1px;
+    height: calc(100% - 12px);
+    background: var(--border);
+  }
+  .timeline-item:last-child::after { display: none; }
+  .timeline-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .timeline-content h3 { font-size: 14px; font-weight: 600; color: var(--text); margin: 6px 0 4px; }
+  .timeline-content p { font-size: 13px; margin-bottom: 0; }
+
+  /* FILTER BUTTONS */
+  .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .filter-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text2);
+    transition: all .15s;
+    letter-spacing: .5px;
+  }
+  .filter-btn:hover, .filter-btn.active { color: #000; }
+  .filter-btn.f-all.active { background: var(--text2); border-color: var(--text2); }
+  .filter-btn.f-s1.active { background: var(--s1); border-color: var(--s1); }
+  .filter-btn.f-s2.active { background: var(--s2); border-color: var(--s2); }
+  .filter-btn.f-s3.active { background: var(--s3); border-color: var(--s3); }
+
+  /* HIDDEN ROWS */
+  tr.hidden-row { display: none; }
+  
+  /* ACCORDION */
+  .accordion-item { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; overflow: hidden; }
+  .accordion-header {
+    background: var(--bg3);
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    transition: background .15s;
+  }
+  .accordion-header:hover { background: var(--bg2); }
+  .accordion-body { display: none; padding: 16px 18px; font-size: 13px; color: var(--text2); line-height: 1.7; }
+  .accordion-body.open { display: block; }
+  .accordion-icon { font-size: 18px; color: var(--accent); transition: transform .2s; }
+  .accordion-header.open .accordion-icon { transform: rotate(45deg); }
+</style>
+
+<style id="qcm-styles">
+#qcm-app .card{width:100%;max-width:680px;background:rgba(16,28,45,0.97);border-radius:18px;border:1px solid #1E3048;padding:28px 24px;box-shadow:0 20px 50px rgba(0,0,0,0.6)}
+#qcm-app h1{font-size:24px;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px}
+#qcm-app .subtitle{color:#52B788;font-size:14px;font-style:italic;margin-bottom:14px}
+#qcm-app .desc{color:#8A9DB5;font-size:14px;line-height:1.6;max-width:440px;margin:0 auto 20px}
+#qcm-app .chips{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:22px}
+#qcm-app .chip{display:flex;align-items:center;gap:4px;border-radius:20px;padding:3px 9px;border:1px solid}
+#qcm-app .chip-dot{width:7px;height:7px;border-radius:50%}
+#qcm-app .chip span{font-size:10px;color:#8A9DB5}
+#qcm-app .btn{background:linear-gradient(135deg,#2D6A4F,#40916C);color:#fff;border:none;border-radius:9px;padding:10px 22px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+#qcm-app .btn:disabled{opacity:0.4;cursor:default}
+#qcm-app .btn-sm{background:#1A2B3C;color:#8A9DB5;border:1px solid #2A3A52;border-radius:7px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:inherit}
+#qcm-app .btn-dark{background:#1A2335}
+#qcm-app .btn-mid{background:#2A3A52}
+#qcm-app .progress-wrap{height:3px;background:#1E3048;border-radius:2px;margin-bottom:14px;overflow:hidden}
+#qcm-app .progress-bar{height:100%;background:linear-gradient(90deg,#2D6A4F,#52B788);border-radius:2px;transition:width 0.4s ease}
+#qcm-app .quiz-meta{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+#qcm-app .counter{color:#6A7D90;font-size:13px}
+#qcm-app .badge{font-size:11px;color:#fff;border-radius:11px;padding:2px 9px;font-weight:600}
+#qcm-app .ord-badge{font-size:11px;color:#E9A23B;border:1px solid #E9A23B;border-radius:8px;padding:2px 7px}
+#qcm-app .score-chip{margin-left:auto;color:#52B788;font-size:13px;font-weight:700}
+#qcm-app .q-text{color:#E8F4EC;font-size:17px;line-height:1.6;margin-bottom:20px;font-weight:500}
+#qcm-app .options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+#qcm-app .opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:9px;font-size:14px;line-height:1.4;cursor:pointer;border:1px solid #2A3A52;background:#1A2335;color:#C8D8E8;transition:all 0.12s;font-family:inherit;width:100%;text-align:left}
+#qcm-app .opt:hover:not(.locked){background:#162A4A;border-color:#52B788;color:#fff}
+#qcm-app .opt.selected{background:#162A4A;border-color:#52B788;color:#fff}
+#qcm-app .opt.correct{background:#1B3A2A;border-color:#52B788;color:#52B788}
+#qcm-app .opt.wrong{background:#3A1B1B;border-color:#E07A5F;color:#E07A5F}
+#qcm-app .opt.locked{cursor:default}
+#qcm-app .letter{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+#qcm-app .tick{margin-left:auto;font-size:15px}
+#qcm-app .feedback{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:9px;border:1px solid;margin-bottom:12px}
+#qcm-app .feedback.ok{background:#1B3A2A;border-color:#52B788;color:#52B788}
+#qcm-app .feedback.ko{background:#3A1B1B;border-color:#E07A5F;color:#E07A5F}
+#qcm-app .exp-btn{background:none;border:none;color:#52B788;cursor:pointer;font-size:12px;padding:3px 0;margin-bottom:5px;font-family:inherit}
+#qcm-app .exp-box{background:#0F1E30;border:1px solid #1E3048;border-radius:9px;padding:12px 14px;color:#8ABFDB;font-size:13px;line-height:1.7;margin-bottom:12px;font-style:italic}
+#qcm-app .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+#qcm-app /* Drag order */
+.drag-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:9px;border:1px solid #2A3A52;background:#1A2335;color:#C8D8E8;cursor:grab;user-select:none;margin-bottom:6px;transition:all 0.12s;font-size:14px}
+#qcm-app .drag-item.dragging{background:#1E3860;border-color:#52B788}
+#qcm-app .drag-item.correct-pos{background:#1B3A2A;border-color:#52B788;color:#52B788;cursor:default}
+#qcm-app .drag-item.wrong-pos{background:#3A1B1B;border-color:#E07A5F;color:#E07A5F;cursor:default}
+#qcm-app .drag-num{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+#qcm-app .drag-hint{color:#8A9DB5;font-size:13px;margin-bottom:8px;font-style:italic}
+#qcm-app .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+#qcm-app .match-left{padding:8px 12px;border-radius:8px;border:1px solid #2A3A52;background:#1A2335;color:#C8D8E8;font-size:13px;cursor:pointer;text-align:left;font-family:inherit}
+#qcm-app .match-left.sel{border-color:#52B788;background:#162A4A;color:#fff}
+#qcm-app .match-left.done-ok{border-color:#52B788;background:#1B3A2A;color:#52B788;cursor:default}
+#qcm-app .match-left.done-ko{border-color:#E07A5F;background:#3A1B1B;color:#E07A5F;cursor:default}
+#qcm-app .match-right{padding:8px 12px;border-radius:8px;border:1px solid #2A3A52;background:#131D2A;color:#8A9DB5;font-size:13px;cursor:pointer;text-align:left;font-family:inherit}
+#qcm-app .match-right.linked{border-color:#40916C;color:#C8D8E8;background:#1A2B3C}
+#qcm-app .match-right.done-ok{border-color:#52B788;background:#1B3A2A;color:#52B788;cursor:default}
+#qcm-app .match-right.done-ko{border-color:#E07A5F;background:#3A1B1B;color:#E07A5F;cursor:default}
+#qcm-app /* Filtre */
+.cat-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;cursor:pointer;border:1px solid #2A3A52;background:#131D2A;margin-bottom:5px}
+#qcm-app .cat-row.active{background:rgba(82,183,136,0.05)}
+#qcm-app .cat-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;background:#2A3A52}
+#qcm-app .cat-name{color:#6A7D90;flex:1;font-size:13px}
+#qcm-app .cat-row.active .cat-name{color:#C8D8E8}
+#qcm-app .cat-count{color:#3A4A5A;font-size:12px}
+#qcm-app .cat-row.active .cat-count{color:#52B788}
+#qcm-app .cat-check{font-size:16px;margin-left:6px}
+#qcm-app .total-count{text-align:center;color:#52B788;margin-bottom:12px;font-size:14px}
+#qcm-app /* Résultats */
+.results-header{text-align:center;margin-bottom:22px}
+#qcm-app .big-score{font-size:50px;font-weight:800;margin:0 0 4px}
+#qcm-app .pct{color:#8A9DB5;font-size:15px}
+#qcm-app .theme-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+#qcm-app .theme-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+#qcm-app .theme-name{font-size:12px;flex:1;color:#C8D8E8}
+#qcm-app .mini-bar-wrap{width:100px;height:5px;background:#1E3048;border-radius:3px;overflow:hidden;flex-shrink:0}
+#qcm-app .mini-bar{height:100%;border-radius:3px}
+#qcm-app .theme-score{font-size:12px;font-weight:700;min-width:36px;text-align:right}
+#qcm-app .section-title{color:#8A9DB5;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+#qcm-app .flex-center{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+#qcm-app /* Review */
+.review-header{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+#qcm-app .review-counter{color:#52B788;font-size:14px;font-weight:700}
+#qcm-app /* Blank */
+.blank-input{background:#0F1E30;border:1px solid #2A3A52;border-radius:6px;color:#E8F4EC;padding:3px 8px;font-size:14px;width:120px;font-family:inherit;outline:none}
+#qcm-app .blank-input.ok{border-color:#52B788;color:#52B788}
+#qcm-app .blank-input.ko{border-color:#E07A5F;color:#E07A5F}
+#qcm-app .blank-correction{font-size:12px;color:#E07A5F;margin-top:2px}
+#qcm-app /* Mode toggle */
+.mode-toggle{display:flex;gap:0;border-radius:9px;overflow:hidden;border:1px solid #2A3A52;margin-bottom:14px;align-self:center}
+#qcm-app .mode-btn{padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all 0.15s}
+#qcm-app .mode-btn.active{background:linear-gradient(135deg,#2D6A4F,#40916C);color:#fff}
+#qcm-app .mode-btn:not(.active){background:#1A2335;color:#6A7D90}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Bilan Carbone® <span>// Révision Certification</span></div>
+  <div class="cert-badge">NIVEAU 1 — VENDREDI</div>
+</header>
+
+<nav id="main-nav">
+  <button class="nav-btn active" onclick="showSection('intro', this)">📘 Intro & Histoire</button>
+  <button class="nav-btn" onclick="showSection('ges', this)">🌍 GES & PRG</button>
+  <button class="nav-btn" onclick="showSection('scopes', this)">🔵 Les 3 Scopes</button>
+  <button class="nav-btn" onclick="showSection('niveaux', this)">📊 Niveaux BC</button>
+  <button class="nav-btn" onclick="showSection('postes', this)">📋 Postes & Domaines</button>
+  <button class="nav-btn" onclick="showSection('methode', this)">⚙️ Méthodologie</button>
+  <button class="nav-btn" onclick="showSection('fiches', this)">⚡ Fiches Éclair</button>
+  <button class="nav-btn" onclick="showSection('qcm', this)">🎯 QCM Entraînement</button>
+</nav>
+
+<main>
+
+<!-- ============================== INTRO ============================== -->
+<div class="section active" id="intro">
+  <div class="card">
+    <div class="card-title">Qu'est-ce que le Bilan Carbone® ?</div>
+    <h2>Le Bilan Carbone®</h2>
+    <p>Le <strong>Bilan Carbone®</strong> est une méthode de comptabilisation des émissions de gaz à effet de serre (GES) développée à partir de 2002 par <strong>Jean-Marc Jancovici</strong> pour le compte de l'<strong>ADEME</strong> (Agence de la transition écologique).</p>
+    <p>Aujourd'hui, la méthode est gérée par l'<strong>Association Bilan Carbone (ABC)</strong> — anciennement ADEME jusqu'en 2011. Elle est distincte de la méthode <em>GHG Protocol</em>, bien qu'elle s'en inspire partiellement.</p>
+    <div class="highlight">
+      💡 Le Bilan Carbone® est une <strong>marque déposée</strong>. Son utilisation est encadrée par l'ABC. Ne pas confondre avec « bilan des émissions de GES » (BEGES) qui est la version réglementaire.
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-value">2002</div><div class="kpi-label">Création par ADEME</div></div>
+    <div class="kpi"><div class="kpi-value">2011</div><div class="kpi-label">Transfert à l'ABC</div></div>
+    <div class="kpi"><div class="kpi-value">teqCO₂</div><div class="kpi-label">Unité de mesure</div></div>
+    <div class="kpi"><div class="kpi-value">7</div><div class="kpi-label">GES comptabilisés</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Cadre réglementaire</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">1</div>
+        <div class="timeline-content">
+          <h3>Protocole de Kyoto (1997)</h3>
+          <p>Identifie les 7 GES réglementés : CO₂, CH₄, N₂O, HFC, PFC, SF₆, NF₃. Fixe des objectifs de réduction pour les pays industrialisés.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-content">
+          <h3>Loi Grenelle II — Art. 75 (2010)</h3>
+          <p>Oblige certaines entités à réaliser un BEGES (Bilan des Émissions de GES) tous les 4 ans : entreprises >500 salariés (250 en DOM-TOM), collectivités >50 000 hab, administrations >250 agents.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-content">
+          <h3>GHG Protocol (référentiel international)</h3>
+          <p>Standard mondial de comptabilisation GES, à l'origine des 3 Scopes repris dans le Bilan Carbone®. Publié par WRI & WBCSD.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-content">
+          <h3>ISO 14064 (2006, révisée 2018)</h3>
+          <p>Norme internationale pour la quantification et déclaration des émissions GES au niveau des organisations et projets.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">5</div>
+        <div class="timeline-content">
+          <h3>CSRD — Directive UE (2023)</h3>
+          <p>Corporate Sustainability Reporting Directive : étend les obligations de reporting aux entreprises de >250 salariés. Intègre une comptabilisation GES alignée sur les scopes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Objectifs du Bilan Carbone®</div>
+    <p>Le Bilan Carbone® sert à :</p>
+    <ul style="padding-left:20px;margin-top:8px">
+      <li style="color:var(--text2);margin:6px 0;font-size:14px"><strong style="color:var(--text)">Cartographier</strong> les émissions GES d'une organisation sur l'ensemble de sa chaîne de valeur</li>
+      <li style="color:var(--text2);margin:6px 0;font-size:14px"><strong style="color:var(--text)">Identifier</strong> les postes les plus émissifs (hotspots)</li>
+      <li style="color:var(--text2);margin:6px 0;font-size:14px"><strong style="color:var(--text)">Définir</strong> une trajectoire de réduction en cohérence avec les Accords de Paris (1,5°C)</li>
+      <li style="color:var(--text2);margin:6px 0;font-size:14px"><strong style="color:var(--text)">Communiquer</strong> de façon transparente sur les performances climatiques</li>
+      <li style="color:var(--text2);margin:6px 0;font-size:14px"><strong style="color:var(--text)">Répondre</strong> aux obligations réglementaires (BEGES, CSRD)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================== GES ============================== -->
+<div class="section" id="ges">
+  <div class="card">
+    <div class="card-title">Les 7 Gaz à Effet de Serre</div>
+    <h2>GES & Potentiel de Réchauffement Global (PRG)</h2>
+    <p>Le Bilan Carbone® comptabilise les 7 GES définis par le <strong>Protocole de Kyoto</strong>. Tous sont convertis en <strong>CO₂ équivalent (CO₂e)</strong> via leur PRG sur 100 ans.</p>
+    <div class="formula-box">
+      <div class="formula-label">Formule de conversion</div>
+      Émissions (teqCO₂) = Quantité (tonne) × PRG (100 ans)
+    </div>
+  </div>
+
+  <div class="ges-grid">
+    <div class="ges-item">
+      <div class="ges-formula">CO₂</div>
+      <div class="ges-info">
+        <strong>Dioxyde de carbone</strong>
+        <span>PRG = 1 — Référence. Combustion fossile, déforestation, procédés industriels.</span>
+      </div>
+    </div>
+    <div class="ges-item">
+      <div class="ges-formula">CH₄</div>
+      <div class="ges-info">
+        <strong>Méthane</strong>
+        <span>PRG = 28 (AR5). Élevage, décharges, gaz naturel, riziculture.</span>
+      </div>
+    </div>
+    <div class="ges-item">
+      <div class="ges-formula">N₂O</div>
+      <div class="ges-info">
+        <strong>Protoxyde d'azote</strong>
+        <span>PRG = 265 (AR5). Agriculture (engrais azotés), combustion, industrie chimique.</span>
+      </div>
+    </div>
+    <div class="ges-item">
+      <div class="ges-formula">HFC</div>
+      <div class="ges-info">
+        <strong>Hydrofluorocarbures</strong>
+        <span>PRG = 12–14 800 selon molécule. Fluides frigorigènes, aérosols, mousses.</span>
+      </div>
+    </div>
+    <div class="ges-item">
+      <div class="ges-formula">PFC</div>
+      <div class="ges-info">
+        <strong>Perfluorocarbures</strong>
+        <span>PRG = 7 390–12 200. Industrie aluminium, électronique semi-conducteurs.</span>
+      </div>
+    </div>
+    <div class="ges-item">
+      <div class="ges-formula">SF₆</div>
+      <div class="ges-info">
+        <strong>Hexafluorure de soufre</strong>
+        <span>PRG = 23 500. Appareillages électriques haute tension, isolation.</span>
+      </div>
+    </div>
+    <div class="ges-item">
+      <div class="ges-formula">NF₃</div>
+      <div class="ges-info">
+        <strong>Trifluorure d'azote</strong>
+        <span>PRG = 16 100. Écrans LCD, cellules photovoltaïques, micro-électronique.</span>
+      </div>
+    </div>
+    <div class="ges-item" style="background:rgba(0,224,160,.06);border-color:rgba(0,224,160,.2)">
+      <div class="ges-formula" style="color:var(--accent)">CO₂e</div>
+      <div class="ges-info">
+        <strong>CO₂ équivalent — l'unité universelle</strong>
+        <span>Toutes les émissions sont ramenées en teqCO₂. Permet l'agrégation des 7 GES.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Points clés PRG</div>
+    <div class="warning">⚠️ Le PRG évolue selon les rapports du GIEC (AR4, AR5, AR6). En France, la Base Empreinte® de l'ADEME utilise le PRG AR5 (5ème rapport). Le méthane passe de 21 (AR4) à 28 (AR5) à 29,8 (AR6).</div>
+    <p>Le <strong>Potentiel de Réchauffement Global (PRG)</strong> mesure la capacité d'un GES à piéger la chaleur dans l'atmosphère sur 100 ans, par rapport au CO₂.</p>
+    <div class="highlight">
+      🎯 À retenir pour l'exam : CH₄ = 28, N₂O = 265, SF₆ = 23 500. Le NF₃ (ajout du Protocole de Kyoto en 2012) = 16 100.
+    </div>
+    <h3>La Base Empreinte® (anciennement Base Carbone®)</h3>
+    <p>Gérée par l'ADEME, c'est la base de <strong>facteurs d'émission (FE)</strong> de référence française, publique et gratuite. Elle contient des milliers de FE pour calculer les émissions associées à chaque activité ou produit.</p>
+    <div class="highlight">💡 Ne pas confondre <strong>Base Empreinte®</strong> (base de données ADEME) avec la <strong>méthode Bilan Carbone®</strong> (méthodologie ABC).</div>
+  </div>
+</div>
+
+<!-- ============================== SCOPES ============================== -->
+<div class="section" id="scopes">
+  <div class="card">
+    <div class="card-title">Périmètre d'émissions</div>
+    <h2>Les 3 Scopes d'émissions</h2>
+    <p>La structure en 3 scopes est issue du <strong>GHG Protocol</strong> (2001, révisé 2011). Le Bilan Carbone® reprend cette structure tout en l'enrichissant de postes propres à sa méthodologie.</p>
+    <div class="warning">⚠️ La frontière entre scopes dépend de l'entité déclarante. Ce qui est Scope 3 pour l'un peut être Scope 1 pour un autre acteur de la chaîne.</div>
+  </div>
+
+  <div class="scope-grid">
+    <div class="scope-card s1">
+      <div class="scope-number">01</div>
+      <h3>Émissions Directes</h3>
+      <p style="font-size:12px;margin-bottom:10px"><strong>Sources détenues ou contrôlées</strong> par l'organisation.</p>
+      <ul>
+        <li>Chaudières, fours, turbines</li>
+        <li>Véhicules de la flotte propre</li>
+        <li>Procédés industriels (ciment, acier…)</li>
+        <li>Fuites de fluides frigorigènes</li>
+        <li>Émissions fugitives</li>
+        <li>Terres agricoles gérées en propre</li>
+      </ul>
+    </div>
+    <div class="scope-card s2">
+      <div class="scope-number">02</div>
+      <h3>Émissions Indirectes — Énergie</h3>
+      <p style="font-size:12px;margin-bottom:10px"><strong>Énergies achetées</strong> et consommées par l'organisation.</p>
+      <ul>
+        <li>Électricité achetée</li>
+        <li>Chaleur achetée (réseau de chaleur)</li>
+        <li>Froid acheté</li>
+        <li>Vapeur achetée</li>
+      </ul>
+      <p style="margin-top:10px;font-size:11px;color:var(--text3)">Approche marché vs approche localisation (Scope 2 Guidance GHG Protocol)</p>
+    </div>
+    <div class="scope-card s3">
+      <div class="scope-number">03</div>
+      <h3>Autres Émissions Indirectes</h3>
+      <p style="font-size:12px;margin-bottom:10px"><strong>Toute la chaîne de valeur</strong> : amont et aval.</p>
+      <ul>
+        <li>Achats de biens & services</li>
+        <li>Immobilisations corporelles</li>
+        <li>Transport & fret</li>
+        <li>Déplacements pro & domicile-travail</li>
+        <li>Utilisation des produits vendus</li>
+        <li>Fin de vie des produits</li>
+        <li>Investissements & participations</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Exemples concrets par Scope</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Scope</th>
+            <th>Source d'émission</th>
+            <th>Exemple concret</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="pill scope-1">S1</span></td><td class="poste-name">Combustion fixe</td><td>Chaudière gaz d'un bâtiment administratif</td></tr>
+          <tr><td><span class="pill scope-1">S1</span></td><td class="poste-name">Combustion mobile</td><td>Camions de livraison propriétés de l'entreprise</td></tr>
+          <tr><td><span class="pill scope-1">S1</span></td><td class="poste-name">Procédés industriels</td><td>Calcination du calcaire dans une cimenterie</td></tr>
+          <tr><td><span class="pill scope-1">S1</span></td><td class="poste-name">Émissions fugitives</td><td>Fuite de HFC d'une climatisation</td></tr>
+          <tr><td><span class="pill scope-2">S2</span></td><td class="poste-name">Électricité achetée</td><td>Consommation électrique des bureaux (via réseau EDF)</td></tr>
+          <tr><td><span class="pill scope-2">S2</span></td><td class="poste-name">Chaleur achetée</td><td>Raccordement au réseau de chaleur urbaine</td></tr>
+          <tr><td><span class="pill scope-3">S3</span></td><td class="poste-name">Achats</td><td>Matières premières achetées (acier, plastique, béton)</td></tr>
+          <tr><td><span class="pill scope-3">S3</span></td><td class="poste-name">Fret amont</td><td>Transport des matières premières jusqu'à l'usine</td></tr>
+          <tr><td><span class="pill scope-3">S3</span></td><td class="poste-name">Déplacements pro</td><td>Vols d'affaires des salariés</td></tr>
+          <tr><td><span class="pill scope-3">S3</span></td><td class="poste-name">Domicile-travail</td><td>Trajets quotidiens des employés (voiture perso)</td></tr>
+          <tr><td><span class="pill scope-3">S3</span></td><td class="poste-name">Utilisation produits</td><td>Émissions liées à l'utilisation d'une voiture vendue</td></tr>
+          <tr><td><span class="pill scope-3">S3</span></td><td class="poste-name">Fin de vie</td><td>Incinération ou enfouissement des produits en fin de vie</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Pièges fréquents</div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">Les véhicules loués : S1 ou S3 ? <span class="accordion-icon">+</span></div>
+      <div class="accordion-body">Véhicule en <strong>leasing opérationnel</strong> utilisé par l'entreprise : les émissions de combustion vont dans le <strong>Scope 1</strong> si l'entreprise en a le contrôle opérationnel. Si leasing et pas de contrôle : <strong>Scope 3</strong> (actifs loués amont). La réponse dépend du <strong>périmètre opérationnel</strong> choisi (contrôle financier vs opérationnel).</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">L'électricité achetée : toujours S2 ? <span class="accordion-icon">+</span></div>
+      <div class="accordion-body">L'électricité achetée est toujours en <strong>Scope 2</strong>. Attention : si l'organisation possède ses propres panneaux solaires et produit de l'électricité, les émissions de cette production (si thermique) seraient Scope 1. L'électricité autoproduite et consommée = Scope 1. L'électricité autoproduite et vendue = hors périmètre.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">Scope 3 amont vs aval <span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><strong>Amont</strong> (catégories 1 à 8 GHG Protocol) : tout ce qui se passe avant que les biens/services arrivent à l'organisation. <strong>Aval</strong> (catégories 9 à 15) : tout ce qui se passe après que l'organisation délivre ses produits/services. Le transport des matières premières jusqu'à l'usine = amont. La livraison au client = aval.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">Double comptage entre scopes <span class="accordion-icon">+</span></div>
+      <div class="accordion-body">Le GHG Protocol prévoit des règles pour éviter les doubles comptages. Par exemple, l'électricité achetée ne doit pas être comptée à la fois dans le Scope 2 de l'acheteur ET dans le Scope 1 du fournisseur d'énergie (on ne cumule pas les bilans de deux entités différentes dans un seul rapport).</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== NIVEAUX ============================== -->
+<div class="section" id="niveaux">
+  <div class="card">
+    <div class="card-title">Niveaux de Bilan Carbone®</div>
+    <h2>Standard · Initial · Avancé</h2>
+    <p>La méthode Bilan Carbone® définit <strong>3 niveaux de complétude</strong> qui correspondent au nombre de postes pris en compte dans l'inventaire. Plus le niveau est élevé, plus le périmètre est large et représentatif de l'empreinte réelle.</p>
+    <div class="warning">⚠️ Ne pas confondre les niveaux du Bilan Carbone® (Standard/Initial/Avancé) avec les obligations réglementaires du BEGES (Scopes 1+2 obligatoires, Scope 3 partiel).</div>
+  </div>
+
+  <div class="levels-grid">
+    <div class="level-card level-std">
+      <div class="level-name">STANDARD</div>
+      <p>Niveau minimum. Correspond au BEGES réglementaire (Loi Grenelle II).</p>
+      <div style="margin-top:12px">
+        <div class="check-item">Scope 1 — Émissions directes (combustion fixe, mobile, procédés, fugitives)</div>
+        <div class="check-item">Scope 2 — Énergie achetée (électricité, chaleur, vapeur)</div>
+        <div class="cross-item">Scope 3 — Non requis (ou très partiel)</div>
+      </div>
+      <div class="warning" style="margin-top:12px;font-size:11px;padding:8px 10px">Obligatoire pour entités >500 salariés (250 DOM-TOM). Tous les 4 ans. Plan de transition associé.</div>
+    </div>
+    <div class="level-card level-init">
+      <div class="level-name">INITIAL</div>
+      <p>Élargi aux principaux postes Scope 3 ayant un impact significatif.</p>
+      <div style="margin-top:12px">
+        <div class="check-item">Scope 1 — Complet</div>
+        <div class="check-item">Scope 2 — Complet</div>
+        <div class="check-item">Scope 3 — Postes significatifs : achats, fret, déplacements (domicile-travail + pro), déchets</div>
+        <div class="cross-item">Scope 3 — Postes secondaires non inclus</div>
+      </div>
+      <div class="highlight" style="margin-top:12px;font-size:11px;padding:8px 10px">Recommandé pour une première démarche volontaire ambitieuse.</div>
+    </div>
+    <div class="level-card level-adv">
+      <div class="level-name">AVANCÉ</div>
+      <p>Périmètre complet. Tous les postes des 3 Scopes sont couverts.</p>
+      <div style="margin-top:12px">
+        <div class="check-item">Scope 1 — Complet</div>
+        <div class="check-item">Scope 2 — Complet</div>
+        <div class="check-item">Scope 3 — Tous postes : utilisation produits, fin de vie, investissements, visiteurs…</div>
+        <div class="check-item">Analyse de la chaîne de valeur exhaustive</div>
+      </div>
+      <div class="highlight" style="margin-top:12px;font-size:11px;padding:8px 10px">Vise l'alignement avec la trajectoire 1,5°C (Science Based Targets).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">BEGES Réglementaire vs Bilan Carbone®</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Critère</th><th>BEGES (réglementaire)</th><th>Bilan Carbone® (volontaire)</th></tr></thead>
+        <tbody>
+          <tr><td>Base légale</td><td class="poste-name">Art. 75 Grenelle II — Décret 2011-829</td><td class="poste-name">Démarche volontaire</td></tr>
+          <tr><td>Entités visées</td><td>Entreprises >500 sal., collectivités >50k hab., admin. >250 agents</td><td>Toute organisation volontaire</td></tr>
+          <tr><td>Fréquence</td><td>Tous les 4 ans</td><td>Recommandé tous les 3-4 ans</td></tr>
+          <tr><td>Scopes obligatoires</td><td>1 et 2 obligatoires, Scope 3 partiel</td><td>Standard (1+2), Initial ou Avancé</td></tr>
+          <tr><td>Plan associé</td><td>Plan de transition obligatoire depuis 2023</td><td>Plan d'action recommandé</td></tr>
+          <tr><td>Publication</td><td>ADEME (BEGES publiés publiquement)</td><td>Décision de l'organisation</td></tr>
+          <tr><td>Méthode imposée ?</td><td>Non — plusieurs méthodes acceptées (BC, GHG Protocol, ISO 14064)</td><td>Méthode ABC spécifique</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight" style="margin-top:16px">💡 Le Bilan Carbone® peut servir de support pour répondre à l'obligation BEGES, mais le BEGES peut aussi être réalisé avec d'autres méthodes (GHG Protocol, ISO 14064).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Périmètre organisationnel</div>
+    <p>Avant de définir les postes, il faut délimiter l'entité à l'aide de deux approches :</p>
+    <h3>Approche par contrôle financier</h3>
+    <p>L'organisation comptabilise les émissions de toutes les entités sur lesquelles elle exerce un <strong>contrôle financier</strong> (consolidation comptable). Utilisée par la plupart des entreprises cotées.</p>
+    <h3>Approche par contrôle opérationnel</h3>
+    <p>L'organisation comptabilise les émissions des entités sur lesquelles elle exerce un <strong>contrôle opérationnel</strong> (autorité d'introduire et mettre en œuvre des politiques). Plus large que le contrôle financier.</p>
+    <h3>Approche par quote-part d'actions (Equity Share)</h3>
+    <p>L'organisation comptabilise les émissions au prorata de sa <strong>participation capitalistique</strong> dans chaque entité. Recommandée par le GHG Protocol pour certains secteurs.</p>
+  </div>
+</div>
+
+<!-- ============================== POSTES ============================== -->
+<div class="section" id="postes">
+  <div class="card">
+    <div class="card-title">Postes du Bilan Carbone®</div>
+    <h2>Les Postes par Domaine et Scope</h2>
+    <p>La méthode Bilan Carbone® organise ses postes en <strong>6 domaines</strong>. Chaque poste est associé à un ou plusieurs Scopes selon sa nature. Ci-dessous le tableau complet :</p>
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn f-all active" onclick="filterTable('all', this)">TOUS</button>
+    <button class="filter-btn f-s1" onclick="filterTable('s1', this)">SCOPE 1</button>
+    <button class="filter-btn f-s2" onclick="filterTable('s2', this)">SCOPE 2</button>
+    <button class="filter-btn f-s3" onclick="filterTable('s3', this)">SCOPE 3</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="postes-table">
+      <thead>
+        <tr>
+          <th>Domaine</th>
+          <th>Poste</th>
+          <th>Scope</th>
+          <th>Description & exemples</th>
+          <th>Niveau BC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ENERGIE -->
+        <tr data-scope="s1">
+          <td><span class="domaine-badge">ÉNERGIE</span></td>
+          <td class="poste-name">Combustion de sources fixes</td>
+          <td><span class="pill scope-1">S1</span></td>
+          <td>Gaz naturel, fioul, charbon dans chaudières, fours, turbines sur sites propres</td>
+          <td><span class="pill scope-1" style="font-size:10px">STD</span></td>
+        </tr>
+        <tr data-scope="s1">
+          <td><span class="domaine-badge">ÉNERGIE</span></td>
+          <td class="poste-name">Combustion de sources mobiles</td>
+          <td><span class="pill scope-1">S1</span></td>
+          <td>Flotte propre de véhicules, engins de chantier, navires, avions propriété de l'org.</td>
+          <td><span class="pill scope-1" style="font-size:10px">STD</span></td>
+        </tr>
+        <tr data-scope="s2">
+          <td><span class="domaine-badge">ÉNERGIE</span></td>
+          <td class="poste-name">Énergie achetée (électricité, chaleur, froid)</td>
+          <td><span class="pill scope-2">S2</span></td>
+          <td>Électricité réseau, réseau de chaleur urbaine, abonnement froid, vapeur achetée</td>
+          <td><span class="pill scope-1" style="font-size:10px">STD</span></td>
+        </tr>
+        <!-- INTRANTS -->
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">INTRANTS</span></td>
+          <td class="poste-name">Achats de biens & matières premières</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Acier, béton, plastiques, composants, matières agricoles achetés. Empreinte carbone de production.</td>
+          <td><span class="pill scope-3" style="font-size:10px">INIT</span></td>
+        </tr>
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">INTRANTS</span></td>
+          <td class="poste-name">Achats de services</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Prestations intellectuelles, sous-traitance, gardiennage, nettoyage, conseil</td>
+          <td><span class="pill scope-3" style="font-size:10px">AVA</span></td>
+        </tr>
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">INTRANTS</span></td>
+          <td class="poste-name">Immobilisations (amortissement)</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Amortissement carbone des bâtiments, machines, équipements IT, véhicules achetés</td>
+          <td><span class="pill scope-3" style="font-size:10px">INIT</span></td>
+        </tr>
+        <!-- FRET -->
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">FRET</span></td>
+          <td class="poste-name">Transport amont (fret entrant)</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Transport des matières premières et composants jusqu'aux sites de l'organisation</td>
+          <td><span class="pill scope-3" style="font-size:10px">INIT</span></td>
+        </tr>
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">FRET</span></td>
+          <td class="poste-name">Transport aval (fret sortant)</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Livraison des produits finis aux clients, distribution, logistique sortante</td>
+          <td><span class="pill scope-3" style="font-size:10px">INIT</span></td>
+        </tr>
+        <tr data-scope="s1 s3">
+          <td><span class="domaine-badge">FRET</span></td>
+          <td class="poste-name">Transport de marchandises (flotte mixte)</td>
+          <td><span class="pill scope-1">S1</span><span class="pill scope-3">S3</span></td>
+          <td>S1 si véhicule propre, S3 si transporteur externe. Dépend du contrôle opérationnel.</td>
+          <td><span class="pill scope-3" style="font-size:10px">INIT</span></td>
+        </tr>
+        <!-- DÉPLACEMENTS -->
+        <tr data-scope="s1 s3">
+          <td><span class="domaine-badge">DÉPLACEMENTS</span></td>
+          <td class="poste-name">Déplacements professionnels</td>
+          <td><span class="pill scope-1">S1</span><span class="pill scope-3">S3</span></td>
+          <td>S1 si véhicule de fonction propre. S3 si transports achetés (train, avion, taxi, location)</td>
+          <td><span class="pill scope-3" style="font-size:10px">INIT</span></td>
+        </tr>
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">DÉPLACEMENTS</span></td>
+          <td class="poste-name">Déplacements domicile-travail</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Trajets quotidiens des salariés (voiture perso, transports communs, vélo, covoiturage)</td>
+          <td><span class="pill scope-3" style="font-size:10px">INIT</span></td>
+        </tr>
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">DÉPLACEMENTS</span></td>
+          <td class="poste-name">Déplacements des visiteurs & clients</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Trajets des clients pour accéder aux locaux, visiteurs, prestataires entrants</td>
+          <td><span class="pill scope-3" style="font-size:10px">AVA</span></td>
+        </tr>
+        <!-- DÉCHETS -->
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">DÉCHETS</span></td>
+          <td class="poste-name">Déchets directs (gestion des déchets)</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Incinération, enfouissement, compostage, recyclage des déchets générés par l'organisation</td>
+          <td><span class="pill scope-3" style="font-size:10px">INIT</span></td>
+        </tr>
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">DÉCHETS</span></td>
+          <td class="poste-name">Fin de vie des produits vendus</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Traitement en fin de vie des produits vendus par l'organisation (hors son contrôle direct)</td>
+          <td><span class="pill scope-3" style="font-size:10px">AVA</span></td>
+        </tr>
+        <!-- UTILISATION / AVAL -->
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">UTILISATION</span></td>
+          <td class="poste-name">Utilisation des produits vendus</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Émissions générées par l'usage des produits (ex : carburant brûlé dans les voitures vendues)</td>
+          <td><span class="pill scope-3" style="font-size:10px">AVA</span></td>
+        </tr>
+        <tr data-scope="s1">
+          <td><span class="domaine-badge">PROCÉDÉS</span></td>
+          <td class="poste-name">Procédés industriels hors énergie</td>
+          <td><span class="pill scope-1">S1</span></td>
+          <td>Calcination (ciment), réduction chimique (acier), fermentation, émissions de process chimiques</td>
+          <td><span class="pill scope-1" style="font-size:10px">STD</span></td>
+        </tr>
+        <tr data-scope="s1">
+          <td><span class="domaine-badge">PROCÉDÉS</span></td>
+          <td class="poste-name">Émissions fugitives</td>
+          <td><span class="pill scope-1">S1</span></td>
+          <td>Fuites de fluides frigorigènes (HFC), fuites de SF₆, méthane des canalisations</td>
+          <td><span class="pill scope-1" style="font-size:10px">STD</span></td>
+        </tr>
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">IMMOBILISATIONS</span></td>
+          <td class="poste-name">Actifs en leasing amont</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Émissions des actifs loués par l'organisation (si non inclus en Scope 1)</td>
+          <td><span class="pill scope-3" style="font-size:10px">AVA</span></td>
+        </tr>
+        <tr data-scope="s3">
+          <td><span class="domaine-badge">IMMOBILISATIONS</span></td>
+          <td class="poste-name">Investissements financiers</td>
+          <td><span class="pill scope-3">S3</span></td>
+          <td>Émissions finançées via participations, actions, obligations, prêts accordés</td>
+          <td><span class="pill scope-3" style="font-size:10px">AVA</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="highlight" style="margin-top:16px">💡 <strong>STD</strong> = Niveau Standard · <strong>INIT</strong> = Niveau Initial · <strong>AVA</strong> = Niveau Avancé uniquement</div>
+</div>
+
+<!-- ============================== METHODE ============================== -->
+<div class="section" id="methode">
+  <div class="card">
+    <div class="card-title">Calcul des émissions</div>
+    <h2>Méthodologie & Calcul</h2>
+    <div class="formula-box">
+      <div class="formula-label">Formule fondamentale</div>
+      Émissions (teqCO₂) = Donnée d'activité × Facteur d'émission (FE)
+    </div>
+    <p>La <strong>donnée d'activité</strong> est la mesure physique ou économique de l'activité (litres de carburant, kWh consommés, km parcourus, tonnes achetées…).</p>
+    <p>Le <strong>facteur d'émission</strong> est le coefficient de conversion vers les teqCO₂. Il est issu de la <strong>Base Empreinte® (ADEME)</strong>, d'ECOINVENT, de rapports IPCC, ou calculé par ACV.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Types de données d'activité</div>
+    <div class="fiche-grid">
+      <div class="fiche">
+        <div class="fiche-label" style="color:var(--s1)">Données primaires (mesurées)</div>
+        <ul class="fiche-list">
+          <li>Relevés de compteur gaz / électricité</li>
+          <li>Factures carburant flotte</li>
+          <li>Mesures directes sur cheminées</li>
+          <li>Feuilles de route des camions</li>
+          <li>Données RH sur déplacements</li>
+        </ul>
+      </div>
+      <div class="fiche">
+        <div class="fiche-label" style="color:var(--s3)">Données secondaires (estimées)</div>
+        <ul class="fiche-list">
+          <li>Montants monétaires des achats</li>
+          <li>Ratios sectoriels (kgCO₂e/€)</li>
+          <li>Données issues d'enquêtes fournisseurs</li>
+          <li>Estimations statistiques (ETP, surface m²)</li>
+          <li>Données de transport par défaut</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warning" style="margin-top:16px">⚠️ Plus les données sont <strong>primaires et précises</strong>, plus le bilan est fiable. Les données monétaires sont pratiques mais moins précises. Indiquer le niveau d'incertitude est une bonne pratique.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Approches de collecte par poste</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Poste</th><th>Donnée d'activité typique</th><th>Unité</th><th>FE typique</th></tr></thead>
+        <tbody>
+          <tr><td>Combustion gaz naturel</td><td>Volume consommé</td><td>m³ ou kWh PCI</td><td>~0,202 kgCO₂e/kWh</td></tr>
+          <tr><td>Combustion fioul</td><td>Volume consommé</td><td>litres</td><td>~2,67 kgCO₂e/L</td></tr>
+          <tr><td>Électricité (France)</td><td>kWh consommés</td><td>kWh</td><td>~0,052 kgCO₂e/kWh (2023)</td></tr>
+          <tr><td>Déplacement voiture essence</td><td>km parcourus</td><td>km ou L carburant</td><td>~0,218 kgCO₂e/km (véh. moyen)</td></tr>
+          <tr><td>Avion court courrier</td><td>km × passager</td><td>passager·km</td><td>~0,19 kgCO₂e/pass·km</td></tr>
+          <tr><td>Avion long courrier</td><td>km × passager</td><td>passager·km</td><td>~0,15 kgCO₂e/pass·km (hors RF)</td></tr>
+          <tr><td>Fret routier</td><td>tonnes × km</td><td>tonne·km</td><td>~0,09–0,15 kgCO₂e/t·km</td></tr>
+          <tr><td>Achats (approche monétaire)</td><td>Montant €</td><td>k€</td><td>Variable par secteur</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight" style="margin-top:12px">💡 Le facteur d'émission de l'électricité française est très bas (~52 gCO₂e/kWh) car le mix électrique est majoritairement nucléaire. En Allemagne il est ~400 gCO₂e/kWh. Cela illustre l'importance d'utiliser des FE nationaux.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Étapes d'un Bilan Carbone®</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">1</div>
+        <div class="timeline-content">
+          <h3>Cadrage & périmètre</h3>
+          <p>Définir l'entité, l'année de référence, le niveau (Std/Init/Avancé), les périmètres organisationnel et opérationnel.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-content">
+          <h3>Collecte des données</h3>
+          <p>Identifier les sources, collecter les données d'activité par poste. Impliquer les services (RH, achats, logistique, technique).</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-content">
+          <h3>Calcul & saisie outil</h3>
+          <p>Appliquer les FE issus de la Base Empreinte®. Utiliser l'outil officiel ABC ou équivalent agréé. Résultat en teqCO₂.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-content">
+          <h3>Analyse des résultats</h3>
+          <p>Identifier les postes clés (hotspots). Cartographier les émissions par scope, domaine, site. Comparer aux benchmarks sectoriels.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">5</div>
+        <div class="timeline-content">
+          <h3>Plan d'action & trajectoire</h3>
+          <p>Définir des objectifs de réduction chiffrés et datés. Identifier les leviers d'action prioritaires. Aligner sur la trajectoire 1,5°C si SBTi.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">6</div>
+        <div class="timeline-content">
+          <h3>Communication & suivi</h3>
+          <p>Publication BEGES sur ADEME si réglementaire. Rapport volontaire. Mise à jour périodique (tous les 3-4 ans).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== FICHES ============================== -->
+<div class="section" id="fiches">
+  <div class="card">
+    <div class="card-title">Mémo Express</div>
+    <h2>Fiches Éclair — À mémoriser absolument</h2>
+    <p>Les points les plus souvent testés dans les QCM de certification Bilan Carbone® niveau 1.</p>
+  </div>
+
+  <div class="fiche-grid">
+    <div class="fiche">
+      <div class="fiche-label" style="color:var(--accent)">Créateurs & Gestionnaires</div>
+      <ul class="fiche-list">
+        <li>Inventé par <strong>Jean-Marc Jancovici</strong> pour l'ADEME (~2002)</li>
+        <li>Géré depuis 2011 par l'<strong>ABC</strong> (Association pour la transition Bas Carbone)</li>
+        <li>Distinct du BEGES (réglementaire) et du GHG Protocol (international)</li>
+        <li>Base Empreinte® = base de données FE gérée par l'<strong>ADEME</strong></li>
+      </ul>
+    </div>
+    <div class="fiche">
+      <div class="fiche-label" style="color:var(--accent3)">Les 7 GES à connaître</div>
+      <ul class="fiche-list">
+        <li><strong>CO₂</strong> — PRG 1 (référence)</li>
+        <li><strong>CH₄</strong> — PRG 28 (élevage, décharges)</li>
+        <li><strong>N₂O</strong> — PRG 265 (agriculture)</li>
+        <li><strong>HFC</strong> — PRG 12–14 800 (frigo)</li>
+        <li><strong>PFC</strong> — PRG 7 390–12 200 (alu)</li>
+        <li><strong>SF₆</strong> — PRG 23 500 (HT électrique)</li>
+        <li><strong>NF₃</strong> — PRG 16 100 (LCD, solaire)</li>
+      </ul>
+    </div>
+    <div class="fiche">
+      <div class="fiche-label" style="color:var(--s1)">Scope 1 = Émissions directes</div>
+      <ul class="fiche-list">
+        <li>Combustion dans les installations fixes propres</li>
+        <li>Combustion dans les véhicules de la flotte propre</li>
+        <li>Procédés industriels hors énergie</li>
+        <li>Émissions fugitives (fluides frigorigènes, SF₆…)</li>
+        <li>Toujours obligatoire (niveaux Standard, Initial, Avancé)</li>
+      </ul>
+    </div>
+    <div class="fiche">
+      <div class="fiche-label" style="color:var(--s2)">Scope 2 = Énergie achetée</div>
+      <ul class="fiche-list">
+        <li>Électricité achetée (réseau)</li>
+        <li>Chaleur achetée (réseau de chaleur)</li>
+        <li>Froid acheté</li>
+        <li>Vapeur achetée</li>
+        <li>Toujours obligatoire. FE FR élec ≈ 52 gCO₂e/kWh</li>
+      </ul>
+    </div>
+    <div class="fiche">
+      <div class="fiche-label" style="color:var(--s3)">Scope 3 = Chaîne de valeur</div>
+      <ul class="fiche-list">
+        <li>Souvent le plus gros scope (60-80% émissions)</li>
+        <li>Amont : achats, fret entrant, immobilisations</li>
+        <li>Aval : usage produits, fin de vie, fret sortant</li>
+        <li>Déplacements : pro (S3 si tiers) + domicile-travail</li>
+        <li>Obligatoire à partir du niveau Initial</li>
+      </ul>
+    </div>
+    <div class="fiche">
+      <div class="fiche-label" style="color:var(--accent2)">Niveaux BC — résumé</div>
+      <ul class="fiche-list">
+        <li><strong>Standard</strong> = S1 + S2 (minimum légal BEGES)</li>
+        <li><strong>Initial</strong> = S1 + S2 + S3 postes clés</li>
+        <li><strong>Avancé</strong> = S1 + S2 + S3 complet</li>
+        <li>BEGES obligatoire tous les <strong>4 ans</strong></li>
+        <li>Seuil BEGES : >500 sal. / >50k hab. / >250 agents</li>
+      </ul>
+    </div>
+    <div class="fiche">
+      <div class="fiche-label" style="color:var(--danger)">Pièges classiques d'exam</div>
+      <ul class="fiche-list">
+        <li>Électricité autoproduite (PV propre) = <strong>S1</strong>, pas S2</li>
+        <li>Voiture de location = <strong>S3</strong> (pas S1)</li>
+        <li>Voiture de fonction → combustion = <strong>S1</strong></li>
+        <li>Transport sous-traité = <strong>S3</strong> toujours</li>
+        <li>NF₃ ajouté en 2012 au protocole de Kyoto</li>
+        <li>PRG 100 ans ≠ PRG 20 ans (valeurs différentes)</li>
+      </ul>
+    </div>
+    <div class="fiche">
+      <div class="fiche-label" style="color:var(--text2)">Formule & unités</div>
+      <ul class="fiche-list">
+        <li>Émissions = Donnée d'activité × Facteur d'émission</li>
+        <li>Unité finale : <strong>teqCO₂</strong> ou <strong>kgCO₂e</strong></li>
+        <li>PRG = Potentiel de Réchauffement Global sur 100 ans</li>
+        <li>FE = Facteur d'Émission (de la Base Empreinte®)</li>
+        <li>Base Empreinte® = ex-Base Carbone® renommée en 2021</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Acteurs à connaître</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Acteur</th><th>Rôle dans le Bilan Carbone®</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ADEME</strong></td><td>Agence de la transition écologique — créateur historique, gestionnaire Base Empreinte®</td></tr>
+          <tr><td><strong>ABC</strong></td><td>Association pour la transition Bas Carbone — propriétaire de la marque Bilan Carbone® depuis 2011</td></tr>
+          <tr><td><strong>Jean-Marc Jancovici</strong></td><td>Ingénieur, cofondateur Carbone 4, créateur de la méthode Bilan Carbone®</td></tr>
+          <tr><td><strong>GHG Protocol</strong></td><td>Standard international WRI/WBCSD — origine des 3 scopes. Indépendant du BC®</td></tr>
+          <tr><td><strong>GIEC/IPCC</strong></td><td>Groupe d'experts intergouvernemental — publie les valeurs PRG dans ses rapports d'évaluation (AR5, AR6)</td></tr>
+          <tr><td><strong>SBTi</strong></td><td>Science Based Targets initiative — certifie les objectifs de réduction alignés sur 1,5°C/2°C</td></tr>
+          <tr><td><strong>ISO</strong></td><td>ISO 14064 (comptabilisation GES organisations) ; ISO 14067 (empreinte carbone produit)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================== QCM ============================== -->
+<div class="section" id="qcm">
+  <div id="qcm-app" style="max-width:680px;margin:0 auto;padding:0 0 40px"></div>
+</div>
+
+</main>
+
+<script>
+// ======================== NAVIGATION ========================
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ======================== ACCORDION ========================
+function toggleAccordion(header) {
+  const body = header.nextElementSibling;
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+// ======================== TABLE FILTER ========================
+function filterTable(scope, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const rows = document.querySelectorAll('#postes-table tbody tr');
+  rows.forEach(row => {
+    if (scope === 'all') {
+      row.classList.remove('hidden-row');
+    } else {
+      const scopes = row.dataset.scope || '';
+      row.classList.toggle('hidden-row', !scopes.includes(scope));
+    }
+  });
+}
+
+
+// ======================== QCM ENRICHI ========================
+// ── DONNÉES ──────────────────────────────────────────────────────────────────
+const Q=[
+{id:1,cat:"Historique",type:"mcq",q:"En quelle année les premières versions du Bilan Carbone® ont-elles été développées ?",o:["1997","2002","2004","2011"],a:1,e:"2002 = premières versions de travail. 2004 = formalisation officielle par l'ADEME avec Jean-Marc Jancovici. 2011 = création de l'ABC. Ces 3 dates sont distinctes et importantes à retenir."},
+{id:2,cat:"Historique",type:"mcq",q:"En quelle année la méthode Bilan Carbone® a-t-elle été officiellement formalisée par l'ADEME ?",o:["2000","2002","2004","2008"],a:2,e:"2004 = formalisation officielle. 2002 = travaux préparatoires. Co-développée avec Jean-Marc Jancovici du bureau d'étude Manicore."},
+{id:3,cat:"Historique",type:"mcq",q:"En quelle année l'ABC (Association pour la transition Bas Carbone) a-t-elle été créée ?",o:["2004","2008","2011","2018"],a:2,e:"L'ABC a été créée en 2011 par l'ADEME et l'APCC pour reprendre la gouvernance de la méthode. Elle regroupe plus de 1 000 organisations engagées pour le climat."},
+{id:4,cat:"Historique",type:"mcq",q:"Quel est le numéro de la version actuelle de la méthode mise en application en 2025 ?",o:["Version 7","Version 8","Version 9","Version 10"],a:2,e:"La v9 a été publiée en juillet 2024 et mise en application en 2025. La v8 datait de 2018. La méthode a connu 8 évolutions depuis sa création en 2004."},
+{id:5,cat:"Historique",type:"mcq",q:"La démarche Bilan Carbone® est-elle obligatoire ou volontaire ?",o:["Obligatoire pour toutes les entreprises","Obligatoire pour les +500 salariés","Volontaire — aucune obligation légale","Obligatoire pour les entreprises cotées"],a:2,e:"Le BC® est entièrement VOLONTAIRE. À ne pas confondre avec le BEGES réglementaire (obligatoire pour +500 salariés, collectivités >50k hab.). Le BC® peut répondre aux exigences BEGES mais reste une démarche volontaire."},
+{id:6,cat:"Historique",type:"mcq",q:"Le Bilan Carbone® désigne officiellement :",o:["Uniquement une méthode de calcul","Une méthode + outils + formations + une marque déposée","Un label RSE attribué par l'État","Uniquement une marque déposée par l'ADEME"],a:1,e:"Le BC® désigne 4 éléments : (1) méthode développée par l'ABC, (2) outils (tableurs, logiciels), (3) formations par organismes habilités, (4) marque® déposée à l'INPI en France et dans l'UE."},
+{id:7,cat:"Historique",type:"mcq",q:"Quelle est la durée moyenne d'une mission Bilan Carbone® ?",o:["Quelques jours","Quelques semaines","Quelques mois","Plusieurs années"],a:2,e:"Quelques mois en moyenne : cadrage + gouvernance, collecte des données (souvent la phase la plus longue, 1-2 mois), analyse, comptabilisation, puis restitution."},
+{id:8,cat:"Objectifs & Principes",type:"mcq",q:"Quelle est la philosophie centrale du Bilan Carbone® ?",o:["Mesurer pour publier","Compter pour agir","Réduire pour compenser","Agir pour communiquer"],a:1,e:"« Compter pour agir » : la comptabilisation n'est pas une fin en soi mais un outil au service de l'action et de la réduction. Cela distingue le BC® d'un simple exercice de reporting RSE."},
+{id:9,cat:"Objectifs & Principes",type:"mcq",q:"Quels sont les 3 grands objectifs de la méthode Bilan Carbone® ?",o:["Mesurer, Compenser, Communiquer","Mobiliser, Comptabiliser, Élaborer un plan de transition","Réduire, Certifier, Publier","Inventorier, Analyser, Compenser"],a:1,e:"Les 3 objectifs INDISSOCIABLES : (1) MOBILISER les PP internes et externes, (2) COMPTABILISER les émissions directes et indirectes, (3) Élaborer un PLAN DE TRANSITION ambitieux, pilotable, opérationnel et cohérent."},
+{id:10,cat:"Objectifs & Principes",type:"mcq",q:"Lequel NE fait PAS partie des 5 principes de reporting du BC® ?",o:["Exactitude","Significativité","Compensabilité","Transparence"],a:2,e:"Les 5 principes de reporting : Cohérence, Exactitude, Significativité, Évaluation, Transparence. La 'Compensabilité' n'en fait pas partie — le BC® est orienté RÉDUCTION des émissions."},
+{id:11,cat:"Objectifs & Principes",type:"mcq",q:"Lequel NE fait PAS partie des 4 principes d'analyse stratégique du BC® ?",o:["Stratégie bas carbone","Anticipation","Rentabilité financière","Pragmatisme"],a:2,e:"Les 4 principes d'analyse stratégique : Stratégie bas carbone, Vision long terme, Anticipation, Pragmatisme. La 'Rentabilité financière' n'est pas un principe de la méthode."},
+{id:12,cat:"Objectifs & Principes",type:"mcq",q:"Le BC® niveau Avancé couvre les exigences CSRD ESRS E1 à hauteur de :",o:["L'intégralité","La majeure partie","La moitié environ","Il n'est pas compatible CSRD"],a:1,e:"Le BC® niveau Avancé couvre LA MAJEURE PARTIE (pas l'intégralité) de la CSRD ESRS E1. Les niveaux Initial et Standard ont une couverture partielle. Cette compatibilité est un atout : un seul BC® peut alimenter plusieurs référentiels."},
+{id:13,cat:"Objectifs & Principes",type:"mcq",q:"Le BC® mesure-t-il la responsabilité climatique d'une organisation ?",o:["Oui, c'est son objectif principal","Non — il identifie le potentiel d'action pour dimensionner le plan de transition","Oui, mais uniquement pour les émissions directes","Non, c'est réservé aux États"],a:1,e:"Le BC® ne mesure PAS la responsabilité climatique. Il identifie le POTENTIEL D'ACTION pour dimensionner le plan de transition. L'objectif : transformer l'organisation pour l'adapter au monde bas carbone de demain."},
+{id:14,cat:"Les 7 Étapes",type:"mcq",q:"Combien d'étapes compte la démarche Bilan Carbone® v9 ?",o:["5","6","7","8"],a:2,e:"7 étapes : (1) Cadrage, (2) Périmètre, (3) Mobilisation, (4) Comptabilisation, (5) Plan de transition, (6) Synthèse et restitution, (7) Évaluation. La v9 est une démarche complète de transition bas carbone, pas seulement une méthode de calcul."},
+{id:15,cat:"Les 7 Étapes",type:"mcq",q:"Quelle étape a remplacé la 'sensibilisation des acteurs' dans la v9 ?",o:["La communication externe","La mobilisation des acteurs","La formation obligatoire","Le reporting réglementaire"],a:1,e:"La 'sensibilisation' laisse place à la 'MOBILISATION'. Ce changement est intentionnel : mettre en MOUVEMENT et en ACTION les organisations. La mobilisation est transversale à toutes les étapes, pas seulement ponctuelle."},
+{id:16,cat:"Les 7 Étapes",type:"mcq",q:"Quelles actions font partie de l'étape de cadrage (étape 1) ?",o:["Calculer les émissions GES et sélectionner les FE","Mobiliser la Direction, nommer un·e coordinateur·rice, structurer la gouvernance","Rédiger le rapport final et le publier sur l'OCCF","Définir les objectifs de réduction à 2030"],a:1,e:"Cadrage (étape 1) : mobiliser la Direction, nommer un·e coordinateur·rice interne, structurer la gouvernance (comité de pilotage, équipe projet), définir le niveau de maturité visé. Calcul des émissions = étape 4. Objectifs = étape 5. Publication = étape 6."},
+{id:17,cat:"Les 7 Étapes",type:"mcq",q:"La mobilisation dans le Bilan Carbone® intervient :",o:["Uniquement au début (cadrage)","Uniquement lors de la restitution finale","De façon transversale tout au long de la démarche","Uniquement auprès de l'équipe projet"],a:2,e:"La mobilisation est TRANSVERSALE : elle intervient à chaque étape (cadrage, périmètre, comptabilisation, plan de transition, restitution). La v9 exige une mobilisation EN CONTINU. Elle concerne les PP internes ET externes."},
+{id:18,cat:"Niveaux de Maturité",type:"mcq",q:"Quels sont les 3 niveaux de maturité introduits dans la v9 ?",o:["Bronze, Argent, Or","Débutant, Intermédiaire, Expert","Initial, Standard, Avancé","Basique, Confirmé, Certifié"],a:2,e:"La v9 introduit : INITIAL (premier bilan ou org. peu mature), STANDARD (démarche régulière avec plan d'action structuré), AVANCÉ (pilotage stratégique complet intégré à la stratégie globale)."},
+{id:19,cat:"Niveaux de Maturité",type:"mcq",q:"À quelle fréquence minimale le BC® niveau Avancé doit-il être renouvelé ?",o:["Tous les 4 ans","Tous les 3 ans","Tous les 2 ans","Tous les ans"],a:3,e:"Fréquences : Initial → max 4 ans. Standard → 2 ans. Avancé → TOUS LES ANS. La fréquence croissante traduit l'ambition : au niveau Avancé, le BC® est un véritable outil de pilotage stratégique annuel."},
+{id:20,cat:"Niveaux de Maturité",type:"mcq",q:"Une entreprise réalise son BC® tous les 2 ans. Peut-elle se positionner en niveau Avancé ?",o:["Oui, si elle respecte tous les autres critères","Non — le niveau Avancé exige un renouvellement annuel","Oui, la fréquence n'est pas un critère","Oui, si son bilan a été évalué par un tiers"],a:1,e:"NON. Tous les 2 ans = niveau STANDARD. Le niveau Avancé exige un renouvellement ANNUEL. La fréquence est bien un critère discriminant entre les niveaux."},
+{id:21,cat:"Niveaux de Maturité",type:"mcq",q:"Pour le niveau Initial, quel % minimal des émissions indirectes doit être couvert ?",o:["60%","70%","80%","100%"],a:2,e:"Niveau Initial : 100% des émissions directes + entre 80% et 100% des émissions indirectes. Le seuil de 80% est aligné avec le BEGES-R et ISO 14064-1. 70% est INSUFFISANT."},
+{id:22,cat:"Niveaux de Maturité",type:"mcq",q:"Au niveau Standard, comment les objectifs de réduction sont-ils exprimés ?",o:["En valeur absolue uniquement","En intensité relative uniquement","En valeur absolue ET en intensité relative","Aucune exigence de forme"],a:2,e:"Standard : objectifs en VALEUR ABSOLUE (ex : -30% tCO₂e d'ici 2030) ET en INTENSITÉ RELATIVE (ex : -20% tCO₂e/€CA). Initial = valeur absolue uniquement."},
+{id:23,cat:"Niveaux de Maturité",type:"mcq",q:"À partir de quel niveau la coconstruction devient-elle obligatoire ?",o:["Initial","Standard","Avancé","Elle n'est jamais obligatoire"],a:1,e:"La COCONSTRUCTION est obligatoire à partir du niveau STANDARD. Au niveau Initial, la mobilisation peut se limiter à 3 temps (lancement, collecte, restitution) sans coconstruction obligatoire."},
+{id:24,cat:"Niveaux de Maturité",type:"mcq",q:"Au niveau Avancé, quelle exigence s'applique à la direction ?",o:["Aucune exigence particulière","Valider uniquement les données chiffrées","Être informée du lancement","Au moins 1 membre doit être porteur ET formé BC® Décideurs"],a:3,e:"Niveau Avancé : au moins 1 MEMBRE DE LA DIRECTION doit être porteur de la démarche ET avoir suivi la formation BC® Décideurs. Cela traduit l'intégration du BC® à la stratégie globale."},
+{id:25,cat:"Niveaux de Maturité",type:"mcq",q:"L'Approbateur dans la démarche BC® est :",o:["Le consultant externe","La personne interne responsable de la mission qui s'assure que les objectifs sont atteints","L'évaluateur tiers","Le dirigeant qui signe le rapport"],a:1,e:"L'Approbateur est INTERNE à l'organisation, responsable de la mission, s'assurant que les objectifs sont atteints. À distinguer du coordinateur (pilote opérationnel), du consultant externe et de l'évaluateur tiers (auditeur)."},
+{id:26,cat:"Niveaux de Maturité",type:"mcq",q:"Une organisation respecte tous les critères Avancés sauf A3. Peut-elle se positionner Avancé ?",o:["Non, tous les critères sont absolument obligatoires","Oui — un seul critère manquant est toléré","Uniquement si A3 est compensé par d'autres critères","Non, elle doit se positionner en Initial"],a:1,e:"OUI, un seul critère manquant est toléré au niveau Avancé. Cela reflète la logique d'amélioration continue : progresser, pas atteindre la perfection absolue. Le critère manquant doit être documenté."},
+{id:27,cat:"Niveaux de Maturité",type:"mcq",q:"En niveau Initial, l'organisation peut-elle se limiter à 3 temps de mobilisation ?",o:["Non, il en faut au minimum 5","Oui — 3 temps suffisent au niveau Initial","Non, sans nombre minimal mais mobilisation continue","Oui, uniquement si le budget est limité"],a:1,e:"OUI, au niveau Initial : 3 temps de mobilisation suffisent — (1) Lancement, (2) Présentation en cours de collecte, (3) Restitution finale. Aux niveaux Standard et Avancé, des phases supplémentaires (notamment coconstruction) sont exigées."},
+{id:28,cat:"Niveaux de Maturité",type:"mcq",q:"Au niveau Initial, les objectifs de réduction doivent être :",o:["Uniquement court terme, sans référence nationale","Moyen ET long terme (2030 et 2050), valeur absolue, cohérents avec la SNBC","En intensité relative, selon des standards sectoriels","Librement définis sans contrainte"],a:1,e:"Niveau Initial : objectifs MOYEN TERME (ex : 2030) ET LONG TERME (ex : 2050), en VALEUR ABSOLUE, cohérents avec la SNBC. L'intensité relative et les standards sectoriels internationaux sont des exigences des niveaux supérieurs."},
+{id:29,cat:"Cadrage",type:"mcq",q:"Qu'est-ce que l'outil RACI dans le pilotage d'un BC® ?",o:["Un outil de calcul des émissions par poste","Un outil pour structurer et clarifier les rôles et responsabilités des parties prenantes","Un référentiel de certification","Un système de notation de la qualité des données"],a:1,e:"RACI = Responsible (réalise), Accountable (approuve), Consulted (consulté), Informed (informé). C'est un outil de GOUVERNANCE de projet, pas de calcul carbone. Il aide à clarifier qui fait quoi dans la démarche BC®."},
+{id:30,cat:"Cadrage",type:"mcq",q:"Une organisation peut-elle viser directement le niveau Avancé sans commencer par l'Initial ?",o:["Non, obligatoirement par l'Initial","Oui, elle peut viser le niveau correspondant à ses objectifs et maturité","Oui, mais uniquement si elle a déjà réalisé un BEGES","Non, les niveaux doivent être atteints séquentiellement"],a:1,e:"OUI, l'organisation peut viser directement le niveau correspondant à ses objectifs et maturité. Elle doit ensuite PROGRESSER à chaque itération. Le questionnaire de maturité aide à trouver le bon point de départ."},
+{id:31,cat:"Cadrage",type:"mcq",q:"Qu'est-ce qu'une démarche Bilan Carbone® collective ?",o:["Un bilan réalisé par plusieurs personnes d'une même organisation","Plusieurs organisations s'associent pour réaliser chacune LEUR bilan en mutualisant ressources et pratiques","Un bilan pour un territoire et ses organisations","Une démarche imposée par une fédération à ses membres"],a:1,e:"La démarche collective = plusieurs ORGANISATIONS distinctes s'associent pour réaliser chacune son PROPRE BC®. Utile pour des organisations d'un même secteur ou territoire. Chaque organisation garde SON bilan individuel."},
+{id:32,cat:"Cadrage",type:"mcq",q:"Quels sont les livrables attendus à l'issue de l'étape 1 (Cadrage) ?",o:["Le profil GES complet et la cartographie des flux","Description de l'org. (SIRET/SIREN/NAF/ETP), niveau de maturité, présentation du coordinateur et de l'équipe projet","Le plan de transition et les fiches actions","Les facteurs d'émission sélectionnés"],a:1,e:"Livrables cadrage (étape 1) : description de l'organisation (raison sociale, SIRET, SIREN, code NAF, ETP), présentation du coordinateur·ice et réalisateur (n° de formé + date de formation), niveau de maturité choisi."},
+{id:33,cat:"Périmètre",type:"mcq",q:"Quels sont les 4 éléments constitutifs du périmètre d'un BC® ?",o:["Stratégique, financier, opérationnel, réglementaire","Émissions comptabilisées, périmètre organisationnel, périmètre temporel, périmètre opérationnel","Scope 1, 2, 3, 4","Amont, aval, direct, indirect"],a:1,e:"Les 4 périmètres : (1) ÉMISSIONS COMPTABILISÉES (quels GES ?), (2) PÉRIMÈTRE ORGANISATIONNEL (quelles entités ?), (3) PÉRIMÈTRE TEMPOREL (quelle période ?), (4) PÉRIMÈTRE OPÉRATIONNEL (quels postes d'émissions ?)."},
+{id:34,cat:"Périmètre",type:"mcq",q:"Dans le périmètre organisationnel, que faut-il inclure à 100% quel que soit le niveau de maturité ?",o:["Toutes les émissions indirectes de la chaîne de valeur","100% des équipements et installations sous contrôle opérationnel de l'organisation","Uniquement les bâtiments propriété de l'organisation","Les filiales avec +50% du capital"],a:1,e:"Quel que soit le niveau de maturité, 100% des équipements et installations sous CONTRÔLE OPÉRATIONNEL (exploités et utilisés) doivent être inclus. Tout autre choix doit être justifié. Correspond à l'approche 'contrôle opérationnel' du BEGES-R et ISO 14064-1."},
+{id:35,cat:"Périmètre",type:"mcq",q:"Quelle est la durée classique du périmètre temporel d'un BC® ?",o:["6 mois","1 an — pour refléter l'activité dans sa globalité","3 ans glissants","5 ans"],a:1,e:"Périmètre temporel CLASSIQUE = 1 AN. Un BC® peut couvrir une période particulière (événement, projet, chantier). Pour le reporting BEGES-R, le périmètre doit être d'une année complète."},
+{id:36,cat:"Périmètre",type:"mcq",q:"Quels types de flux doivent être cartographiés dans un BC® ?",o:["Uniquement énergie et matières premières","Flux d'énergie, fluides, matières premières, personnes, produits (biens et services) et déchets","Uniquement flux financiers et énergie","Uniquement les flux entrants"],a:1,e:"TOUS les flux entrants, internes ET sortants : énergie, fluides, matières premières, personnes (déplacements), produits (biens achetés/vendus/sous-traités) et déchets. L'exhaustivité est clé : un flux oublié = des émissions non comptabilisées."},
+{id:37,cat:"Périmètre",type:"mcq",q:"La cartographie des flux est obligatoire pour quel(s) niveau(x) ?",o:["Uniquement le niveau Avancé","Niveaux Standard et Avancé uniquement","Tous les niveaux : Initial, Standard et Avancé","Elle est toujours optionnelle"],a:2,e:"La cartographie des flux est exigée pour LES TROIS niveaux (critères F1, F2, F3). Seule la cartographie QUANTIFIÉE (avec valeurs chiffrées des émissions) est optionnelle — recommandée pour Standard et Avancé."},
+{id:38,cat:"Périmètre",type:"mcq",q:"Quelle est la bonne séquence pour élaborer la cartographie des flux ?",o:["Préciser les données d'activité → Cartographier → Schématiser → Finaliser","Calculer les émissions → Cartographier → Définir le périmètre → Finaliser","Schématiser l'organigramme → Cartographier les flux → Préciser les données d'activité → Finaliser","Finaliser → Cartographier → Schématiser → Préciser les données"],a:2,e:"Séquence : (1) Schématiser l'organigramme → périmètre ORGANISATIONNEL. (2) Cartographier les flux → périmètre OPÉRATIONNEL. (3) Préciser les données d'activité → prépare la COLLECTE. (4) Finaliser. Processus ITÉRATIF."},
+{id:39,cat:"Périmètre",type:"mcq",q:"Quelles sont les 2 grandes catégories de risques liés au changement climatique ?",o:["Risques financiers et risques opérationnels","Risques de transition et risques physiques","Risques réglementaires et risques technologiques","Risques court terme et risques long terme"],a:1,e:"(1) RISQUES DE TRANSITION — liés aux évolutions des sociétés et modèles éco (réglementaires, d'image, de marché, économiques). (2) RISQUES PHYSIQUES — directement liés à la modification du climat (événements extrêmes, changements progressifs). Identification exigée dès le niveau Initial."},
+{id:40,cat:"Périmètre",type:"mcq",q:"Combien de critères de significativité permettent d'identifier les émissions indirectes prioritaires ?",o:["3","4","5","6"],a:3,e:"6 critères : (1) Ampleur/importance quantitative, (2) Influence et leviers d'action, (3) Importance stratégique et vulnérabilité, (4) Lignes directrices du secteur, (5) Sous-traitance (activités externalisées), (6) Engagement du personnel."},
+{id:41,cat:"Périmètre",type:"mcq",q:"Qu'est-ce que la 'double matérialité' requise au niveau Avancé ?",o:["Comptabiliser émissions directes ET indirectes simultanément","Mesurer l'impact de l'org. sur l'environnement ET l'incidence de la dégradation de l'environnement sur l'org.","Réaliser deux bilans par an pour croiser les résultats","Appliquer deux méthodes pour valider"],a:1,e:"Double matérialité = analyser dans les 2 sens : (1) L'impact de l'org. sur l'environnement (matérialité d'impact), (2) L'incidence de la dégradation de l'environnement sur l'org. (matérialité financière). Aligné avec la CSRD."},
+{id:42,cat:"Mobilisation",type:"mcq",q:"Quelles sont les 4 phases de mobilisation définies par la méthode BC® ?",o:["Communication, Formation, Action, Évaluation","Sensibilisation/vulgarisation, Responsabilisation, Coconstruction, Restitution/communication","Diagnostic, Planification, Mise en œuvre, Bilan","Interne, Externe, Hiérarchique, Opérationnelle"],a:1,e:"Les 4 phases : (1) SENSIBILISATION/VULGARISATION — comprendre pour agir. (2) RESPONSABILISATION — donner un rôle à chacun. (3) COCONSTRUCTION — co-bâtir le plan d'action avec les PP. (4) RESTITUTION ET COMMUNICATION — permettre l'appropriation des résultats."},
+{id:43,cat:"Mobilisation",type:"mcq",q:"À quelle étape de la démarche BC® la coconstruction du plan de transition est-elle réalisée ?",o:["Étape 1 — Cadrage","Étape 2 — Périmètre","Étape 4 — Comptabilisation","Étape 5 — Plan de transition"],a:3,e:"Calendrier : Étape 1 → sensibilisation. Étape 2 → responsabilisation des détenteurs de données. Étape 4 → restitution intermédiaire. Étape 5 (Plan de transition) → COCONSTRUCTION des actions. Étape 6 → communication finale."},
+{id:44,cat:"Mobilisation",type:"mcq",q:"Quelles sont les 6 catégories de parties prenantes à mobiliser dans un BC® ?",o:["Direction, RH, Finance, Production, Commercial, Juridique","Équipe projet, Direction, Collaborateurs internes, Fournisseurs, Clients, Autres partenaires externes","Actionnaires, Salariés, Clients, État, Banques, Médias","Équipe carbone, RSE, qualité, achats, communication, direction"],a:1,e:"Les 6 catégories : (1) Équipe projet/porteurs internes, (2) Direction, (3) Collaborateurs internes (employés, bénévoles), (4) PP externes AMONT (fournisseurs), (5) PP externes AVAL (clients), (6) Autres partenaires externes (financiers, techniques, acteurs locaux, fédérations)."},
+{id:45,cat:"Mobilisation",type:"mcq",q:"Combien de phases de mobilisation distinctes la méthode prévoit-elle (sous-étapes 3.1.1 à ...) ?",o:["3 phases","4 phases","5 phases","6 phases"],a:2,e:"5 phases de mobilisation (3.1.1 à 3.1.5) : (3.1.1) Au lancement/cadrage, (3.1.2) Au lancement de la collecte, (3.1.3) À l'issue du profil GES, (3.1.4) Pour la construction du plan de transition, (3.1.5) En synthèse de la démarche. Timing indicatif."},
+{id:46,cat:"Mobilisation",type:"mcq",q:"Sur les formats et outils de mobilisation, que prévoit la méthode ?",o:["Elle impose des formats et outils spécifiques","Elle exige le contenu et les messages, mais laisse libre le choix des formats et outils","Elle n'impose aucune exigence de contenu","Elle recommande uniquement des présentations PowerPoint"],a:1,e:"La méthode exige le CONTENU et les MESSAGES nécessaires pour passer à l'action. En revanche, les MOYENS (formats, outils) restent à l'appréciation du pilote de la démarche."},
+{id:47,cat:"Comptabilisation",type:"mcq",q:"Quelle est la formule de base du calcul des émissions d'une source ?",o:["Émissions = Données d'activité ÷ Facteur d'émission","Émissions = Données d'activité × Facteur d'émission ± Incertitude","Émissions = Facteur d'émission × Surface × Durée","Émissions = Données d'activité + Facteur d'émission − Compensation"],a:1,e:"Formule fondamentale : DA × FE = Résultat ± Incertitude. La DONNÉE D'ACTIVITÉ est la quantité physique mesurée (litres, km, tonnes…). Le FACTEUR D'ÉMISSION convertit en tCO₂e. L'INCERTITUDE est toujours associée."},
+{id:48,cat:"Comptabilisation",type:"mcq",q:"Quelle est l'unité standard pour exprimer les émissions de GES dans un BC® ?",o:["Tonnes de CO₂ (tCO₂)","Tonne CO₂ équivalent (tCO₂e)","Kilogrammes de carbone (kgC)","Tonnes d'équivalent pétrole (tep)"],a:1,e:"L'unité est la TONNE CO₂ ÉQUIVALENT (tCO₂e). Elle agrège différents GES aux pouvoirs de réchauffement très différents. tCO₂ sans 'e' = uniquement le CO₂ — ce n'est pas l'unité standard du BC®."},
+{id:49,cat:"Comptabilisation",type:"mcq",q:"Quel indicateur permet de convertir les différents GES en tCO₂e ?",o:["Le potentiel d'acidification (PA)","Le pouvoir de réchauffement global à 100 ans (PRG-100)","L'indice de réchauffement climatique (IRC)","Le facteur de conversion carbone (FCC)"],a:1,e:"Le PRG-100 mesure le forçage radiatif d'un GES vs CO₂ sur 100 ans. Exemples : CH₄ ≈ 28, N₂O ≈ 265, SF₆ ≈ 23 900. Valeurs mises à jour régulièrement par le GIEC."},
+{id:50,cat:"Comptabilisation",type:"mcq",q:"Quels gaz doivent OBLIGATOIREMENT être comptabilisés dans un BC® ?",o:["CO₂ et CH₄ uniquement","CO₂, CH₄, N₂O, SF₆, HFC, PFC et NF₃","CO₂, CH₄, N₂O et SO₂","Tous les gaz polluants atmosphériques"],a:1,e:"Gaz obligatoires : CO₂, CH₄, N₂O, SF₆, HFC, PFC et NF₃. Le NF₃ n'est pas dans le Protocole de Kyoto mais le BC® l'inclut. Le SO₂ est un polluant (pluies acides) mais PAS un GES au sens du BC®."},
+{id:51,cat:"Comptabilisation",type:"mcq",q:"Qu'est-ce que le 'profil d'émission' (ou profil GES) dans un BC® ?",o:["Le résumé des objectifs de réduction","La répartition des émissions quantifiées sur les différents postes du BC®","La liste des facteurs d'émission utilisés","Le classement des émissions par niveau d'incertitude"],a:1,e:"Le PROFIL D'ÉMISSION = répartition des émissions quantifiées sur les postes BC®. C'est LE livrable central de l'étape 4. Il doit inclure les incertitudes et le taux de ratios monétaires. C'est ce profil ANONYMISÉ qui est déposé sur l'OCCF."},
+{id:52,cat:"Comptabilisation",type:"mcq",q:"La comptabilité carbone est-elle une mesure scientifiquement rigoureuse ?",o:["Oui, si les bonnes méthodes sont appliquées","Non — c'est un calcul basé sur la science, incertain par nature mais suffisant pour agir","Oui, uniquement pour les émissions directes mesurées par capteurs","Non, c'est uniquement une estimation politique"],a:1,e:"La comptabilité carbone N'EST PAS une mesure mais un CALCUL. Elle est 'basée sur la science', pas rigoureusement scientifique. Incertaine par nature — mais suffisante pour PASSER À L'ACTION et réduire les émissions."},
+{id:53,cat:"Comptabilisation",type:"mcq",q:"Quelle est la différence entre une 'source d'émission' et un 'poste d'émissions' ?",o:["Aucune différence, synonymes","Source = unité physique/processus émettant des GES ; poste = regroupement de plusieurs sources homogènes","Source = obligatoirement comptabilisée ; poste = optionnel","Source = émissions directes ; poste = émissions indirectes"],a:1,e:"SOURCE D'ÉMISSION = unité physique ou processus rejetant des GES (ex : un véhicule, une chaudière). POSTE D'ÉMISSIONS = regroupement de plusieurs sources homogènes (ex : 'déplacements domicile-travail'). GHG Protocol parle de 'scopes' et 'catégories'."},
+{id:54,cat:"Comptabilisation",type:"mcq",q:"Quelle base de données de facteurs d'émission est la référence nationale française ?",o:["IPCC Database","Base Carbone® de l'ADEME","GHG Protocol Database","Ecoinvent"],a:1,e:"La BASE CARBONE® de l'ADEME est la référence nationale française pour les facteurs d'émission. Accessible gratuitement en ligne. En l'absence de FE dans la Base Carbone®, d'autres sources peuvent être utilisées — à condition de les documenter."},
+{id:55,cat:"Comptabilisation",type:"mcq",q:"Quels sont les livrables attendus à l'issue de l'étape 4 (Comptabilisation) ?",o:["Le plan d'action et les fiches actions","Matrice de collecte, FE documentés, incertitudes, taux de ratios monétaires, et profil GES","Cartographie des flux et liste des risques","Rapport d'évaluation externe"],a:1,e:"Livrables étape 4 : (1) MATRICE DE COLLECTE (données + description du processus), (2) FACTEURS D'ÉMISSION documentés (spécifiques et ratios monétaires + sources), (3) INCERTITUDES, (4) TAUX DE RATIOS MONÉTAIRES, (5) PROFIL GES en tCO₂e. Ce dernier est le livrable central."},
+{id:56,cat:"Plan de Transition",type:"mcq",q:"Le plan de transition dans la v9 est :",o:["Optionnel pour tous les niveaux","Obligatoire et au cœur de la méthode, avec des exigences adaptées à chaque niveau","Obligatoire uniquement pour le niveau Avancé","Un simple document de communication sans indicateurs"],a:1,e:"Le plan de transition est OBLIGATOIRE À TOUS LES NIVEAUX et au cœur de la v9. Sans plan de transition, un BC® est INCOMPLET. La v9 est plus exigeante sur son existence, mais l'adapte aux 3 niveaux de maturité."},
+{id:57,cat:"Plan de Transition",type:"mcq",q:"Quels sont les 3 éléments obligatoires d'un plan de transition BC® ?",o:["Un budget, un responsable RSE, et une date de clôture","Des objectifs de réduction, une série d'actions détaillées et quantifiées, et une trajectoire crédible","Une certification externe, des KPI financiers, et un rapport annuel","Une analyse concurrentielle, des benchmarks sectoriels, et des projections financières"],a:1,e:"Plan de transition = (1) OBJECTIFS DE RÉDUCTION alignés sur les scénarios climatiques, (2) ACTIONS détaillées, quantifiées, avec responsables, (3) TRAJECTOIRE crédible par rapport aux actions et objectifs. Des INDICATEURS de suivi permettent le pilotage."},
+{id:58,cat:"Plan de Transition",type:"mcq",q:"Quels sont les 4 adjectifs qualifiant le plan de transition attendu par le BC® ?",o:["Chiffré, publié, certifié, exhaustif","Ambitieux, pilotable, opérationnel, cohérent avec la comptabilisation","Conforme, audité, transparent, international","Court terme, long terme, stratégique, financier"],a:1,e:"Le plan de transition doit être : (1) AMBITIEUX — aligné sur les objectifs climatiques, (2) PILOTABLE — avec des indicateurs de suivi, (3) OPÉRATIONNEL — actions concrètes avec responsables, (4) COHÉRENT avec la comptabilisation — les actions ciblent les postes d'émissions identifiés dans le bilan."},
+{id:59,cat:"Plan de Transition",type:"mcq",q:"Les actions d'adaptation au changement climatique doivent-elles faire partie du plan de transition ?",o:["Non, uniquement la réduction des émissions (atténuation)","Oui — le plan intègre des actions d'adaptation aux risques physiques et de transition","Uniquement pour le secteur agricole","Oui, mais uniquement au niveau Avancé"],a:1,e:"OUI, le plan de transition BC® doit intégrer des actions d'ADAPTATION (pas seulement de réduction/atténuation). Les risques identifiés en étape 2.5 doivent se traduire en actions concrètes. Au niveau Avancé, des objectifs d'adaptation EXPLICITES sont requis."},
+{id:60,cat:"Plan de Transition",type:"mcq",q:"Quels sont les livrables attendus à l'issue de l'étape 5 (Plan de transition) ?",o:["Le profil GES final et les incertitudes","Objectifs, fiches actions, trajectoire, et indicateurs de suivi/mise en œuvre/performance","Le rapport d'évaluation externe","La cartographie des risques et opportunités mise à jour"],a:1,e:"Livrables étape 5 : (1) OBJECTIFS du plan de transition, (2) PLAN D'ACTION via les fiches actions, (3) TRAJECTOIRE de décarbonation, (4) INDICATEURS — de suivi (pilotage), de mise en œuvre (avancement) et de performance (résultats)."},
+{id:61,cat:"Synthèse & Restitution",type:"mcq",q:"En combien d'étapes se déroule la restitution d'un Bilan Carbone® ?",o:["1 étape","2 à 3 étapes","4 étapes","5 étapes"],a:1,e:"Restitution en 2 à 3 étapes : (1) RESTITUTION INTERNE — par le pilote, avec tous les livrables BC® archivés, (2) RESTITUTION ET PUBLICATION — dépôt anonyme du profil GES sur l'OCCF + publication externe optionnelle, (3) RESTITUTION AVEC ÉVALUATION VOLONTAIRE — si l'org. fait auditer son bilan par un évaluateur indépendant."},
+{id:62,cat:"Synthèse & Restitution",type:"mcq",q:"Qu'est-ce que l'OCCF et quel rôle joue-t-il ?",o:["L'Organisme de Certification Carbone Français — délivre les labels BC®","L'Observatoire de la Comptabilité Carbone en France — le profil GES anonymisé y est déposé obligatoirement","L'Office de Contrôle Carbon Footprint — audite tous les bilans","L'Outil de Calcul Carbone Français — base de données des FE"],a:1,e:"L'OCCF = plateforme où chaque organisation DOIT déposer son profil GES ANONYMISÉ. Ce dépôt contribue à la connaissance publique sur les émissions sectorielles. C'est une exigence du principe de TRANSPARENCE du BC®."},
+{id:63,cat:"Synthèse & Restitution",type:"mcq",q:"Quels sont les 2 objectifs de l'évaluation (étape 7) ?",o:["Calculer le coût du bilan et préparer le prochain","Vérifier que le bilan respecte les exigences BC® et confirmer le niveau de maturité","Communiquer en externe et obtenir un label RSE","Comparer avec les bilans des concurrents"],a:1,e:"L'évaluation (étape 7, facultative) : (1) VÉRIFIER que le bilan respecte les exigences méthodologiques BC®, (2) CONFIRMER le niveau de maturité — utile pour savoir quelle démarche complémentaire (ACT, SBTi…) peut être amorcée ensuite."},
+{id:64,cat:"Synthèse & Restitution",type:"mcq",q:"L'évaluation (audit) d'un Bilan Carbone® est-elle obligatoire ?",o:["Oui, pour tous les niveaux","Oui, uniquement pour le niveau Avancé","Non — facultative, mais le BC® doit pouvoir être évalué à tout moment","Non, réservée aux organisations de +500 salariés"],a:2,e:"L'évaluation (étape 7) est FACULTATIVE mais le BC® doit être structuré pour POUVOIR ÊTRE ÉVALUÉ à tout moment. Elle peut être demandée pour : conformité réglementaire, assurance sur la fiabilité, contrôle qualité de bilans de PP, transparence de la communication."},
+{id:65,cat:"Synthèse & Restitution",type:"mcq",q:"Les 3 piliers A, B, C de l'action climatique peuvent-ils être combinés pour calculer une 'empreinte nette' ?",o:["Oui — empreinte nette = émissions induites – évitées – séquestrées","Non — les 3 piliers sont strictement NON COMBINABLES","Oui, mais uniquement B et C peuvent se soustraire à A","Oui, si l'org. est Avancée et les 3 piliers ont été audités"],a:1,e:"Les 3 piliers sont STRICTEMENT NON COMBINABLES : ni additionnables, ni soustrayables. Pilier A (émissions induites) = BC® les réduit. Piliers B (émissions évitées) et C (séquestration) = calculables séparément mais ne se soustraient pas du Pilier A."},
+{id:66,cat:"Synthèse & Restitution",type:"mcq",q:"Avec quels référentiels le Bilan Carbone® est-il compatible ?",o:["Uniquement ISO 14001 et EMAS","ISO 14064-1, GHG Protocol, BEGES réglementaire français, et CSRD ESRS E1","GHG Protocol uniquement","Aucun — le BC® est un standard autonome"],a:1,e:"Le BC® est compatible avec : ISO 14064-1-2:2019, le GHG Protocol, le BEGES réglementaire français, et la CSRD ESRS E1 (niveau Avancé). Il est aussi utilisable pour NZI, ACT, SBTi. Un seul BC® peut alimenter plusieurs référentiels simultanément."},
+{id:67,cat:"Synthèse & Restitution",type:"mcq",q:"Que signifie 'Bilan Carbone® évalué' pour une organisation ?",o:["L'organisation a simplement déposé son profil GES sur l'OCCF","L'organisation a fait auditer son bilan par un évaluateur indépendant avec un résultat positif","L'organisation a atteint le niveau Avancé de maturité","L'organisation a obtenu la certification ISO 14064-1"],a:1,e:"Un 'BC® évalué' signifie que l'organisation a fait AUDITER son bilan par des évaluateurs INDÉPENDANTS avec un résultat POSITIF. Suit le processus du Guide d'évaluation (bilancarbone-evaluation.com). Un simple dépôt OCCF ne suffit pas."},
+// ── NOUVELLES QUESTIONS MCQ — enrichissement depuis sources officielles ────────
+// Chapitre 1 — Cadrage
+{id:68,cat:"Cadrage",type:"mcq",q:"Quelle méthode est recommandée par la méthode BC® pour structurer les rôles et responsabilités au sein de l'équipe projet ?",o:["La méthode SWOT","La méthode RACI","La méthode OKR","La méthode PDCA"],a:1,e:"La méthode RACI (Responsible, Accountable, Consulted, Informed) est recommandée pour 'structurer et clarifier les rôles et responsabilités' au sein du pilotage du BC®."},
+{id:69,cat:"Cadrage",type:"mcq",q:"Au niveau de maturité Initial, qui peut réaliser la démarche Bilan Carbone® ?",o:["Uniquement un bureau d'études externe","Un coordinateur pilote unique formé en interne, avec possibilité d'un prestataire externe optionnel","Obligatoirement une équipe de 3 personnes minimum","Uniquement un évaluateur certifié ABC"],a:1,e:"Au niveau Initial, un coordinateur (pilote unique) formé en interne suffit. Un bureau d'études spécialisé peut intervenir en appui optionnel. Les exigences de pilotage augmentent avec les niveaux Standard et Avancé."},
+{id:70,cat:"Cadrage",type:"mcq",q:"Au niveau de maturité Avancé, quelle implication de la direction est requise ?",o:["La direction peut être simplement informée","Au moins un membre de la direction doit être porteur et garant de l'application du plan de transition","La direction n'est pas concernée par la démarche","La direction doit signer le rapport d'évaluation externe"],a:1,e:"Au niveau Avancé, 'l'implication hiérarchique et la gouvernance du sujet carbone sont des priorités' : au moins un membre de la direction doit être porteur de la démarche et garant de l'application du plan de transition."},
+{id:71,cat:"Cadrage",type:"mcq",q:"À quelle fréquence minimale le Bilan Carbone® doit-il être renouvelé pour le secteur public (BEGES réglementaire) ?",o:["Tous les ans","Tous les 2 ans","Tous les 3 ans","Tous les 4 ans"],a:2,e:"Le renouvellement est à minima tous les 4 ans pour les niveaux Initial et Standard, SAUF pour les organisations de droit public soumises au BEGES-R qui doivent renouveler tous les 3 ans."},
+{id:72,cat:"Cadrage",type:"mcq",q:"Quelle est la fréquence minimale de renouvellement du BC® au niveau de maturité Avancé ?",o:["Tous les 4 ans","Tous les 3 ans","Tous les 2 ans","Au moins tous les ans"],a:3,e:"Au niveau Avancé, 'le Bilan Carbone® complet de l'organisation est renouvelé à minima tous les ans'. Ce renouvellement annuel permet d'alimenter la stratégie bas-carbone et les indicateurs de pilotage continus."},
+// Chapitre 2 — Périmètre
+{id:73,cat:"Périmètre",type:"mcq",q:"Quelle est la règle principale pour le périmètre organisationnel d'un Bilan Carbone® ?",o:["Inclure au minimum 50% des entités du groupe","Intégrer 100% des équipements exploités sous contrôle opérationnel de l'organisation","Exclure les filiales étrangères","Limiter au seul siège social"],a:1,e:"Le critère de contrôle opérationnel s'applique : 100% des équipements exploités par l'organisation doivent être inclus. 'Tout autre choix doit être justifié.' Les filiales consolidées sont également concernées."},
+{id:74,cat:"Périmètre",type:"mcq",q:"Que sont les 'trois piliers' de l'action climatique dans le Bilan Carbone® ?",o:["Pilier A : émissions évitées ; Pilier B : émissions induites ; Pilier C : émissions séquestrées","Pilier A : émissions induites ; Pilier B : émissions évitées ; Pilier C : émissions séquestrées","Pilier A : émissions directes ; Pilier B : émissions indirectes ; Pilier C : émissions compensées","Pilier A : Scope 1 ; Pilier B : Scope 2 ; Pilier C : Scope 3"],a:1,e:"Les 3 piliers : (A) Émissions INDUITES = émissions directes et indirectes à réduire — seul pilier traité par le BC®. (B) Émissions ÉVITÉES = réductions chez des tiers. (C) Émissions SÉQUESTRÉES = puits de carbone. Ils sont strictement non combinables."},
+{id:75,cat:"Périmètre",type:"mcq",q:"Pour quel niveau de maturité la couverture des émissions indirectes peut-elle être limitée à 80-100% ?",o:["Niveau Standard","Niveau Avancé","Niveau Initial","Aucun — la couverture doit toujours être 100%"],a:2,e:"Au niveau Initial, un taux de couverture de 80 à 100% des émissions indirectes est toléré. Aux niveaux Standard et Avancé, 100% des émissions (significatives et non significatives) doivent être comptabilisées."},
+{id:76,cat:"Périmètre",type:"mcq",q:"Quelle règle s'applique aux organisations soumises au BEGES réglementaire concernant leur périmètre organisationnel ?",o:["Le périmètre peut être librement défini par l'organisation","Le périmètre doit correspondre à la Personne Morale soumise à régulation (SIREN)","Seuls les sites français sont inclus","Le périmètre doit correspondre aux entités cotées en bourse"],a:1,e:"Pour le BEGES réglementaire, le périmètre organisationnel doit correspondre à la Personne Morale identifiée par son numéro SIREN. De même, pour la CSRD, il correspond à l'entité déclarante dans les états financiers."},
+// Chapitre 3 — Mobilisation
+{id:77,cat:"Mobilisation",type:"mcq",q:"À quel moment de la démarche Bilan Carbone® la mobilisation doit-elle être programmée ?",o:["Uniquement au lancement de la démarche","Uniquement lors de la restitution finale","En continu durant toute la démarche, de la phase de cadrage à la synthèse","Uniquement pendant la phase de collecte des données"],a:2,e:"Selon la source officielle : 'La mobilisation se poursuit en continu durant toute la démarche Bilan Carbone®'. Elle intervient à 5 moments clés : lancement/cadrage, avant la collecte, après le profil GES, pour le plan de transition, et en synthèse finale."},
+{id:78,cat:"Mobilisation",type:"mcq",q:"Que prescrit la méthode Bilan Carbone® concernant les outils et formats de mobilisation ?",o:["Des outils numériques obligatoires","Des ateliers en présentiel exclusivement","Aucun outil ni format imposé — la méthode est souple","Un kit de communication standardisé fourni par l'ABC"],a:2,e:"La méthode 'se veut souple et n'impose ni moyens, ni outils ou formats spécifiques'. L'organisation choisit ses propres modalités de mobilisation, adaptées à son contexte et à ses parties prenantes, en s'inspirant des exemples disponibles en annexe."},
+{id:79,cat:"Mobilisation",type:"mcq",q:"Quel est le rôle spécifique de la mobilisation lors de la phase de construction du plan de transition ?",o:["Informer passivement les salariés des résultats","Coconstruire les actions avec les parties prenantes","Obtenir la validation externe d'un auditeur","Publier les résultats sur l'OCCF"],a:1,e:"Lors de la construction du plan de transition, la mobilisation a un rôle de COCONSTRUCTION : les parties prenantes (internes et externes) sont associées à l'élaboration des actions, ce qui garantit l'adhésion et l'opérationnalité du plan."},
+// Chapitre 4 — Comptabilisation
+{id:80,cat:"Comptabilisation",type:"mcq",q:"Combien de postes et de sous-postes comporte la nomenclature du Bilan Carbone® v9 ?",o:["5 postes et 20 sous-postes","7 postes et 35 sous-postes","10 postes et 48 sous-postes","12 postes et 60 sous-postes"],a:2,e:"La nomenclature BC® v9 structure les émissions en 10 POSTES et 48 SOUS-POSTES. Chaque émission ne peut être comptabilisée que dans un seul sous-poste, évitant ainsi les doubles comptages."},
+{id:81,cat:"Comptabilisation",type:"mcq",q:"Quelle est la limite maximale de facteurs d'émission en ratios monétaires au niveau de maturité Standard ?",o:["Max 10% de ratios monétaires spécifiques, max 30% de non-spécifiques","Max 20% de ratios monétaires spécifiques et max 10% de non-spécifiques","Max 30% de ratios monétaires, sans distinction","Aucune limite n'est fixée"],a:1,e:"Au niveau Standard : max 20% de FE en ratios monétaires spécifiques et max 10% de non-spécifiques. Au niveau Initial : max 30% via ratios monétaires. Au niveau Avancé : max 10% de spécifiques, zéro non-spécifique idéalement."},
+{id:82,cat:"Comptabilisation",type:"mcq",q:"Pourquoi les facteurs d'émission en ratios monétaires sont-ils déconseillés ?",o:["Parce qu'ils sont interdits par la méthode BC®","Parce qu'ils sont sensibles à l'inflation et présentent de très fortes incertitudes","Parce qu'ils ne couvrent pas les émissions directes","Parce qu'ils nécessitent un logiciel spécialisé"],a:1,e:"Les FE en ratios monétaires (kgCO₂e/k€) présentent de 'très fortes incertitudes', sont 'sensibles à l'inflation', et ne permettent pas de suivre l'efficacité des politiques d'achats responsables. Ils restent tolérés dans certaines limites par niveau de maturité."},
+{id:83,cat:"Comptabilisation",type:"mcq",q:"Quels sont les 4 types de données d'activité dans la méthode Bilan Carbone® ?",o:["Données réelles, extrapolées, statistiques et approchées","Données mesurées, calculées, estimées et théoriques","Données primaires, secondaires, tertiaires et résiduelles","Données internes, externes, sectorielles et réglementaires"],a:0,e:"Les 4 types de données d'activité : (1) RÉELLES (physiques ou comptables, les plus fiables), (2) EXTRAPOLÉES (questionnaires, ajustements), (3) STATISTIQUES (moyennes sectorielles, à limiter), (4) APPROCHÉES (à éviter, moins fiables). Plus le niveau de maturité est élevé, plus on utilise des données réelles."},
+// Chapitre 5 — Plan de transition
+{id:84,cat:"Plan de Transition",type:"mcq",q:"Quelle approche est recommandée pour définir les objectifs de réduction dans le plan de transition ?",o:["Bottom-up — à partir des actions identifiées","Top-down — à partir d'une trajectoire théorique de décarbonation","Benchmark — à partir des objectifs des concurrents","Inside-out — à partir des capacités internes disponibles"],a:1,e:"L'approche recommandée est TOP-DOWN : sélectionner d'abord une trajectoire théorique de décarbonation (SNBC, SBT), puis décliner les objectifs par horizon temporel (court terme = 3-4 ans, moyen terme = ~10 ans, long terme = 2050)."},
+{id:85,cat:"Plan de Transition",type:"mcq",q:"Quelles sont les 5 catégories d'actions dans un plan de transition Bilan Carbone® ?",o:["Actions techniques, organisationnelles, comportementales, réglementaires et financières","Actions immédiates, prioritaires, stratégiques, d'amélioration et d'adaptation","Actions Scope 1, Scope 2, Scope 3, d'évitement et de compensation","Actions court terme, moyen terme, long terme, d'urgence et systémiques"],a:1,e:"Les 5 catégories d'actions : (1) IMMÉDIATES (court terme, sans difficultés majeures), (2) PRIORITAIRES (réduisent fortement les postes significatifs), (3) STRATÉGIQUES (moyen/long terme, modifient le modèle), (4) D'AMÉLIORATION (précisent la méthodologie), (5) D'ADAPTATION (résilience climatique)."},
+{id:86,cat:"Plan de Transition",type:"mcq",q:"Parmi les 4 natures d'actions possibles dans un plan de transition, laquelle représente la pertinence maximale selon la méthode ?",o:["Les actions de compensation","Les actions hors chaîne de valeur","Les actions dans le cœur d'activité de l'organisation","Les actions d'évitement"],a:2,e:"La pertinence des actions se hiérarchise du plus au moins pertinent : (1) Actions dans le CŒUR D'ACTIVITÉ (pertinence maximale), (2) Dans la chaîne de valeur, (3) Hors chaîne de valeur, (4) D'évitement, (5) De compensation (pertinence minimale)."},
+// Chapitre 6 — Restitution
+{id:87,cat:"Synthèse & Restitution",type:"mcq",q:"Quels sont les trois résultats possibles d'une évaluation du Bilan Carbone® ?",o:["Validé, En cours, Refusé","Validation, Échec, Rejet","Certifié, Non certifié, En révision","Conforme, Partiellement conforme, Non conforme"],a:1,e:"Les 3 résultats possibles : (1) VALIDATION — 'le bilan est vérifié et validé', (2) ÉCHEC — 'l'évaluation n'a pas pu aboutir', (3) REJET — 'des éléments indiquent que le bilan n'est pas fondamentalement correct'. En cas de validation, l'ABC délivre une attestation avec le niveau de maturité."},
+// Chapitre 7 — Évaluation
+{id:88,cat:"Évaluation & Qualité",type:"mcq",q:"Quelles sont les 4 étapes du processus d'évaluation d'un Bilan Carbone® ?",o:["Candidature, Audit documentaire, Audit terrain, Certification","Recueil d'informations générales, Vérification des prérequis, Évaluation méthodologique, Analyse de cohérence et pertinence","Cadrage, Collecte, Analyse, Restitution","Autoévaluation, Évaluation externe, Délibération, Publication"],a:1,e:"Le processus d'évaluation comprend 4 étapes : (1) Recueil d'informations générales (traçabilité), (2) Vérification des prérequis (formation, outil, implication hiérarchique), (3) Évaluation méthodologique (respect de la méthode), (4) Analyse de cohérence et pertinence du bilan et du plan de transition."},
+{id:89,cat:"Évaluation & Qualité",type:"mcq",q:"Quelle est la condition d'impartialité requise pour les évaluateurs d'un Bilan Carbone® ?",o:["L'évaluateur peut appartenir à la même organisation s'il est certifié","Les évaluateurs doivent être indépendants de ceux ayant réalisé le bilan","Seul un expert-comptable peut réaliser l'évaluation","L'évaluation doit être réalisée par l'ADEME"],a:1,e:"Les évaluateurs doivent respecter les principes d'impartialité et d'indépendance vis-à-vis de ceux ayant réalisé le bilan. Tous les membres doivent appartenir à des organisations adhérentes à l'ABC. Tout conflit d'intérêt doit être signalé à l'ABC."},
+{id:90,cat:"Évaluation & Qualité",type:"mcq",q:"Quelle est la validité des plans d'action et trajectoires lors d'une évaluation du Bilan Carbone® ?",o:["1 an","2 ans","4 ans","10 ans"],a:1,e:"Les plans d'action et trajectoires ont une validité de 2 ANS lors d'une évaluation. L'analyse des risques au niveau Avancé a une validité de 10 ans. La démarche de mobilisation a une validité de 2 ans. Cela évite les redondances entre renouvellements."},
+{id:91,cat:"Évaluation & Qualité",type:"mcq",q:"Pour quelle raison une organisation peut-elle demander une évaluation externe de son Bilan Carbone® ?",o:["Uniquement pour obtenir un label RSE","Pour la conformité réglementaire, l'assurance de fiabilité, le contrôle qualité ou la transparence de communication","Uniquement si elle est au niveau Avancé","Pour obtenir une réduction de sa taxe carbone"],a:1,e:"Une évaluation externe peut être demandée pour : (1) conformité réglementaire (BEGES-R, CSRD), (2) assurance sur la fiabilité des résultats, (3) contrôle qualité des bilans de parties prenantes, (4) transparence de la communication externe. Elle reste volontaire."},
+// ── QUESTIONS CERTIFICATION NIVEAU 1 (issues de bilan-carbone-revision.html) ──
+{id:92,cat:"Historique",type:"mcq",q:"Qui a développé la méthode Bilan Carbone® à partir de 2002 ?",o:["Jean-Marc Jancovici pour l'ADEME","L'ADEME seule, en 1997","Le GHG Protocol (WRI/WBCSD)","La Commission Européenne"],a:0,e:"Le Bilan Carbone® a été développé à partir de 2002 par Jean-Marc Jancovici (ingénieur, cofondateur Carbone 4) pour le compte de l'ADEME. Depuis 2011, la méthode est gérée par l'ABC (Association pour la transition Bas Carbone)."},
+{id:93,cat:"Historique",type:"mcq",q:"Quelle organisation gère la marque Bilan Carbone® depuis 2011 ?",o:["L'ADEME","L'ABC (Association pour la transition Bas Carbone)","Le GHG Protocol","L'ISO"],a:1,e:"Depuis 2011, la méthode Bilan Carbone® est la propriété de l'ABC (Association pour la transition Bas Carbone). L'ADEME conserve la gestion de la Base Empreinte® (base de données de facteurs d'émission)."},
+{id:94,cat:"Comptabilisation",type:"mcq",q:"Quel est le Potentiel de Réchauffement Global (PRG) du méthane (CH₄) sur 100 ans selon le 5ème rapport du GIEC (AR5) ?",o:["21","28","34","72"],a:1,e:"Selon le AR5 du GIEC (utilisé par la Base Empreinte® française), le PRG du CH₄ est de 28. Il était de 21 selon le AR4 et de 29,8 selon le AR6. En France, on utilise conventionnellement la valeur AR5."},
+{id:95,cat:"Comptabilisation",type:"mcq",q:"Lequel de ces gaz N'EST PAS inclus dans les 7 GES du Protocole de Kyoto comptabilisés dans le Bilan Carbone® ?",o:["SF₆ (hexafluorure de soufre)","NF₃ (trifluorure d'azote)","O₃ (ozone troposphérique)","HFC (hydrofluorocarbures)"],a:2,e:"L'ozone (O₃) n'est pas l'un des 7 GES du Protocole de Kyoto. Les 7 GES sont : CO₂, CH₄, N₂O, HFC, PFC, SF₆ et NF₃ (ce dernier ajouté en 2012). L'ozone est bien un GES mais n'est pas comptabilisé dans cette liste."},
+{id:96,cat:"Périmètre",type:"mcq",q:"Dans le Bilan Carbone®, quel scope correspond aux émissions directes de l'organisation ?",o:["Scope 1","Scope 2","Scope 3","Scope 0"],a:0,e:"Le Scope 1 correspond aux émissions directes : combustion dans les installations et véhicules appartenant ou contrôlés par l'organisation, procédés industriels, émissions fugitives. Ce sont les sources que l'organisation possède ou contrôle directement."},
+{id:97,cat:"Périmètre",type:"mcq",q:"L'électricité achetée sur le réseau par une entreprise appartient à quel scope ?",o:["Scope 1","Scope 2","Scope 3 amont","Scope 3 aval"],a:1,e:"L'électricité achetée sur le réseau est toujours en Scope 2. Ce scope regroupe les émissions indirectes liées à l'énergie achetée : électricité, chaleur, froid et vapeur. L'électricité autoproduite par des panneaux solaires propres serait en Scope 1."},
+{id:98,cat:"Périmètre",type:"mcq",q:"Les déplacements domicile-travail des salariés appartiennent à quel scope ?",o:["Scope 1","Scope 2","Scope 3","Ils ne sont pas inclus dans le Bilan Carbone®"],a:2,e:"Les déplacements domicile-travail des salariés sont en Scope 3 (autres émissions indirectes). L'organisation ne contrôle pas ces déplacements mais en est indirectement responsable. Ce poste est inclus dès le niveau Initial."},
+{id:99,cat:"Niveaux de Maturité",type:"mcq",q:"Quel niveau du Bilan Carbone® correspond au minimum réglementaire du BEGES (Bilan des Émissions de GES) ?",o:["Niveau Avancé","Niveau Initial","Niveau Standard","Niveau Basique"],a:2,e:"Le niveau Standard du Bilan Carbone® correspond au minimum réglementaire BEGES (Scopes 1 et 2 obligatoires). Le BEGES est imposé par l'article 75 de la loi Grenelle II (décret 2011-829) pour les entités dépassant certains seuils de salariés."},
+{id:100,cat:"Comptabilisation",type:"mcq",q:"Quelle est l'unité de mesure utilisée dans le Bilan Carbone® ?",o:["kWh","kg de CO₂","teqCO₂ (tonnes équivalent CO₂)","Joules"],a:2,e:"L'unité du Bilan Carbone® est la teqCO₂ (tonne équivalent CO₂), parfois notée tCO₂e. Elle permet d'agréger les 7 GES en les convertissant via leur Potentiel de Réchauffement Global (PRG) sur 100 ans."},
+{id:101,cat:"Périmètre",type:"mcq",q:"Un véhicule de société appartenant à l'entreprise qui roule au diesel : ses émissions de combustion relèvent de quel scope ?",o:["Scope 1","Scope 2","Scope 3","Scope 1 et 3 simultanément"],a:0,e:"Les émissions de combustion d'un véhicule appartenant à l'entreprise (flotte propre) sont en Scope 1 (combustion de sources mobiles). Si le véhicule est loué ou si l'employé utilise son propre véhicule, ça passe en Scope 3."},
+{id:102,cat:"Périmètre",type:"mcq",q:"Les achats de matières premières (acier, plastique, etc.) par une entreprise relèvent de quel scope ?",o:["Scope 1","Scope 2","Scope 3","Hors périmètre"],a:2,e:"Les achats de matières premières (et plus généralement tous les achats de biens et services) sont en Scope 3 amont. L'empreinte carbone de production de ces matières (extraction, transformation, transport) est comptabilisée dans ce scope. Inclus dès le niveau Initial."},
+{id:103,cat:"Comptabilisation",type:"mcq",q:"Quel est le Potentiel de Réchauffement Global du SF₆ (hexafluorure de soufre) sur 100 ans ?",o:["265","7 390","23 500","16 100"],a:2,e:"Le SF₆ a un PRG de 23 500 sur 100 ans (AR5). C'est l'un des GES les plus puissants. Il est utilisé dans les appareillages électriques haute tension comme isolant. Une fuite de quelques grammes équivaut à plusieurs centaines de kg de CO₂."},
+{id:104,cat:"Historique",type:"mcq",q:"La Base Empreinte® (base nationale de facteurs d'émission) est gérée par :",o:["L'ABC","L'ADEME","Le GHG Protocol","L'ISO"],a:1,e:"La Base Empreinte® (anciennement Base Carbone®, renommée en 2021) est la base de données nationale de référence des facteurs d'émission, gérée par l'ADEME. Elle est publique et gratuite. À distinguer de la méthode Bilan Carbone® gérée par l'ABC."},
+{id:105,cat:"Niveaux de Maturité",type:"mcq",q:"Un bilan GES réalisé avec la méthode Bilan Carbone® au niveau Initial inclut obligatoirement :",o:["Uniquement les Scopes 1 et 2","Les Scopes 1, 2, et les principaux postes du Scope 3","Les Scopes 1, 2 et la totalité du Scope 3","Uniquement le Scope 3"],a:1,e:"Le niveau Initial inclut les Scopes 1 et 2 (complets) plus les principaux postes du Scope 3 : achats, fret, déplacements professionnels, domicile-travail, déchets directs, immobilisations. Le niveau Avancé inclut la totalité du Scope 3."},
+{id:106,cat:"Objectifs & Principes",type:"mcq",q:"L'article 75 de la loi Grenelle II impose le BEGES tous les combien d'années ?",o:["2 ans","3 ans","4 ans","5 ans"],a:2,e:"L'article 75 de la loi Grenelle II (Décret 2011-829) impose la réalisation d'un Bilan des Émissions de GES (BEGES) tous les 4 ans. Depuis 2023, un plan de transition doit obligatoirement accompagner ce bilan."},
+{id:107,cat:"Périmètre",type:"mcq",q:"Les émissions fugitives de fluides frigorigènes (HFC) appartiennent à quel scope ?",o:["Scope 1","Scope 2","Scope 3","Ce ne sont pas des GES"],a:0,e:"Les fuites de fluides frigorigènes (HFC, composés à très fort PRG) sont des émissions fugitives et relèvent donc du Scope 1 (émissions directes). Elles sont souvent sous-estimées mais peuvent représenter un poste significatif dans les émissions directes."},
+{id:108,cat:"Périmètre",type:"mcq",q:"Quel scope est le plus souvent le plus important en volume d'émissions pour une entreprise ?",o:["Scope 1 uniquement","Scope 2 uniquement","Scope 3","Scopes 1 et 2 à égalité"],a:2,e:"Le Scope 3 représente souvent 60 à 80% voire plus des émissions totales d'une organisation, car il englobe toute la chaîne de valeur (achats, utilisation des produits, transports, etc.). C'est pourquoi son inclusion est fondamentale pour une vision complète."},
+{id:109,cat:"Périmètre",type:"mcq",q:"Dans le Bilan Carbone®, le transport de marchandises réalisé par un transporteur externe est en :",o:["Scope 1 (combustion mobile)","Scope 2","Scope 3","Hors périmètre"],a:2,e:"Si le transport est réalisé par un prestataire externe, les émissions sont en Scope 3. Seul le transport effectué par les propres véhicules de l'organisation relève du Scope 1."},
+{id:110,cat:"Comptabilisation",type:"mcq",q:"Laquelle de ces affirmations sur le PRG (Potentiel de Réchauffement Global) est correcte ?",o:["Le PRG est constant et ne change jamais","Le PRG du CO₂ est de 1 et sert de référence","Le PRG est calculé sur 50 ans par convention","Le PRG mesure la toxicité d'un gaz"],a:1,e:"Le CO₂ est le gaz de référence avec un PRG = 1 sur 100 ans. Le PRG mesure la capacité d'un GES à piéger la chaleur dans l'atmosphère par rapport au CO₂ sur 100 ans. Il évolue selon les rapports du GIEC (AR4, AR5, AR6) et s'applique sur 100 ans par convention internationale."},
+{id:111,cat:"Objectifs & Principes",type:"mcq",q:"Une entreprise de 300 salariés basée en France métropolitaine est-elle soumise à l'obligation BEGES ?",o:["Oui, le seuil est 250 salariés en France métropolitaine","Non, le seuil est 500 salariés en France métropolitaine","Oui, toutes les entreprises privées y sont soumises","Non, seules les collectivités sont soumises"],a:1,e:"En France métropolitaine, l'obligation BEGES s'applique aux entreprises de plus de 500 salariés. Le seuil de 250 salariés s'applique dans les DOM-TOM. Cette entreprise de 300 salariés n'est donc pas soumise à l'obligation (mais peut réaliser un bilan volontaire)."},
+{id:112,cat:"Périmètre",type:"mcq",q:"Les vols d'affaires d'un employé (billets achetés par l'entreprise) sont comptabilisés dans quel scope ?",o:["Scope 1","Scope 2","Scope 3","Hors périmètre pour les déplacements aériens"],a:2,e:"Les déplacements professionnels réalisés via des prestataires de transport (avion, train, taxi, location) sont en Scope 3. Le Scope 1 s'appliquerait uniquement si l'entreprise possédait ses propres avions. Les déplacements professionnels sont inclus dès le niveau Initial."},
+{id:113,cat:"Historique",type:"mcq",q:"Quelle est la différence principale entre la méthode Bilan Carbone® et le GHG Protocol ?",o:["Il n'y a aucune différence, ce sont les mêmes","Le GHG Protocol est français, le Bilan Carbone® est international","Le Bilan Carbone® est une méthode française (ABC/ADEME), le GHG Protocol est un standard international (WRI/WBCSD)","Le GHG Protocol ne comptabilise pas le Scope 3"],a:2,e:"Le Bilan Carbone® est une méthode française développée par l'ADEME et gérée par l'ABC, avec sa propre structuration en postes et domaines. Le GHG Protocol est le standard international publié par le WRI et le WBCSD, à l'origine des 3 scopes. Les deux méthodes sont compatibles mais distinctes."},
+{id:114,cat:"Comptabilisation",type:"mcq",q:"Quel est le PRG du N₂O (protoxyde d'azote) selon le AR5 du GIEC ?",o:["28","120","265","298"],a:2,e:"Le N₂O a un PRG de 265 selon le AR5 (298 selon l'AR4). Il est principalement émis par l'agriculture (utilisation d'engrais azotés), la combustion et l'industrie chimique. C'est l'un des trois GES les plus importants à retenir avec CO₂ et CH₄."},
+{id:115,cat:"Périmètre",type:"mcq",q:"L'amortissement carbone des bâtiments et équipements (immobilisations) appartient à quel scope ?",o:["Scope 1","Scope 2","Scope 3","Il n'est pas comptabilisé dans le Bilan Carbone®"],a:2,e:"L'empreinte carbone de la fabrication des bâtiments et équipements est amortie sur leur durée de vie et comptabilisée en Scope 3 (immobilisations). On parle de 'carbone gris' ou 'carbone incorporé'. Ce poste est important dans les secteurs à forte intensité capitalistique."},
+{id:116,cat:"Objectifs & Principes",type:"mcq",q:"Quelle loi française a rendu obligatoire la réalisation d'un BEGES pour les grandes entreprises ?",o:["Loi Sapin II (2016)","Loi Vigilance (2017)","Loi Grenelle II — Article 75 (2010)","Loi PACTE (2019)"],a:2,e:"L'article 75 de la loi Grenelle II (2010), mis en application par le décret 2011-829, a rendu obligatoire la réalisation d'un BEGES pour les entreprises >500 sal., collectivités >50 000 hab. et administrations >250 agents."},
+{id:117,cat:"Périmètre",type:"mcq",q:"Dans une approche par contrôle opérationnel, une filiale dans laquelle l'entreprise a le contrôle opérationnel (mais seulement 40% du capital) est-elle incluse dans le périmètre Scope 1 ?",o:["Non, car la participation est inférieure à 50%","Oui, car l'entreprise exerce le contrôle opérationnel","Uniquement à hauteur de 40%","Elle ne peut jamais être incluse dans le Scope 1"],a:1,e:"Dans l'approche par contrôle opérationnel, si l'entreprise a l'autorité d'introduire et de mettre en œuvre des politiques opérationnelles sur cette filiale, ses émissions sont incluses à 100% dans le Scope 1, quelle que soit le taux de participation capitalistique."},
+{id:118,cat:"Synthèse & Restitution",type:"mcq",q:"Quelle directive européenne de 2023 élargit les obligations de reporting non-financier (incluant les GES) aux entreprises de plus de 250 salariés ?",o:["Directive TCFD","Directive SFDR","Directive CSRD","Directive ETS"],a:2,e:"La CSRD (Corporate Sustainability Reporting Directive, 2023) élargit progressivement les obligations de reporting de durabilité (dont les GES) aux entreprises de plus de 250 salariés. Elle remplace la NFRD et s'appuie sur les standards ESRS (dont ESRS E1 pour le climat)."},
+{id:119,cat:"Périmètre",type:"mcq",q:"Une entreprise fait livrer ses produits à ses clients par un transporteur externe. Ces émissions sont classées en :",o:["Scope 1 (combustion mobile)","Scope 3 amont (fret entrant)","Scope 3 aval (fret sortant)","Hors périmètre car c'est un prestataire"],a:2,e:"La livraison des produits finis aux clients par un transporteur externe est du fret aval, classé en Scope 3 aval. Le fret entrant (matières premières arrivant vers l'usine) est Scope 3 amont. Cette distinction amont/aval est importante à maîtriser."},
+{id:120,cat:"Plan de Transition",type:"mcq",q:"Quel référentiel permet aux entreprises de valider des objectifs de réduction de GES alignés sur les scénarios climatiques 1,5°C / 2°C ?",o:["ISO 14001","SBTi (Science Based Targets initiative)","Label Bas Carbone","ISO 14064"],a:1,e:"La Science Based Targets initiative (SBTi) est le référentiel permettant aux entreprises de faire valider des objectifs de réduction GES scientifiquement fondés et alignés sur les trajectoires 1,5°C ou 2°C des Accords de Paris. Le Label Bas Carbone est un outil français de financement de projets de séquestration carbone."},
+];
+
+const ORD=[
+{id:"O1",cat:"Les 7 Étapes",type:"ord",q:"Remettez les 7 étapes du Bilan Carbone® dans le bon ordre :",items:[{id:"e1",l:"Cadrage"},{id:"e2",l:"Périmètre"},{id:"e3",l:"Mobilisation"},{id:"e4",l:"Comptabilisation"},{id:"e5",l:"Plan de transition"},{id:"e6",l:"Synthèse et restitution"},{id:"e7",l:"Évaluation"}],correct:["e1","e2","e3","e4","e5","e6","e7"],e:"(1) Cadrage — niveau de maturité et pilotage. (2) Périmètre — 4 périmètres et cartographie des flux. (3) Mobilisation — engager les PP (transversale à toutes les étapes). (4) Comptabilisation — calculer les émissions. (5) Plan de transition — objectifs et actions. (6) Synthèse/Restitution — communiquer et publier sur l'OCCF. (7) Évaluation — audit qualité FACULTATIF."},
+{id:"O2",cat:"Périmètre",type:"ord",q:"Remettez les 4 étapes d'élaboration de la cartographie des flux dans le bon ordre :",items:[{id:"f1",l:"Schématiser l'organigramme (bâtiments, filiales, clients, fournisseurs)"},{id:"f2",l:"Cartographier les flux entrants, internes et sortants"},{id:"f3",l:"Préciser les données d'activité associées à chaque flux"},{id:"f4",l:"Finaliser la cartographie des flux"}],correct:["f1","f2","f3","f4"],e:"(1) Schématiser l'organigramme → périmètre ORGANISATIONNEL. (2) Cartographier les flux → périmètre OPÉRATIONNEL. (3) Préciser les données d'activité → prépare la COLLECTE et la matrice de collecte. (4) Finaliser. Processus ITÉRATIF."},
+{id:"O3",cat:"Plan de Transition",type:"ord",q:"Remettez les 5 sous-étapes du plan de transition dans le bon ordre :",items:[{id:"p1",l:"Définition des objectifs"},{id:"p2",l:"Construction du plan d'action"},{id:"p3",l:"Définition de la trajectoire de transition"},{id:"p4",l:"Mise en œuvre du plan de transition"},{id:"p5",l:"Suivi et pilotage du plan de transition"}],correct:["p1","p2","p3","p4","p5"],e:"(5.1) DÉFINITION DES OBJECTIFS — vision 2030/2050, trajectoire top-down. (5.2) CONSTRUCTION DU PLAN D'ACTION — fiches actions, potentiels de réduction. (5.3) DÉFINITION DE LA TRAJECTOIRE — approche bottom-up. (5.4) MISE EN ŒUVRE des actions. (5.5) SUIVI ET PILOTAGE — indicateurs, tableau de bord."},
+{id:"O4",cat:"Mobilisation",type:"ord",q:"Remettez les moments de mobilisation dans le bon ordre chronologique :",items:[{id:"m1",l:"Au lancement et cadrage (sensibilisation/vulgarisation)"},{id:"m2",l:"Au lancement de la collecte (responsabilisation)"},{id:"m3",l:"À l'issue du profil GES (restitution intermédiaire)"},{id:"m4",l:"Pour la construction du plan de transition (coconstruction)"},{id:"m5",l:"En synthèse de la démarche (communication finale)"}],correct:["m1","m2","m3","m4","m5"],e:"(1) Lancement/cadrage : sensibiliser et vulgariser les enjeux. (2) Avant la collecte : responsabiliser les détenteurs de données. (3) Après le profil GES : restitution intermédiaire des résultats. (4) Plan de transition : coconstruire les actions avec les PP. (5) Synthèse : communication finale."},
+];
+
+const TF = [
+  {id:"TF1",type:"tf",cat:"Historique",
+    q:"Le Bilan Carbone® a été officiellement formalisé par l'ADEME en 2004.",
+    a:true,
+    e:"Exact. 2004 = formalisation officielle par l'ADEME avec Jean-Marc Jancovici (Manicore). 2002 = travaux préparatoires. 2011 = création de l'ABC."},
+  {id:"TF2",type:"tf",cat:"Historique",
+    q:"La marque Bilan Carbone® est déposée uniquement en France.",
+    a:false,
+    e:"FAUX. La marque® est déposée à l'INPI en France ET dans toute l'Union Européenne."},
+  {id:"TF3",type:"tf",cat:"Objectifs & Principes",
+    q:"La démarche Bilan Carbone® est obligatoire pour les entreprises de plus de 500 salariés.",
+    a:false,
+    e:"FAUX. Le BC® est entièrement VOLONTAIRE. C'est le BEGES réglementaire qui est obligatoire pour les organisations de +500 salariés. Le BC® peut y répondre mais reste une démarche volontaire."},
+  {id:"TF4",type:"tf",cat:"Objectifs & Principes",
+    q:"La comptabilité carbone est une mesure scientifiquement rigoureuse des émissions de GES.",
+    a:false,
+    e:"FAUX. La comptabilité carbone est un CALCUL, basé sur la science, mais incertain par nature. Elle n'est pas rigoureusement scientifique mais suffisante pour passer à l'action."},
+  {id:"TF5",type:"tf",cat:"Les 7 Étapes",
+    q:"La démarche Bilan Carbone® v9 est structurée en 7 étapes.",
+    a:true,
+    e:"Exact. Les 7 étapes : (1) Cadrage, (2) Périmètre, (3) Mobilisation, (4) Comptabilisation, (5) Plan de transition, (6) Synthèse et restitution, (7) Évaluation."},
+  {id:"TF6",type:"tf",cat:"Les 7 Étapes",
+    q:"L'évaluation (étape 7) est obligatoire pour tous les niveaux de maturité.",
+    a:false,
+    e:"FAUX. L'évaluation (étape 7) est FACULTATIVE et volontaire. Le BC® doit pouvoir être évalué à tout moment, mais l'audit n'est pas une obligation."},
+  {id:"TF7",type:"tf",cat:"Niveaux de Maturité",
+    q:"Une organisation peut directement viser le niveau Avancé sans commencer par le niveau Initial.",
+    a:true,
+    e:"Exact. L'organisation peut viser directement le niveau correspondant à ses objectifs et sa maturité. Un questionnaire de maturité aide à trouver le bon point de départ."},
+  {id:"TF8",type:"tf",cat:"Niveaux de Maturité",
+    q:"Au niveau Avancé, un seul critère manquant est toléré.",
+    a:true,
+    e:"Exact. Au niveau Avancé, un seul critère manquant est toléré. Cela reflète la logique d'amélioration continue : progresser, pas atteindre la perfection absolue."},
+  {id:"TF9",type:"tf",cat:"Comptabilisation",
+    q:"L'unité standard pour exprimer les émissions dans un BC® est la tonne de CO₂ (tCO₂).",
+    a:false,
+    e:"FAUX. L'unité est la TONNE CO₂ ÉQUIVALENT (tCO₂e). Elle agrège différents GES selon leur PRG-100. tCO₂ sans 'e' = uniquement le CO₂, ce n'est pas l'unité standard."},
+  {id:"TF10",type:"tf",cat:"Comptabilisation",
+    q:"Le SO₂ est un gaz à effet de serre comptabilisé obligatoirement dans un Bilan Carbone®.",
+    a:false,
+    e:"FAUX. Le SO₂ est un polluant atmosphérique (pluies acides) mais PAS un GES au sens du BC®. Les GES obligatoires sont : CO₂, CH₄, N₂O, SF₆, HFC, PFC et NF₃."},
+  {id:"TF11",type:"tf",cat:"Périmètre",
+    q:"Le périmètre temporel classique d'un Bilan Carbone® est d'une année complète.",
+    a:true,
+    e:"Exact. Le périmètre temporel classique = 1 an, pour refléter l'activité dans sa globalité. Pour répondre au BEGES-R, le périmètre doit obligatoirement être une année complète."},
+  {id:"TF12",type:"tf",cat:"Plan de Transition",
+    q:"Le plan de transition est obligatoire uniquement pour le niveau Avancé.",
+    a:false,
+    e:"FAUX. Le plan de transition est OBLIGATOIRE À TOUS LES NIVEAUX (Initial, Standard, Avancé). Sans plan de transition, un BC® est incomplet selon la v9."},
+  // ── NOUVELLES QUESTIONS TF — enrichissement depuis sources officielles ─────
+  {id:"TF13",type:"tf",cat:"Cadrage",
+    q:"Au niveau de maturité Avancé, le Bilan Carbone® doit être renouvelé au moins une fois par an.",
+    a:true,
+    e:"Exact. Au niveau Avancé, 'le Bilan Carbone® complet de l'organisation est renouvelé à minima tous les ans'. Aux niveaux Initial et Standard, le renouvellement est a minima tous les 4 ans (3 ans pour le secteur public)."},
+  {id:"TF14",type:"tf",cat:"Cadrage",
+    q:"Une organisation débutante doit obligatoirement commencer par le niveau Initial avant d'accéder au niveau Standard.",
+    a:false,
+    e:"FAUX. Une organisation peut directement viser le niveau correspondant à ses objectifs et sa maturité, sans nécessairement commencer par le niveau Initial. Un questionnaire de maturité aide à trouver le bon point de départ."},
+  {id:"TF15",type:"tf",cat:"Périmètre",
+    q:"Les trois piliers A (émissions induites), B (émissions évitées) et C (émissions séquestrées) peuvent être soustraits pour calculer une 'empreinte nette'.",
+    a:false,
+    e:"FAUX. Les 3 piliers sont 'strictement non combinables : ni additionnables, ni soustrayables'. Seul le pilier A est traité par le BC®. Les piliers B et C peuvent être calculés séparément mais ne se soustraient jamais du pilier A."},
+  {id:"TF16",type:"tf",cat:"Comptabilisation",
+    q:"La nomenclature du Bilan Carbone® v9 comprend 10 postes et 48 sous-postes d'émissions.",
+    a:true,
+    e:"Exact. Le profil d'émission du BC® v9 s'organise en 10 postes et 48 sous-postes. Chaque émission ne peut être comptabilisée que dans un seul sous-poste pour éviter les doubles comptages."},
+  {id:"TF17",type:"tf",cat:"Comptabilisation",
+    q:"Les facteurs d'émission en ratios monétaires sont interdits au niveau de maturité Avancé.",
+    a:false,
+    e:"FAUX. Ils ne sont pas interdits mais très limités : au niveau Avancé, leur usage est limité à 10% maximum pour les ratios monétaires spécifiques et idéalement zéro pour les non-spécifiques. Ils restent tolérés, mais déconseillés."},
+  {id:"TF18",type:"tf",cat:"Évaluation & Qualité",
+    q:"Une organisation peut communiquer librement sur le résultat de son évaluation Bilan Carbone® avec ses propres formulations.",
+    a:false,
+    e:"FAUX. La communication sur le résultat de l'évaluation doit respecter 'strictement le verbatim officiel' défini par l'ABC. Aucune reformulation libre n'est autorisée. De plus, aucune communication externe n'est permise pour les autoévaluations."},
+  {id:"TF19",type:"tf",cat:"Synthèse & Restitution",
+    q:"La couverture de la CSRD ESRS E1 est maximale dès le niveau de maturité Standard du Bilan Carbone®.",
+    a:false,
+    e:"FAUX. La couverture maximale de la CSRD ESRS E1 n'est atteinte qu'à partir du NIVEAU AVANCÉ. Même à ce niveau, certaines exigences (E1-1, E1-7, E1-8) ne sont pas couvertes ou seulement partiellement couvertes par le BC®."},
+];
+const MULTI = [
+{id:"M1",cat:"Historique",type:"multi",q:"Quels éléments désigne officiellement le Bilan Carbone® ?",o:["Une méthode développée par l'ABC","Des outils (tableurs, logiciels)","Un label RSE attribué par l'État","Des formations par organismes habilités","Une marque® déposée à l'INPI en France et dans l'UE"],a:[0,1,3,4],e:"Le BC® désigne 4 éléments : (1) méthode développée par l'ABC, (2) outils (tableurs, logiciels), (3) formations par organismes habilités, (4) marque® déposée à l'INPI en France et dans l'UE. L'État ne délivre pas de label RSE BC®."},
+{id:"M2",cat:"Historique",type:"multi",q:"Parmi ces dates, lesquelles sont des jalons importants du Bilan Carbone® ?",o:["2002 — premières versions de travail","2004 — formalisation officielle par l'ADEME","2008 — création de l'ABC","2011 — création de l'ABC","2024 — publication de la v9"],a:[0,1,3,4],e:"2002 = travaux préparatoires. 2004 = formalisation officielle. 2011 = création de l'ABC. 2024 = publication de la v9 (mise en application en 2025). 2008 n'est pas un jalon officiel de la méthode."},
+{id:"M3",cat:"Objectifs & Principes",type:"multi",q:"Quels sont les 3 grands objectifs indissociables de la méthode Bilan Carbone® ?",o:["Mobiliser les parties prenantes internes et externes","Certifier les émissions auprès d'un organisme tiers","Comptabiliser les émissions directes et indirectes","Compenser l'intégralité des émissions résiduelles","Élaborer un plan de transition ambitieux et pilotable"],a:[0,2,4],e:"Les 3 objectifs INDISSOCIABLES : (1) MOBILISER les PP internes et externes, (2) COMPTABILISER les émissions directes et indirectes, (3) Élaborer un PLAN DE TRANSITION ambitieux, pilotable, opérationnel et cohérent. Certification et compensation ne font pas partie des 3 objectifs."},
+{id:"M4",cat:"Objectifs & Principes",type:"multi",q:"Quels sont les 5 principes de reporting du Bilan Carbone® ?",o:["Cohérence","Compensabilité","Exactitude","Significativité","Évaluation","Transparence"],a:[0,2,3,4,5],e:"Les 5 principes de reporting : Cohérence, Exactitude, Significativité, Évaluation, Transparence. La 'Compensabilité' n'en fait pas partie — le BC® est orienté RÉDUCTION des émissions, pas compensation."},
+{id:"M5",cat:"Les 7 Étapes",type:"multi",q:"Quels livrables sont attendus à l'issue de l'étape 1 (Cadrage) ?",o:["Description de l'organisation (SIRET, SIREN, NAF, ETP)","Le profil GES complet en tCO₂e","Présentation du coordinateur et de l'équipe projet","Le niveau de maturité choisi (Initial, Standard ou Avancé)","Les facteurs d'émission sélectionnés"],a:[0,2,3],e:"Livrables cadrage (étape 1) : description de l'organisation (raison sociale, SIRET, SIREN, code NAF, ETP), présentation du coordinateur·ice et réalisateur, niveau de maturité choisi. Le profil GES = étape 4. Les FE = étape 4."},
+{id:"M6",cat:"Les 7 Étapes",type:"multi",q:"Quels livrables sont attendus à l'issue de l'étape 5 (Plan de transition) ?",o:["Les objectifs de réduction du plan de transition","Le profil GES anonymisé déposé sur l'OCCF","Les fiches actions détaillées et quantifiées","La trajectoire de décarbonation","Les indicateurs de suivi, de mise en œuvre et de performance"],a:[0,2,3,4],e:"Livrables étape 5 : (1) OBJECTIFS du plan de transition, (2) PLAN D'ACTION via les fiches actions, (3) TRAJECTOIRE de décarbonation, (4) INDICATEURS — de suivi, de mise en œuvre et de performance. Le dépôt OCCF = étape 6 (Synthèse/Restitution)."},
+{id:"M7",cat:"Périmètre & Données",type:"multi",q:"Quels types de flux doivent être cartographiés dans un Bilan Carbone® ?",o:["Flux d'énergie et fluides","Flux financiers et comptables","Flux de matières premières","Flux de personnes (déplacements)","Flux de produits (biens et services) et déchets"],a:[0,2,3,4],e:"TOUS les flux entrants, internes ET sortants : énergie, fluides, matières premières, personnes (déplacements), produits (biens achetés/vendus/sous-traités) et déchets. Les flux financiers et comptables ne font pas partie de la cartographie des flux BC®."},
+{id:"M8",cat:"Plan de Transition",type:"multi",q:"Quels sont les 4 adjectifs qualifiant le plan de transition attendu par la méthode BC® ?",o:["Ambitieux","Certifié","Pilotable","Opérationnel","Cohérent avec la comptabilisation","Exhaustif"],a:[0,2,3,4],e:"Le plan de transition doit être : (1) AMBITIEUX — aligné sur les objectifs climatiques, (2) PILOTABLE — avec des indicateurs de suivi, (3) OPÉRATIONNEL — actions concrètes avec responsables, (4) COHÉRENT avec la comptabilisation — les actions ciblent les postes identifiés. Certifié et Exhaustif ne font pas partie de ces 4 adjectifs."},
+]; // Multi-réponses
+const MATCH = [
+{id:"MA1",cat:"Historique",type:"match",
+  q:"Associez chaque année à l'événement correspondant :",
+  pairs:[
+    {left:"2002",right:"Premières versions de travail BC®"},
+    {left:"2004",right:"Formalisation officielle par l'ADEME"},
+    {left:"2011",right:"Création de l'ABC"},
+    {left:"2024",right:"Publication de la v9"},
+  ],
+  e:"2002 = travaux préparatoires. 2004 = formalisation officielle avec Jean-Marc Jancovici. 2011 = création de l'ABC par l'ADEME et l'APCC. 2024 = publication de la v9 (mise en application 2025)."},
+{id:"MA2",cat:"Objectifs & Principes",type:"match",
+  q:"Associez chaque principe de reporting BC® à sa définition :",
+  pairs:[
+    {left:"Cohérence",right:"Comparabilité dans le temps entre bilans"},
+    {left:"Exactitude",right:"Données les plus précises possible"},
+    {left:"Significativité",right:"Couvrir les émissions les plus importantes"},
+    {left:"Transparence",right:"Documenter hypothèses, sources et limites"},
+  ],
+  e:"Les 5 principes de reporting BC® : Cohérence (comparabilité), Exactitude (précision), Significativité (émissions importantes), Évaluation (auditabilité), Transparence (documentation). La Compensabilité n'en fait pas partie."},
+{id:"MA3",cat:"Les 7 Étapes",type:"match",
+  q:"Associez chaque numéro d'étape à son nom dans la démarche BC® v9 :",
+  pairs:[
+    {left:"Étape 1",right:"Cadrage"},
+    {left:"Étape 3",right:"Mobilisation"},
+    {left:"Étape 5",right:"Plan de transition"},
+    {left:"Étape 7",right:"Évaluation"},
+  ],
+  e:"Les 7 étapes : (1) Cadrage, (2) Périmètre, (3) Mobilisation, (4) Comptabilisation, (5) Plan de transition, (6) Synthèse et restitution, (7) Évaluation (facultative)."},
+{id:"MA4",cat:"Périmètre & Données",type:"match",
+  q:"Associez chaque périmètre BC® à ce qu'il définit :",
+  pairs:[
+    {left:"Périmètre organisationnel",right:"Quelles entités sont incluses"},
+    {left:"Périmètre temporel",right:"Quelle période est couverte (classique : 1 an)"},
+    {left:"Périmètre opérationnel",right:"Quels postes d'émissions sont comptabilisés"},
+    {left:"Émissions comptabilisées",right:"Quels gaz à effet de serre sont inclus"},
+  ],
+  e:"Les 4 périmètres BC® : organisationnel (entités), temporel (période, classique 1 an), opérationnel (postes d'émissions), émissions comptabilisées (quels GES). Ensemble ils délimitent exactement le champ du bilan."},
+{id:"MA5",cat:"Comptabilisation",type:"match",
+  q:"Associez chaque poste d'émissions à la catégorie de flux correspondante :",
+  pairs:[
+    {left:"Énergie et fluides",right:"Consommations directes de l'organisation"},
+    {left:"Déplacements de personnes",right:"Flux de personnes entrants et sortants"},
+    {left:"Achats de biens et services",right:"Flux de produits entrants (amont)"},
+    {left:"Déchets",right:"Flux sortants en fin de vie"},
+  ],
+  e:"La cartographie des flux alimente la comptabilisation : énergie/fluides → consommations directes ; déplacements → flux personnes ; achats biens/services → flux produits amont ; déchets → flux sortants. La formule de base : DA × FE = résultat ± incertitude (en tCO₂e)."},
+{id:"MA6",cat:"Plan de Transition",type:"match",
+  q:"Associez chaque concept du plan de transition BC® à sa définition :",
+  pairs:[
+    {left:"Ambitieux",right:"Aligné sur les objectifs climatiques (SNBC, 2°C)"},
+    {left:"Pilotable",right:"Doté d'indicateurs de suivi"},
+    {left:"Opérationnel",right:"Actions concrètes avec responsables désignés"},
+    {left:"Trajectoire",right:"Vision de décarbonation long terme cohérente avec les actions"},
+  ],
+  e:"Le plan de transition doit être : ambitieux (objectifs climatiques), pilotable (indicateurs de suivi), opérationnel (actions et responsables), cohérent (lié à la comptabilisation). La trajectoire bottom-up est construite à l'étape 5.3 et doit rester cohérente avec les actions du plan."},
+]; // Associations
+const BLANK = [
+{id:"BL1",cat:"Historique",type:"blank",q:"Le Bilan Carbone® a été officiellement formalisé par l'ADEME en [_] avec Jean-Marc Jancovici.",blanks:["2004"],e:"2004 = formalisation officielle par l'ADEME avec Jean-Marc Jancovici (Manicore). 2002 = travaux préparatoires. 2011 = création de l'ABC."},
+{id:"BL2",cat:"Historique",type:"blank",q:"L'ABC (Association pour la transition Bas Carbone) a été créée en [_]. La version actuelle de la méthode, mise en application en 2025, est la version [_].",blanks:["2011","9"],e:"2011 = création de l'ABC par l'ADEME et l'APCC. La v9 a été publiée en juillet 2024 et mise en application en 2025."},
+{id:"BL3",cat:"Objectifs & Principes",type:"blank",q:"La philosophie centrale du Bilan Carbone® se résume par la formule « [_] pour agir ».",blanks:["Compter"],e:"« Compter pour agir » : la comptabilisation n'est pas une fin en soi mais un outil au service de l'action et de la réduction."},
+{id:"BL4",cat:"Objectifs & Principes",type:"blank",q:"Le principe de reporting qui exige de couvrir les émissions les plus importantes s'appelle la [_].",blanks:["Significativité"],e:"Les 5 principes de reporting : Cohérence, Exactitude, Significativité, Évaluation, Transparence. La Significativité impose de couvrir les émissions les plus importantes."},
+{id:"BL5",cat:"Les 7 Étapes",type:"blank",q:"La démarche Bilan Carbone® v9 comprend [_] étapes. La première est le [_].",blanks:["7","Cadrage"],e:"7 étapes : (1) Cadrage, (2) Périmètre, (3) Mobilisation, (4) Comptabilisation, (5) Plan de transition, (6) Synthèse et restitution, (7) Évaluation."},
+{id:"BL6",cat:"Les 7 Étapes",type:"blank",q:"Dans la v9, la « sensibilisation des acteurs » a été remplacée par la « [_] des acteurs », pour mettre en mouvement les organisations.",blanks:["Mobilisation"],e:"La 'MOBILISATION' remplace la 'sensibilisation' — l'objectif est de mettre en MOUVEMENT et en ACTION. La mobilisation est transversale à toutes les étapes."},
+{id:"BL7",cat:"Périmètre & Données",type:"blank",q:"Le périmètre temporel classique d'un Bilan Carbone® est de [_] an(s). Les 6 critères de significativité permettent d'identifier les émissions indirectes [_].",blanks:["1","prioritaires"],e:"Périmètre temporel classique = 1 an. Les 6 critères de significativité : ampleur quantitative, influence/leviers, importance stratégique, lignes directrices du secteur, sous-traitance, engagement du personnel."},
+{id:"BL8",cat:"Comptabilisation",type:"blank",q:"La formule fondamentale de la comptabilité carbone est : Données d'activité × [_] = Résultat ± Incertitude. L'unité standard est la [_].",blanks:["Facteur d'émission","tCO₂e"],e:"Formule : DA × FE = Résultat ± Incertitude. L'unité est la TONNE CO₂ ÉQUIVALENT (tCO₂e), qui agrège différents GES selon leur PRG-100."},
+]; // Texte à trous
+
+// ── CATÉGORIES ────────────────────────────────────────────────────────────────
+const CATS = [...new Set([
+  ...Q.map(q => q.cat),
+  ...ORD.map(q => q.cat),
+  ...TF.map(q => q.cat),
+  ...MULTI.map(q => q.cat),
+  ...MATCH.map(q => q.cat),
+  ...BLANK.map(q => q.cat),
+])];
+
+// Palette de couleurs par catégorie
+const CC = {
+  "Historique":           "#E07A5F",
+  "Objectifs & Principes":"#52B788",
+  "Les 7 Étapes":         "#81B29A",
+  "Niveaux de Maturité":  "#F2CC8F",
+  "Cadrage":              "#3D405B",
+  "Périmètre":            "#E9A23B",
+  "Mobilisation":         "#8ABFDB",
+  "Comptabilisation":     "#C77DFF",
+  "Plan de Transition":   "#52B788",
+  "Synthèse & Restitution":"#F28482",
+  "Évaluation & Qualité": "#A0C4FF",
+};
+
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+// ── LOCALSTORAGE ──────────────────────────────────────────────────────────────
+const LS_KEY = "qcm_bc_v2";
+
+function loadLS() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    return raw ? JSON.parse(raw) : { starred: [], attempts: {}, successes: {}, lastSession: null };
+  } catch { return { starred: [], attempts: {}, successes: {}, lastSession: null }; }
+}
+
+function saveLS(ls) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(ls)); } catch {}
+}
+
+function toggleStar(id) {
+  const ls = state.ls;
+  const idx = ls.starred.indexOf(id);
+  if (idx === -1) ls.starred.push(id);
+  else ls.starred.splice(idx, 1);
+  saveLS(ls);
+  setState({ ls });
+}
+
+function isStarred(id) { return state.ls.starred.includes(String(id)); }
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let state = {
+  mode: "menu",
+  quizMode: "study", // study | exam
+  timerActive: false,
+  timerDuration: 45 * 60,
+  timerElapsed: 0,
+  timerInterval: null,
+  selCats: new Set(CATS),
+  inclOrd: true,
+  inclTF: true,
+  inclMulti: true,
+  inclMatch: true,
+  inclBlank: true,
+  filterStarred: false,
+  qs: [], cur: 0, sel: null, conf: false, score: 0, ans: [], showExp: false,
+  revIdx: 0,
+  dragItems: {}, dragIdx: null, dragDone: {}, dragOk: {},
+  matchSel: {},
+  matchDone: {},
+  matchOk: {},
+  blankVal: {},
+  blankDone: {},
+  blankOk: {},
+  ls: loadLS(),
+};
+
+function setState(patch){
+  if(typeof patch === "function") patch = patch(state);
+  state = {...state, ...patch};
+  render();
+}
+
+// ── LOGIQUE ───────────────────────────────────────────────────────────────────
+function start() {
+  const cats = state.selCats;
+  const starred = state.filterStarred ? new Set(state.ls.starred.map(String)) : null;
+
+  const filterQ = (arr) => {
+    let res = arr.filter(q => cats.has(q.cat));
+    if (starred) res = res.filter(q => starred.has(String(q.id)));
+    return shuf(res);
+  };
+
+  const mcq = filterQ(Q);
+  const ord = state.inclOrd ? filterQ(ORD) : [];
+  const tf  = state.inclTF  ? filterQ(TF)  : [];
+  const multi = state.inclMulti ? filterQ(MULTI) : [];
+  const match = state.inclMatch ? filterQ(MATCH) : [];
+  const blank = state.inclBlank ? filterQ(BLANK) : [];
+  const all = shuf([...mcq, ...ord, ...tf, ...multi, ...match, ...blank]);
+
+  const di = {}, dd = {}, dok = {};
+  all.filter(q => q.type === "ord").forEach(q => {
+    di[q.id] = shuf(q.items); dd[q.id] = false; dok[q.id] = false;
+  });
+
+  const ms = {}, md = {}, mok = {};
+  all.filter(q => q.type === "match").forEach(q => {
+    ms[q.id] = { leftIdx: null, pairs: {} };
+    md[q.id] = false; mok[q.id] = false;
+  });
+
+  const bv = {}, bd = {}, bok = {};
+  all.filter(q => q.type === "blank").forEach(q => {
+    bv[q.id] = ""; bd[q.id] = false; bok[q.id] = false;
+  });
+
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  let interval = null;
+  if (state.timerActive) {
+    interval = setInterval(() => {
+      setState(s => ({ timerElapsed: s.timerElapsed + 1 }));
+    }, 1000);
+  }
+
+  setState({
+    mode: "quiz", qs: all, cur: 0, sel: null, conf: false,
+    score: 0, ans: [], showExp: false,
+    dragItems: di, dragDone: dd, dragOk: dok,
+    matchSel: ms, matchDone: md, matchOk: mok,
+    blankVal: bv, blankDone: bd, blankOk: bok,
+    timerElapsed: 0, timerInterval: interval,
+  });
+}
+
+function confirm_answer(){
+  if(state.sel===null)return;
+  const q=state.qs[state.cur];
+  const ok=state.sel===q.a;
+  setState({conf:true,score:state.score+(ok?1:0),ans:[...state.ans,{id:q.id,sel:state.sel,ok}]});
+}
+
+function next() {
+  if (state.cur + 1 >= state.qs.length) {
+    if (state.timerInterval) clearInterval(state.timerInterval);
+    const ls = state.ls;
+    ls.lastSession = { score: state.score, total: state.qs.length, date: new Date().toISOString().slice(0,10) };
+    saveLS(ls);
+    setState({ mode: "results", timerInterval: null });
+  } else {
+    setState({ cur: state.cur + 1, sel: null, conf: false, showExp: false });
+  }
+}
+
+function prev() {
+  if (state.cur === 0) return;
+  const wasConf = state.conf;
+  const lastAns = wasConf ? state.ans[state.ans.length - 1] : null;
+  setState({
+    cur: state.cur - 1,
+    sel: null, conf: false, showExp: false,
+    score: lastAns && lastAns.ok ? state.score - 1 : state.score,
+    ans: wasConf ? state.ans.slice(0, -1) : state.ans,
+  });
+}
+
+function tog(cat){
+  const s=new Set(state.selCats);
+  s.has(cat)?s.delete(cat):s.add(cat);
+  setState({selCats:s});
+}
+
+function pct(n,d){return d===0?0:Math.round(n/d*100);}
+
+// ── DRAG & DROP (ORD) ─────────────────────────────────────────────────────────
+function dragStart(qid,idx){setState({dragIdx:idx});}
+function dragOver(e,qid,idx){
+  e.preventDefault();
+  if(state.dragIdx===null||state.dragIdx===idx)return;
+  const items=[...state.dragItems[qid]];
+  const moved=items.splice(state.dragIdx,1)[0];
+  items.splice(idx,0,moved);
+  setState({dragItems:{...state.dragItems,[qid]:items},dragIdx:idx});
+}
+function dragEnd(){setState({dragIdx:null});}
+function submitDrag(qid){
+  const q=state.qs.find(x=>x.id===qid);
+  const current=state.dragItems[qid];
+  const ok=current.every((item,i)=>item.id===q.correct[i]);
+  const newDone={...state.dragDone,[qid]:true};
+  const newOk={...state.dragOk,[qid]:ok};
+  setState({dragDone:newDone,dragOk:newOk,conf:true,score:state.score+(ok?1:0),ans:[...state.ans,{id:qid,ok}]});
+}
+
+// ── DOM HELPERS ───────────────────────────────────────────────────────────────
+function h(tag,attrs,...children){
+  const el=document.createElement(tag);
+  if(attrs)Object.entries(attrs).forEach(([k,v])=>{
+    if(k==="style"&&typeof v==="object")Object.assign(el.style,v);
+    else if(k.startsWith("on"))el.addEventListener(k.slice(2).toLowerCase(),v);
+    else if(k==="className")el.className=v;
+    else if(typeof v==="boolean"){if(v)el.setAttribute(k,"");else el.removeAttribute(k);}
+    else el.setAttribute(k,v);
+  });
+  children.flat().forEach(c=>{
+    if(c==null)return;
+    el.appendChild(typeof c==="string"?document.createTextNode(c):c);
+  });
+  return el;
+}
+const div=(...a)=>h("div",...a);
+const span=(...a)=>h("span",...a);
+const btn=(...a)=>h("button",...a);
+const p=(...a)=>h("p",...a);
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function render(){
+  const app=document.getElementById("qcm-app");
+  const newNode=buildView();
+  app.replaceChildren(newNode);
+}
+
+function buildView(){
+  switch(state.mode){
+    case"menu":   return buildMenu();
+    case"filter": return buildFilter();
+    case"quiz":   return buildQuiz();
+    case"results":return buildResults();
+    case"review": return buildReview();
+    default:      return buildMenu();
+  }
+}
+
+// ── MENU ──────────────────────────────────────────────────────────────────────
+function buildMenu(){
+  const total=Q.length+ORD.length+TF.length+MULTI.length+MATCH.length+BLANK.length;
+  const chips=CATS.map(cat=>
+    div({className:"chip",style:{borderColor:CC[cat]||"#2A3A52",background:"rgba(0,0,0,0.2)"}},
+      div({className:"chip-dot",style:{background:CC[cat]||"#2A3A52"}}),
+      span({},cat)
+    )
+  );
+
+  const modeToggle=div({className:"mode-toggle"},
+    btn({className:"mode-btn"+(state.quizMode==="study"?" active":""),onClick:()=>setState({quizMode:"study"})},"Étude"),
+    btn({className:"mode-btn"+(state.quizMode==="exam"?" active":""),onClick:()=>setState({quizMode:"exam"})},"Examen"),
+  );
+
+  const timerToggle=div({
+    style:{display:"flex",alignItems:"center",gap:"8px",marginBottom:"12px",cursor:"pointer"},
+    onClick:()=>setState({timerActive:!state.timerActive})
+  },
+    span({style:{fontSize:"18px"}},state.timerActive?"☑":"☐"),
+    span({style:{fontSize:"13px",color:"#8A9DB5"}},"Timer 45 min"),
+  );
+
+  const actionBtns=[
+    btn({className:"btn",onClick:()=>{setState({filterStarred:false});start();}},"▶ Commencer"),
+    btn({className:"btn-sm",onClick:()=>setState({mode:"filter"})},"⚙ Filtrer"),
+  ];
+  if(state.ls.starred.length>0){
+    actionBtns.push(btn({className:"btn-sm",onClick:()=>{setState({filterStarred:true});start();}},"⭐ À revoir ("+state.ls.starred.length+")"));
+  }
+
+  return div({},
+    h("h1",{},"🥖 QCM Bilan Carbone"),
+    p({className:"subtitle"},"Maîtrisez la méthode Bilan Carbone® v9"),
+    p({className:"desc"},`${total} questions • 6 types • ${CATS.length} thèmes • BC® v9`),
+    div({className:"chips"},...chips),
+    div({style:{display:"flex",flexDirection:"column",alignItems:"center",marginBottom:"8px"}},
+      modeToggle,
+      timerToggle,
+    ),
+    div({style:{display:"flex",gap:"8px",justifyContent:"center",flexWrap:"wrap"}},...actionBtns),
+  );
+}
+
+// ── FILTRE ────────────────────────────────────────────────────────────────────
+function buildFilter(){
+  const cnt =
+    Q.filter(q => state.selCats.has(q.cat)).length +
+    (state.inclOrd   ? ORD.filter(o => state.selCats.has(o.cat)).length : 0) +
+    (state.inclTF    ? TF.filter(q => state.selCats.has(q.cat)).length  : 0) +
+    (state.inclMulti ? MULTI.filter(q => state.selCats.has(q.cat)).length : 0) +
+    (state.inclMatch ? MATCH.filter(q => state.selCats.has(q.cat)).length : 0) +
+    (state.inclBlank ? BLANK.filter(q => state.selCats.has(q.cat)).length : 0);
+
+  const rows=CATS.map(cat=>{
+    const active=state.selCats.has(cat);
+    const catCnt=Q.filter(q=>q.cat===cat).length+ORD.filter(o=>o.cat===cat).length
+      +TF.filter(q=>q.cat===cat).length+MULTI.filter(q=>q.cat===cat).length
+      +MATCH.filter(q=>q.cat===cat).length+BLANK.filter(q=>q.cat===cat).length;
+    return div({className:"cat-row"+(active?" active":""),onClick:()=>tog(cat)},
+      div({className:"cat-dot",style:{background:active?(CC[cat]||"#52B788"):"#2A3A52"}}),
+      span({className:"cat-name"},cat),
+      span({className:"cat-count"},catCnt+" q"),
+      span({className:"cat-check"},active?"✓":""),
+    );
+  });
+
+  const inclRow=(label,key)=>div({
+    style:{display:"flex",alignItems:"center",gap:"8px",padding:"8px 12px",borderRadius:"9px",background:"#131D2A",border:"1px solid #2A3A52",marginBottom:"5px",cursor:"pointer"},
+    onClick:()=>setState({[key]:!state[key]})
+  },
+    span({style:{flex:1,fontSize:"13px",color:state[key]?"#C8D8E8":"#6A7D90"}},label),
+    span({style:{fontSize:"16px"}},state[key]?"✓":""),
+  );
+
+  return div({},
+    div({style:{display:"flex",alignItems:"center",gap:"10px",marginBottom:"16px"}},
+      btn({className:"btn-sm",onClick:()=>setState({mode:"menu"})},"← Retour"),
+      h("h1",{style:{fontSize:"18px"}},"Filtres"),
+    ),
+    p({className:"section-title"},"Thèmes"),
+    ...rows,
+    p({className:"section-title",style:{marginTop:"14px"}},"Types de questions"),
+    inclRow("Inclure les questions Ordonnancement (ORD)","inclOrd"),
+    inclRow("Inclure les questions Vrai/Faux (TF)","inclTF"),
+    inclRow("Inclure les questions Multi-réponses (MULTI)","inclMulti"),
+    inclRow("Inclure les questions Associations (MATCH)","inclMatch"),
+    inclRow("Inclure les questions Texte à trous (BLANK)","inclBlank"),
+    p({className:"total-count"},`${cnt} question${cnt>1?"s":""} sélectionnée${cnt>1?"s":""}`),
+    div({className:"flex-center"},
+      btn({className:"btn",onClick:start,disabled:cnt===0},"▶ Lancer le quiz"),
+      btn({className:"btn-sm",onClick:()=>setState({mode:"menu"})},"← Menu"),
+    )
+  );
+}
+
+// ── QUIZ ──────────────────────────────────────────────────────────────────────
+function buildQuiz(){
+  const curQ=state.qs[state.cur];
+  if(!curQ)return div({},"Aucune question.");
+  const progress=((state.cur)/(state.qs.length))*100;
+  const children=[];
+
+  // Progress + meta
+  children.push(div({className:"progress-wrap"},div({className:"progress-bar",style:{width:progress+"%"}})));
+  const metaItems=[
+    span({className:"counter"},`${state.cur+1} / ${state.qs.length}`),
+  ];
+  if(curQ.cat) metaItems.push(span({className:"badge",style:{background:CC[curQ.cat]||"#2A3A52"}},curQ.cat));
+  const typeLabels={mcq:"MCQ",ord:"ORD",tf:"V/F",multi:"MULTI",match:"ASSOC",blank:"TROUS"};
+  const typeColors={mcq:"#3D5A80",ord:"#E9A23B",tf:"#6B4226",multi:"#5B2D8E",match:"#1B6CA8",blank:"#2D6A4F"};
+  metaItems.push(span({className:"badge",style:{background:typeColors[curQ.type]||"#2A3A52"}},typeLabels[curQ.type]||curQ.type));
+  if(state.timerActive){
+    const remaining=state.timerDuration-state.timerElapsed;
+    const m=Math.floor(Math.abs(remaining)/60);
+    const s=Math.abs(remaining)%60;
+    const over=remaining<0;
+    metaItems.push(span({style:{color:over?"#E07A5F":"#8A9DB5",fontSize:"12px"}},(over?"⏱ +":"⏱ ")+m+":"+(s<10?"0"+s:s)));
+  }
+  metaItems.push(span({className:"score-chip"},`Score: ${state.score}`));
+  if(state.cur > 0) metaItems.push(btn({className:"btn-sm",onClick:prev,style:{marginLeft:"4px",padding:"3px 10px",fontSize:"12px"}},"← Précédent"));
+  children.push(div({className:"quiz-meta"},...metaItems));
+
+  // Question text
+  children.push(p({className:"q-text"},curQ.q));
+
+  // Question body by type
+  if (curQ.type === "ord") {
+    const qid=curQ.id;
+    const items=state.dragItems[qid]||curQ.items;
+    const done=state.dragDone[qid];
+    const allOk=state.dragOk[qid];
+    if(!done) children.push(p({className:"drag-hint"},"Glissez-déposez les éléments dans le bon ordre."));
+    items.forEach((item,idx)=>{
+      let cls="drag-item";
+      if(done){
+        cls+=item.id===curQ.correct[idx]?" correct-pos":" wrong-pos";
+      }
+      const el=div({
+        className:cls,
+        draggable:done?"false":"true",
+        onDragstart:done?null:()=>dragStart(qid,idx),
+        onDragover:done?null:(e)=>dragOver(e,qid,idx),
+        onDragend:done?null:dragEnd,
+      },
+        div({className:"drag-num"},idx+1),
+        span({},item.l),
+        done?span({style:{marginLeft:"auto"}},item.id===curQ.correct[idx]?"✓":"✗"):"",
+      );
+      children.push(el);
+    });
+    if(!done){
+      children.push(div({className:"actions"},
+        btn({className:"btn",onClick:()=>submitDrag(qid)},"Valider l'ordre"),
+      ));
+    }
+  } else if (curQ.type === "tf") {
+    children.push(buildTF(curQ));
+  } else if (curQ.type === "multi") {
+    children.push(...buildMulti(curQ));
+  } else if (curQ.type === "match") {
+    children.push(...buildMatch(curQ));
+  } else if (curQ.type === "blank") {
+    children.push(...buildBlank(curQ));
+  } else {
+    // mcq
+    const opts=curQ.o.map((opt,i)=>{
+      let cls="opt";
+      if(state.conf){
+        cls+=" locked";
+        if(i===curQ.a) cls+=" correct";
+        else if(i===state.sel) cls+=" wrong";
+      } else if(state.sel===i) cls+=" selected";
+      return btn({className:cls,onClick:state.conf?null:()=>setState({sel:i})},
+        span({className:"letter"},"ABCD"[i]),
+        span({style:{flex:1}},opt),
+        state.conf&&i===curQ.a?span({className:"tick"},"✓"):"",
+        state.conf&&i===state.sel&&i!==curQ.a?span({className:"tick"},"✗"):"",
+      );
+    });
+    children.push(div({className:"options"},...opts));
+    if(!state.conf){
+      children.push(div({className:"actions"},
+        btn({className:"btn",disabled:state.sel===null,onClick:confirm_answer},"Valider"),
+      ));
+    }
+  }
+
+  // Feedback (after conf) — uniquement pour mcq et ord (tf, multi, match gèrent leur propre feedback)
+  if(state.conf && curQ.type !== "tf" && curQ.type !== "multi" && curQ.type !== "match" && curQ.type !== "blank"){
+    const isOrd=curQ.type==="ord";
+    const ok=isOrd?state.dragOk[curQ.id]:(state.sel===curQ.a);
+    if(state.quizMode === "exam"){
+      children.push(div({className:"actions"},
+        btn({className:"btn",onClick:next},state.cur+1>=state.qs.length?"Voir les résultats":"Question suivante →"),
+      ));
+    } else {
+      children.push(div({className:"feedback "+(ok?"ok":"ko")},
+        span({},ok?"✓ Bonne réponse !":"✗ Mauvaise réponse"),
+        buildStarBtn(curQ.id),
+      ));
+      if(!ok) {
+        children.push(div({className:"exp-box"},curQ.e));
+      } else {
+        children.push(btn({className:"exp-btn",onClick:()=>setState({showExp:!state.showExp})},
+          state.showExp?"▲ Masquer l'explication":"▼ Voir l'explication"
+        ));
+        if(state.showExp) children.push(div({className:"exp-box"},curQ.e));
+      }
+      children.push(div({className:"actions"},
+        btn({className:"btn",onClick:next},state.cur+1>=state.qs.length?"Voir les résultats":"Question suivante →"),
+      ));
+    }
+  }
+
+  return div({},...children);
+}
+
+// ── VRAI / FAUX ───────────────────────────────────────────────────────────────
+function buildTF(q) {
+  const { conf, sel, showExp, quizMode } = state;
+  const isStudy = quizMode === "study";
+  const children = [];
+
+  const tfRow = div({ style: { display: "flex", gap: "10px", marginBottom: "16px" } }, [
+    btn({
+      class: `opt${sel === 1 ? " selected" : ""}${conf ? " locked" : ""}${conf && q.a === true ? " correct" : ""}${conf && sel === 1 && q.a !== true ? " wrong" : ""}`,
+      style: { flex: "1", justifyContent: "center", fontSize: "16px", fontWeight: "700" },
+      onclick: conf ? null : () => setState({ sel: 1 }),
+    }, [span({ class: "letter" }, "V"), "Vrai", conf && q.a === true ? span({ class: "tick" }, "✓") : null]),
+    btn({
+      class: `opt${sel === 0 ? " selected" : ""}${conf ? " locked" : ""}${conf && q.a === false ? " correct" : ""}${conf && sel === 0 && q.a !== false ? " wrong" : ""}`,
+      style: { flex: "1", justifyContent: "center", fontSize: "16px", fontWeight: "700" },
+      onclick: conf ? null : () => setState({ sel: 0 }),
+    }, [span({ class: "letter" }, "F"), "Faux", conf && q.a === false ? span({ class: "tick" }, "✓") : null]),
+  ]);
+  children.push(tfRow);
+
+  if (conf) {
+    const ok = (sel === 1 && q.a === true) || (sel === 0 && q.a === false);
+    if (isStudy) {
+      children.push(div({ class: `feedback ${ok ? "ok" : "ko"}` }, [
+        span({ style: { fontSize: "18px" } }, ok ? "✅" : "❌"),
+        span({ style: { fontWeight: "600", fontSize: "14px" } }, ok ? "Bonne réponse !" : `Incorrect — Réponse : ${q.a ? "Vrai" : "Faux"}`),
+        buildStarBtn(q.id),
+      ]));
+      if (!ok) {
+        children.push(div({ class: "exp-box" }, q.e));
+      } else {
+        if (showExp) children.push(div({ class: "exp-box" }, q.e));
+        else children.push(btn({ class: "exp-btn", onclick: () => setState({ showExp: true }) }, "▼ Voir l'explication"));
+      }
+    }
+  }
+
+  children.push(div({ class: "actions" }, [
+    !conf
+      ? btn({ class: "btn", style: { opacity: sel === null ? 0.4 : 1 }, onclick: sel !== null ? confirmTF : null }, "Valider →")
+      : btn({ class: "btn", onclick: next }, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
+  ]));
+  return div({}, children);
+}
+
+function confirmTF() {
+  const q = state.qs[state.cur];
+  const ok = (state.sel === 1 && q.a === true) || (state.sel === 0 && q.a === false);
+  setState(s => ({ conf: true, score: ok ? s.score + 1 : s.score, ans: [...s.ans, { id: q.id, sel: s.sel, ok }] }));
+}
+
+function buildStarBtn(id) {
+  const starred = isStarred(id);
+  return btn({
+    class: "btn-sm",
+    style: { marginLeft: "auto", background: "none", border: "none", fontSize: "16px", cursor: "pointer", padding: "0 4px" },
+    onclick: () => toggleStar(id),
+    title: starred ? "Retirer des favoris" : "Ajouter aux favoris",
+  }, starred ? "⭐" : "☆");
+}
+
+// ── MULTI-RÉPONSES ────────────────────────────────────────────────────────────
+function buildMulti(q) {
+  const { conf, showExp } = state;
+  const sel = state.sel instanceof Set ? state.sel : new Set();
+  const children = [];
+
+  children.push(p({style:{color:"#8A9DB5",fontSize:"13px",marginBottom:"10px",fontStyle:"italic"}}, "Plusieurs réponses possibles"));
+
+  const opts = q.o.map((opt, i) => {
+    const isSelected = sel.has(i);
+    const isCorrect = q.a.includes(i);
+    let cls = "opt";
+    if (conf) {
+      cls += " locked";
+      if (isCorrect) cls += " correct";
+      else if (isSelected) cls += " wrong";
+    } else if (isSelected) {
+      cls += " selected";
+    }
+    const tick = conf
+      ? (isCorrect ? span({className:"tick"}, "✓") : (isSelected ? span({className:"tick"}, "✗") : ""))
+      : "";
+    return btn({
+      className: cls,
+      onClick: conf ? null : () => {
+        const cur = state.sel instanceof Set ? new Set(state.sel) : new Set();
+        if (cur.has(i)) cur.delete(i); else cur.add(i);
+        setState({ sel: cur });
+      },
+    },
+      span({className:"letter"}, isSelected ? "☑" : "☐"),
+      span({style:{flex:1}}, opt),
+      tick,
+    );
+  });
+
+  children.push(div({className:"options"}, ...opts));
+
+  if (!conf) {
+    children.push(div({className:"actions"},
+      btn({className:"btn", disabled: sel.size === 0, onClick: confirmMulti}, "Valider"),
+    ));
+  }
+
+  if (conf) {
+    const ok = q.a.length === sel.size && q.a.every(i => sel.has(i));
+    if (state.quizMode === "study") {
+      children.push(div({className:"feedback " + (ok ? "ok" : "ko")},
+        span({}, ok ? "✓ Bonne réponse !" : "✗ Incomplet ou incorrect"),
+        buildStarBtn(q.id),
+      ));
+      if (!ok) {
+        children.push(div({className:"exp-box"}, q.e));
+      } else {
+        if (showExp) children.push(div({className:"exp-box"}, q.e));
+        else children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:true})}, "▼ Voir l'explication"));
+      }
+    }
+    children.push(div({className:"actions"},
+      btn({className:"btn", onClick:next}, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
+    ));
+  }
+
+  return children;
+}
+
+function confirmMulti() {
+  const q = state.qs[state.cur];
+  const sel = state.sel instanceof Set ? state.sel : new Set();
+  const ok = q.a.length === sel.size && q.a.every(i => sel.has(i));
+  setState(s => ({ conf: true, score: ok ? s.score + 1 : s.score, ans: [...s.ans, { id: q.id, sel: [...sel], ok }] }));
+}
+
+// ── ASSOCIATIONS (MATCH) ──────────────────────────────────────────────────────
+function shuffle(arr){
+  const a=[...arr.map((_,i)=>i)];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function buildMatch(q) {
+  const qid = q.id;
+  // Init state if needed
+  if (!state.matchSel[qid] || !state.matchSel[qid].rightOrder) {
+    const ms = { ...state.matchSel };
+    ms[qid] = { rightOrder: shuffle(q.pairs), links: {}, selLeft: null };
+    state = { ...state, matchSel: ms };
+  }
+  const ms = state.matchSel[qid];
+  const done = state.matchDone[qid];
+  const allOk = state.matchOk[qid];
+  const { rightOrder, links, selLeft } = ms;
+  const children = [];
+
+  // How many pairs are linked
+  const linkedCount = Object.keys(links).length;
+  const allLinked = linkedCount === q.pairs.length;
+
+  children.push(p({style:{color:"#8A9DB5",fontSize:"13px",marginBottom:"10px",fontStyle:"italic"}},
+    done ? "" : "Cliquez sur un élément gauche, puis sur l'élément droit correspondant."));
+
+  const grid = div({className:"match-grid"});
+
+  q.pairs.forEach((pair, li) => {
+    // Determine if this left is linked
+    const linkedRightOrderIdx = links[li] !== undefined ? links[li] : null;
+    const linkedRightOrigIdx = linkedRightOrderIdx !== null ? rightOrder[linkedRightOrderIdx] : null;
+    const linkedLabel = linkedRightOrigIdx !== null ? q.pairs[linkedRightOrigIdx].right : null;
+
+    let leftCls = "match-left";
+    if (done) {
+      // rightOrder[links[li]] === li means correct
+      const correct = linkedRightOrderIdx !== null && rightOrder[linkedRightOrderIdx] === li;
+      leftCls += correct ? " done-ok" : " done-ko";
+    } else if (selLeft === li) {
+      leftCls += " sel";
+    }
+
+    const leftText = done && linkedLabel
+      ? pair.left + " → " + linkedLabel + (rightOrder[links[li]] === li ? " ✓" : " ✗")
+      : (linkedLabel ? pair.left + " → " + linkedLabel : pair.left);
+
+    grid.appendChild(btn({
+      className: leftCls,
+      disabled: done,
+      onClick: done ? null : () => {
+        const cur = state.matchSel[qid];
+        setState({ matchSel: { ...state.matchSel, [qid]: { ...cur, selLeft: cur.selLeft === li ? null : li } } });
+      },
+    }, leftText));
+
+    // Right side: show the right item at rightOrder[li] position
+    const ri = rightOrder[li]; // original pair index shown in row li
+    // Find if this right slot (position li in rightOrder) is already linked
+    const isLinked = Object.values(links).includes(li);
+
+    let rightCls = "match-right";
+    if (done) {
+      // The correct left for ri is ri itself (pairs[ri].right should match pairs[ri].left)
+      // Find which left chose this right slot (li)
+      const whoLinked = Object.entries(links).find(([,v]) => v === li);
+      if (whoLinked) {
+        const leftIdx = parseInt(whoLinked[0]);
+        rightCls += rightOrder[li] === leftIdx ? " done-ok" : " done-ko";
+      } else {
+        rightCls += " done-ko";
+      }
+    } else if (isLinked) {
+      rightCls += " linked";
+    }
+
+    grid.appendChild(btn({
+      className: rightCls,
+      disabled: done,
+      onClick: done ? null : () => {
+        const cur = state.matchSel[qid];
+        if (cur.selLeft === null) return;
+        const newLinks = { ...cur.links, [cur.selLeft]: li };
+        setState({ matchSel: { ...state.matchSel, [qid]: { ...cur, links: newLinks, selLeft: null } } });
+      },
+    }, q.pairs[ri].right));
+  });
+
+  children.push(grid);
+
+  if (!done) {
+    children.push(div({className:"actions"},
+      btn({className:"btn", disabled: !allLinked, onClick: () => confirmMatch(qid)}, "Valider les associations"),
+    ));
+  }
+
+  if (done) {
+    if (state.quizMode === "study") {
+      children.push(div({className:"feedback " + (allOk ? "ok" : "ko")},
+        span({}, allOk ? "✓ Toutes les associations sont correctes !" : "✗ Certaines associations sont incorrectes"),
+        buildStarBtn(qid),
+      ));
+      if (!allOk) {
+        children.push(div({className:"exp-box"}, q.e));
+      } else {
+        if (state.showExp) children.push(div({className:"exp-box"}, q.e));
+        else children.push(btn({className:"exp-btn", onClick:()=>setState({showExp:true})}, "▼ Voir l'explication"));
+      }
+    }
+    children.push(div({className:"actions"},
+      btn({className:"btn", onClick:next}, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
+    ));
+  }
+
+  return children;
+}
+
+// ── TEXTE À TROUS (BLANK) ─────────────────────────────────────────────────────
+function buildBlank(q) {
+  const qid = q.id;
+  const done = state.blankDone[qid];
+  const allOk = state.blankOk[qid];
+  const vals = state.blankVal[qid] || {};
+  const isExam = state.quizMode === "exam";
+  const children = [];
+
+  // Bouton créé en premier pour que les inputs puissent le référencer
+  const validateBtn = !done ? btn({ className: "btn", onClick: () => confirmBlank(qid) }, "Valider") : null;
+
+  // Parse q.q, replace each [_] with an input
+  const parts = q.q.split("[_]");
+  const lineDiv = div({ style: { lineHeight: "2.2", fontSize: "15px", color: "#E8F4EC", marginBottom: "16px" } });
+
+  parts.forEach((part, i) => {
+    lineDiv.appendChild(document.createTextNode(part));
+    if (i < q.blanks.length) {
+      const inp = h("input", {
+        className: "blank-input" + (done ? (((vals[i]||"").trim().toLowerCase() === q.blanks[i].trim().toLowerCase()) ? " ok" : " ko") : ""),
+        type: "text",
+        value: vals[i] || "",
+        disabled: done,
+        placeholder: "…",
+        style: { verticalAlign: "middle", margin: "0 4px" },
+      });
+      // Mutation directe sans setState → pas de re-render → pas de perte de focus
+      inp.addEventListener("input", () => {
+        if (!state.blankVal[qid]) state.blankVal[qid] = {};
+        state.blankVal[qid][i] = inp.value;
+        if (validateBtn) validateBtn.disabled = q.blanks.some((_, j) => !(state.blankVal[qid][j]||"").trim());
+      });
+      lineDiv.appendChild(inp);
+
+      if (done) {
+        const correct = (vals[i]||"").trim().toLowerCase() === q.blanks[i].trim().toLowerCase();
+        if (!correct) {
+          const correction = div({ className: "blank-correction" }, "✗ Réponse attendue : " + q.blanks[i]);
+          lineDiv.appendChild(correction);
+        }
+      }
+    }
+  });
+
+  children.push(lineDiv);
+
+  if (!done) {
+    validateBtn.disabled = q.blanks.some((_, i) => !(vals[i]||"").trim());
+    children.push(div({ className: "actions" }, validateBtn));
+  }
+
+  if (done) {
+    if (!isExam) {
+      children.push(div({ className: "feedback " + (allOk ? "ok" : "ko") },
+        span({}, allOk ? "✓ Bonne réponse !" : "✗ Réponse incorrecte"),
+        buildStarBtn(qid),
+      ));
+      if (!allOk) {
+        children.push(div({ className: "exp-box" }, q.e));
+      } else {
+        if (state.showExp) children.push(div({ className: "exp-box" }, q.e));
+        else children.push(btn({ className: "exp-btn", onClick: () => setState({ showExp: true }) }, "▼ Voir l'explication"));
+      }
+    }
+    children.push(div({ className: "actions" },
+      btn({ className: "btn", onClick: next }, state.cur + 1 >= state.qs.length ? "Voir les résultats →" : "Question suivante →"),
+    ));
+  }
+
+  return children;
+}
+
+function confirmBlank(qid) {
+  const q = state.qs.find(x => x.id === qid);
+  const vals = state.blankVal[qid] || {};
+  const ok = q.blanks.every((b, i) => (vals[i]||"").trim().toLowerCase() === b.trim().toLowerCase());
+  setState(s => ({
+    conf: true,
+    blankDone: {...s.blankDone, [qid]: true},
+    blankOk: {...s.blankOk, [qid]: ok},
+    score: ok ? s.score + 1 : s.score,
+    ans: [...s.ans, {id: qid, ok}]
+  }));
+}
+
+function confirmMatch(qid) {
+  const q = state.qs.find(x => x.id === qid);
+  const ms = state.matchSel[qid];
+  const realOk = q.pairs.every((_, i) => {
+    const chosenRightOrderIdx = ms.links[i];
+    return ms.rightOrder[chosenRightOrderIdx] === i;
+  });
+  setState(s => ({
+    conf: true,
+    matchDone: { ...s.matchDone, [qid]: true },
+    matchOk: { ...s.matchOk, [qid]: realOk },
+    score: realOk ? s.score + 1 : s.score,
+    ans: [...s.ans, { id: qid, ok: realOk }],
+  }));
+}
+
+// ── RÉSULTATS ─────────────────────────────────────────────────────────────────
+function buildResults(){
+  const total=state.qs.length;
+  const score=state.score;
+  const p100=pct(score,total);
+  const color=p100>=70?"#52B788":p100>=50?"#F2CC8F":"#E07A5F";
+
+  // Par catégorie
+  const catStats={};
+  state.ans.forEach(a=>{
+    const q=state.qs.find(x=>x.id===a.id);
+    if(!q)return;
+    if(!catStats[q.cat])catStats[q.cat]={ok:0,total:0};
+    catStats[q.cat].total++;
+    if(a.ok)catStats[q.cat].ok++;
+  });
+
+  const themeRows=Object.entries(catStats).map(([cat,s])=>{
+    const p=pct(s.ok,s.total);
+    const c=p>=70?"#52B788":p>=50?"#F2CC8F":"#E07A5F";
+    return div({className:"theme-row"},
+      div({className:"theme-dot",style:{background:CC[cat]||"#2A3A52"}}),
+      span({className:"theme-name"},cat),
+      div({className:"mini-bar-wrap"},div({className:"mini-bar",style:{width:p+"%",background:c}})),
+      span({className:"theme-score",style:{color:c}},`${s.ok}/${s.total}`),
+    );
+  });
+
+  return div({},
+    div({className:"results-header"},
+      div({className:"big-score",style:{color}},score+"/"+total),
+      p({className:"pct"},p100+"% de réussite"),
+    ),
+    p({className:"section-title"},"Par thème"),
+    ...themeRows,
+    div({className:"flex-center",style:{marginTop:"18px"}},
+      btn({className:"btn",onClick:start},"Recommencer"),
+      btn({className:"btn-sm",onClick:()=>setState({mode:"review",revIdx:0})},"📋 Réviser"),
+      btn({className:"btn-sm",onClick:()=>setState({mode:"menu"})},"Menu"),
+    )
+  );
+}
+
+// ── RÉVISION ──────────────────────────────────────────────────────────────────
+function buildReview(){
+  const idx=state.revIdx;
+  const q=state.qs[idx];
+  const a=state.ans[idx];
+  if(!q)return div({},"Fin de la révision.");
+  const isOrd=q.type==="ord";
+
+  return div({},
+    div({className:"review-header"},
+      span({className:"review-counter"},`Révision ${idx+1}/${state.qs.length}`),
+      span({style:{color:a&&a.ok?"#52B788":"#E07A5F",fontSize:"14px"}},a&&a.ok?"✓":"✗"),
+    ),
+    p({className:"q-text"},q.q),
+    isOrd?div({},
+      ...(state.dragItems[q.id]||q.items).map((item,i)=>
+        div({className:"drag-item "+(a&&a.ok?"correct-pos":"wrong-pos")},
+          div({className:"drag-num"},i+1),
+          span({},item.l),
+        )
+      )
+    ):div({className:"options"},
+      ...q.o.map((opt,i)=>{
+        const ans_sel = Array.isArray(a?.sel) ? a.sel : (a?.sel != null ? [a.sel] : []);
+        const isCorrect = q.type === "multi" ? q.a.includes(i) : i === q.a;
+        const isWrong = !isCorrect && ans_sel.includes(i);
+        return btn({
+          className:"opt locked"+(isCorrect?" correct":"")+(isWrong?" wrong":""),
+        },
+          span({className:"letter"}, q.type === "multi" ? (ans_sel.includes(i) ? "☑" : "☐") : "ABCD"[i]),
+          span({style:{flex:1}},opt),
+          isCorrect?span({className:"tick"},"✓"):"",
+        );
+      })
+    ),
+    div({className:"exp-box",style:{marginTop:"12px"}},q.e),
+    div({className:"actions"},
+      idx>0?btn({className:"btn-sm",onClick:()=>setState({revIdx:idx-1})},"← Préc."):"",
+      idx+1<state.qs.length
+        ?btn({className:"btn",onClick:()=>setState({revIdx:idx+1})},"Suiv. →")
+        :btn({className:"btn",onClick:()=>setState({mode:"results"})},"← Résultats"),
+    )
+  );
+}
+
+render();
+</script>
+</body>
+</html>
