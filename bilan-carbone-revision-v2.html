@@ -695,7 +695,7 @@
 
 <header>
   <div class="logo">Bilan Carbone® <span>// Révision Certification</span></div>
-  <div class="cert-badge">NIVEAU 1 — VENDREDI</div>
+  <div class="cert-badge">Développé par : PADER Sylvain</div>
 </header>
 
 <nav id="main-nav">
@@ -1095,6 +1095,50 @@
     <div class="highlight">Les <strong>2 versions sont obligatoires</strong> : avec ET sans "utilisation en dépendance". Omettre l'une des deux versions est un piège classique de la certification.</div>
   </div>
 
+  <div class="card">
+    <div class="card-title">Chaîne de valeur — Les 3 Scopes BC®</div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0;margin:16px 0;">
+      <div style="background:rgba(6,214,160,.07);border:1px solid rgba(6,214,160,.3);border-radius:8px;padding:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--s3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">Scope 3 Amont</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Achats biens & matières</div>
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Achats de services</div>
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Fret entrant</div>
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Immobilisations</div>
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Déplacements pro & D-T</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:0 10px;color:var(--accent);font-size:22px;font-weight:300;">→</div>
+      <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border);">
+        <div style="background:rgba(255,107,53,.12);border-bottom:1px solid rgba(255,107,53,.3);padding:12px 14px;">
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--s1);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Scope 1 — Direct</div>
+          <div style="font-size:11px;color:var(--text2);margin:3px 0">Combustibles (fossiles & organiques)</div>
+          <div style="font-size:11px;color:var(--text2);margin:3px 0">Émissions fugitives (HFC, gaz réfrigérants)</div>
+          <div style="font-size:11px;color:var(--text2);margin:3px 0">Procédés industriels</div>
+          <div style="font-size:11px;color:var(--text2);margin:3px 0">Véhicules appartenant à l'org.</div>
+        </div>
+        <div style="background:rgba(255,209,102,.09);padding:12px 14px;">
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--s2);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Scope 2 — Énergie achetée</div>
+          <div style="font-size:11px;color:var(--text2);margin:3px 0">Électricité achetée sur le réseau</div>
+          <div style="font-size:11px;color:var(--text2);margin:3px 0">Chaleur / vapeur / froid achetés</div>
+          <div style="font-size:11px;color:var(--text2);margin:3px 0">Réseaux de chaleur et de froid</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:0 10px;color:var(--accent);font-size:22px;font-weight:300;">→</div>
+      <div style="background:rgba(6,214,160,.07);border:1px solid rgba(6,214,160,.3);border-radius:8px;padding:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--s3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">Scope 3 Aval</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Fret sortant (livraisons clients)</div>
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Déplacements clients & visiteurs</div>
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Utilisation des produits vendus</div>
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Déchets directs</div>
+          <div style="font-size:11px;color:var(--text2);background:var(--bg3);border-radius:3px;padding:5px 8px;">Fin de vie produits vendus</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:4px">Chaîne de valeur complète : de l'amont fournisseurs → activité propre → aval clients & fin de vie</p>
+  </div>
+
 </div>
 
 <!-- ============================== NIVEAUX ============================== -->
@@ -1255,6 +1299,104 @@
     </div>
     <div class="warning">⚠️ Le tableur BC® v9.0 est <strong>obligatoire depuis avril 2025</strong>. Tout tableur antérieur à la v9.0 est refusé.</div>
     <div class="highlight">Toujours présenter le profil d'émissions <strong>avec ET sans</strong> le sous-poste "utilisation en dépendance" — les 2 versions sont obligatoires.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Nomenclature BC® v9 — 10 postes / 48 sous-postes</div>
+
+    <!-- Layout en croix : gauche = amont, centre = direct/interne, droite = aval -->
+    <div style="display:grid;grid-template-columns:1fr 16px 1fr 16px 1fr;gap:8px;margin-top:16px;align-items:start">
+
+      <!-- COLONNE GAUCHE — AMONT (bleu) -->
+      <div style="display:flex;flex-direction:column;gap:8px">
+
+        <div style="background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.35);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--accent2);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">📦 Intrants biens & matières</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Métaux, plastiques & verres · Papiers & cartons · Matériaux de construction · Produits chimiques · Nourriture · Emballages · Autres intrants · Approche monétaire</div>
+        </div>
+
+        <div style="background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.35);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--accent2);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">🛠 Intrants services</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Achats de services · Usages numériques · Services en approche monétaire</div>
+        </div>
+
+        <div style="background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.35);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--accent2);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">🏗 Immobilisations</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Bâtiments · Autres infrastructures · Équipements · Informatique</div>
+        </div>
+
+        <div style="background:rgba(0,170,255,.06);border:1px solid rgba(0,170,255,.2);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--accent2);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">→ Fret entrant</div>
+          <div style="font-size:10px;color:var(--text3)">Fret entrant vers l'organisation</div>
+        </div>
+
+      </div>
+
+      <!-- flèche gauche → centre -->
+      <div style="display:flex;align-items:center;justify-content:center;padding-top:120px;color:var(--accent2);font-size:18px">→</div>
+
+      <!-- COLONNE CENTRE — DIRECT / INTERNE (vert accent, bordure pointillée) -->
+      <div style="display:flex;flex-direction:column;gap:8px;border:2px dashed rgba(0,224,160,.3);border-radius:8px;padding:10px">
+
+        <div style="background:rgba(0,224,160,.08);border:1px solid rgba(0,224,160,.3);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">🚶 Déplacements</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Domicile-Travail · Déplacements professionnels · Déplacements visiteurs</div>
+        </div>
+
+        <div style="background:rgba(255,107,53,.09);border:1px solid rgba(255,107,53,.35);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--s1);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">⚡ Énergie</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Combustibles fossiles · Combustibles organiques · Réseaux chaleur & vapeur · Réseaux de froid · Électricité</div>
+        </div>
+
+        <div style="background:rgba(255,107,53,.09);border:1px solid rgba(255,107,53,.35);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--s1);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">💨 Autres émissions directes</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Agriculture · Changement affectation terres · Production de froid · Procédés industriels · Autres non-énergétiques</div>
+        </div>
+
+        <div style="background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--s1);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">🚛 Fret interne</div>
+          <div style="font-size:10px;color:var(--text3)">Transport entre sites propres</div>
+        </div>
+
+        <div style="background:rgba(122,154,184,.08);border:1px solid rgba(122,154,184,.25);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">🗑 Déchets directs</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Emballages & plastiques · Organiques · Ordures ménagères · Dangereux · Matériaux · Autres · Fuites non-énergétiques · Eaux usées</div>
+        </div>
+
+      </div>
+
+      <!-- flèche centre → droite -->
+      <div style="display:flex;align-items:center;justify-content:center;padding-top:120px;color:var(--accent3);font-size:18px">→</div>
+
+      <!-- COLONNE DROITE — AVAL (orange/jaune) -->
+      <div style="display:flex;flex-direction:column;gap:8px">
+
+        <div style="background:rgba(255,180,0,.09);border:1px solid rgba(255,180,0,.35);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--accent3);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">♻ Fin de vie</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Consommation d'énergie en fin de vie · Traitement des déchets · Traitement des emballages · Fuites non-énergétiques fin de vie</div>
+        </div>
+
+        <div style="background:rgba(255,180,0,.09);border:1px solid rgba(255,180,0,.35);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--accent3);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">🔄 Utilisation & dépendance</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.75">Utilisation en responsabilité · Utilisation en dépendance · Investissements financiers réalisés</div>
+        </div>
+
+        <div style="background:rgba(255,180,0,.06);border:1px solid rgba(255,180,0,.2);border-radius:6px;padding:11px">
+          <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--accent3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">→ Fret sortant</div>
+          <div style="font-size:10px;color:var(--text3)">Livraisons vers les clients</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Légende -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:10px;color:var(--text3)">
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(255,107,53,.5);margin-right:4px;vertical-align:middle"></span>Scope 1 — Direct</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(0,170,255,.5);margin-right:4px;vertical-align:middle"></span>Scope 3 amont</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(122,154,184,.45);margin-right:4px;vertical-align:middle"></span>Scope 3 mixte</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(255,180,0,.5);margin-right:4px;vertical-align:middle"></span>Scope 3 aval</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(0,224,160,.4);margin-right:4px;vertical-align:middle"></span>Déplacements (mixte)</span>
+    </div>
   </div>
 
   <div class="card">
@@ -1959,36 +2101,6 @@ const Q=[
 {id:89,cat:"Évaluation & Qualité",type:"mcq",q:"Quelle est la condition d'impartialité requise pour les évaluateurs d'un Bilan Carbone® ?",o:["L'évaluateur peut appartenir à la même organisation s'il est certifié","Les évaluateurs doivent être indépendants de ceux ayant réalisé le bilan","Seul un expert-comptable peut réaliser l'évaluation","L'évaluation doit être réalisée par l'ADEME"],a:1,e:"Les évaluateurs doivent respecter les principes d'impartialité et d'indépendance vis-à-vis de ceux ayant réalisé le bilan. Tous les membres doivent appartenir à des organisations adhérentes à l'ABC. Tout conflit d'intérêt doit être signalé à l'ABC."},
 {id:90,cat:"Évaluation & Qualité",type:"mcq",q:"Quelle est la validité des plans d'action et trajectoires lors d'une évaluation du Bilan Carbone® ?",o:["1 an","2 ans","4 ans","10 ans"],a:1,e:"Les plans d'action et trajectoires ont une validité de 2 ANS lors d'une évaluation. L'analyse des risques au niveau Avancé a une validité de 10 ans. La démarche de mobilisation a une validité de 2 ans. Cela évite les redondances entre renouvellements."},
 {id:91,cat:"Évaluation & Qualité",type:"mcq",q:"Pour quelle raison une organisation peut-elle demander une évaluation externe de son Bilan Carbone® ?",o:["Uniquement pour obtenir un label RSE","Pour la conformité réglementaire, l'assurance de fiabilité, le contrôle qualité ou la transparence de communication","Uniquement si elle est au niveau Avancé","Pour obtenir une réduction de sa taxe carbone"],a:1,e:"Une évaluation externe peut être demandée pour : (1) conformité réglementaire (BEGES-R, CSRD), (2) assurance sur la fiabilité des résultats, (3) contrôle qualité des bilans de parties prenantes, (4) transparence de la communication externe. Elle reste volontaire."},
-// ── QUESTIONS CERTIFICATION NIVEAU 1 (issues de bilan-carbone-revision.html) ──
-{id:92,cat:"Historique",type:"mcq",q:"Qui a développé la méthode Bilan Carbone® à partir de 2002 ?",o:["Jean-Marc Jancovici pour l'ADEME","L'ADEME seule, en 1997","Le GHG Protocol (WRI/WBCSD)","La Commission Européenne"],a:0,e:"Le Bilan Carbone® a été développé à partir de 2002 par Jean-Marc Jancovici (ingénieur, cofondateur Carbone 4) pour le compte de l'ADEME. Depuis 2011, la méthode est gérée par l'ABC (Association pour la transition Bas Carbone)."},
-{id:93,cat:"Historique",type:"mcq",q:"Quelle organisation gère la marque Bilan Carbone® depuis 2011 ?",o:["L'ADEME","L'ABC (Association pour la transition Bas Carbone)","Le GHG Protocol","L'ISO"],a:1,e:"Depuis 2011, la méthode Bilan Carbone® est la propriété de l'ABC (Association pour la transition Bas Carbone). L'ADEME conserve la gestion de la Base Empreinte® (base de données de facteurs d'émission)."},
-{id:94,cat:"Comptabilisation",type:"mcq",q:"Quel est le Potentiel de Réchauffement Global (PRG) du méthane (CH₄) sur 100 ans selon le 5ème rapport du GIEC (AR5) ?",o:["21","28","34","72"],a:1,e:"Selon le AR5 du GIEC (utilisé par la Base Empreinte® française), le PRG du CH₄ est de 28. Il était de 21 selon le AR4 et de 29,8 selon le AR6. En France, on utilise conventionnellement la valeur AR5."},
-{id:95,cat:"Comptabilisation",type:"mcq",q:"Lequel de ces gaz N'EST PAS inclus dans les 7 GES du Protocole de Kyoto comptabilisés dans le Bilan Carbone® ?",o:["SF₆ (hexafluorure de soufre)","NF₃ (trifluorure d'azote)","O₃ (ozone troposphérique)","HFC (hydrofluorocarbures)"],a:2,e:"L'ozone (O₃) n'est pas l'un des 7 GES du Protocole de Kyoto. Les 7 GES sont : CO₂, CH₄, N₂O, HFC, PFC, SF₆ et NF₃ (ce dernier ajouté en 2012). L'ozone est bien un GES mais n'est pas comptabilisé dans cette liste."},
-{id:96,cat:"Périmètre",type:"mcq",q:"Dans le Bilan Carbone®, quel scope correspond aux émissions directes de l'organisation ?",o:["Scope 1","Scope 2","Scope 3","Scope 0"],a:0,e:"Le Scope 1 correspond aux émissions directes : combustion dans les installations et véhicules appartenant ou contrôlés par l'organisation, procédés industriels, émissions fugitives. Ce sont les sources que l'organisation possède ou contrôle directement."},
-{id:97,cat:"Périmètre",type:"mcq",q:"L'électricité achetée sur le réseau par une entreprise appartient à quel scope ?",o:["Scope 1","Scope 2","Scope 3 amont","Scope 3 aval"],a:1,e:"L'électricité achetée sur le réseau est toujours en Scope 2. Ce scope regroupe les émissions indirectes liées à l'énergie achetée : électricité, chaleur, froid et vapeur. L'électricité autoproduite par des panneaux solaires propres serait en Scope 1."},
-{id:98,cat:"Périmètre",type:"mcq",q:"Les déplacements domicile-travail des salariés appartiennent à quel scope ?",o:["Scope 1","Scope 2","Scope 3","Ils ne sont pas inclus dans le Bilan Carbone®"],a:2,e:"Les déplacements domicile-travail des salariés sont en Scope 3 (autres émissions indirectes). L'organisation ne contrôle pas ces déplacements mais en est indirectement responsable. Ce poste est inclus dès le niveau Initial."},
-{id:99,cat:"Niveaux de Maturité",type:"mcq",q:"Quel niveau du Bilan Carbone® correspond au minimum réglementaire du BEGES (Bilan des Émissions de GES) ?",o:["Niveau Avancé","Niveau Initial","Niveau Standard","Niveau Basique"],a:2,e:"Le niveau Standard du Bilan Carbone® correspond au minimum réglementaire BEGES (Scopes 1 et 2 obligatoires). Le BEGES est imposé par l'article 75 de la loi Grenelle II (décret 2011-829) pour les entités dépassant certains seuils de salariés."},
-{id:100,cat:"Comptabilisation",type:"mcq",q:"Quelle est l'unité de mesure utilisée dans le Bilan Carbone® ?",o:["kWh","kg de CO₂","teqCO₂ (tonnes équivalent CO₂)","Joules"],a:2,e:"L'unité du Bilan Carbone® est la teqCO₂ (tonne équivalent CO₂), parfois notée tCO₂e. Elle permet d'agréger les 7 GES en les convertissant via leur Potentiel de Réchauffement Global (PRG) sur 100 ans."},
-{id:101,cat:"Périmètre",type:"mcq",q:"Un véhicule de société appartenant à l'entreprise qui roule au diesel : ses émissions de combustion relèvent de quel scope ?",o:["Scope 1","Scope 2","Scope 3","Scope 1 et 3 simultanément"],a:0,e:"Les émissions de combustion d'un véhicule appartenant à l'entreprise (flotte propre) sont en Scope 1 (combustion de sources mobiles). Si le véhicule est loué ou si l'employé utilise son propre véhicule, ça passe en Scope 3."},
-{id:102,cat:"Périmètre",type:"mcq",q:"Les achats de matières premières (acier, plastique, etc.) par une entreprise relèvent de quel scope ?",o:["Scope 1","Scope 2","Scope 3","Hors périmètre"],a:2,e:"Les achats de matières premières (et plus généralement tous les achats de biens et services) sont en Scope 3 amont. L'empreinte carbone de production de ces matières (extraction, transformation, transport) est comptabilisée dans ce scope. Inclus dès le niveau Initial."},
-{id:103,cat:"Comptabilisation",type:"mcq",q:"Quel est le Potentiel de Réchauffement Global du SF₆ (hexafluorure de soufre) sur 100 ans ?",o:["265","7 390","23 500","16 100"],a:2,e:"Le SF₆ a un PRG de 23 500 sur 100 ans (AR5). C'est l'un des GES les plus puissants. Il est utilisé dans les appareillages électriques haute tension comme isolant. Une fuite de quelques grammes équivaut à plusieurs centaines de kg de CO₂."},
-{id:104,cat:"Historique",type:"mcq",q:"La Base Empreinte® (base nationale de facteurs d'émission) est gérée par :",o:["L'ABC","L'ADEME","Le GHG Protocol","L'ISO"],a:1,e:"La Base Empreinte® (anciennement Base Carbone®, renommée en 2021) est la base de données nationale de référence des facteurs d'émission, gérée par l'ADEME. Elle est publique et gratuite. À distinguer de la méthode Bilan Carbone® gérée par l'ABC."},
-{id:105,cat:"Niveaux de Maturité",type:"mcq",q:"Un bilan GES réalisé avec la méthode Bilan Carbone® au niveau Initial inclut obligatoirement :",o:["Uniquement les Scopes 1 et 2","Les Scopes 1, 2, et les principaux postes du Scope 3","Les Scopes 1, 2 et la totalité du Scope 3","Uniquement le Scope 3"],a:1,e:"Le niveau Initial inclut les Scopes 1 et 2 (complets) plus les principaux postes du Scope 3 : achats, fret, déplacements professionnels, domicile-travail, déchets directs, immobilisations. Le niveau Avancé inclut la totalité du Scope 3."},
-{id:106,cat:"Objectifs & Principes",type:"mcq",q:"L'article 75 de la loi Grenelle II impose le BEGES tous les combien d'années ?",o:["2 ans","3 ans","4 ans","5 ans"],a:2,e:"L'article 75 de la loi Grenelle II (Décret 2011-829) impose la réalisation d'un Bilan des Émissions de GES (BEGES) tous les 4 ans. Depuis 2023, un plan de transition doit obligatoirement accompagner ce bilan."},
-{id:107,cat:"Périmètre",type:"mcq",q:"Les émissions fugitives de fluides frigorigènes (HFC) appartiennent à quel scope ?",o:["Scope 1","Scope 2","Scope 3","Ce ne sont pas des GES"],a:0,e:"Les fuites de fluides frigorigènes (HFC, composés à très fort PRG) sont des émissions fugitives et relèvent donc du Scope 1 (émissions directes). Elles sont souvent sous-estimées mais peuvent représenter un poste significatif dans les émissions directes."},
-{id:108,cat:"Périmètre",type:"mcq",q:"Quel scope est le plus souvent le plus important en volume d'émissions pour une entreprise ?",o:["Scope 1 uniquement","Scope 2 uniquement","Scope 3","Scopes 1 et 2 à égalité"],a:2,e:"Le Scope 3 représente souvent 60 à 80% voire plus des émissions totales d'une organisation, car il englobe toute la chaîne de valeur (achats, utilisation des produits, transports, etc.). C'est pourquoi son inclusion est fondamentale pour une vision complète."},
-{id:109,cat:"Périmètre",type:"mcq",q:"Dans le Bilan Carbone®, le transport de marchandises réalisé par un transporteur externe est en :",o:["Scope 1 (combustion mobile)","Scope 2","Scope 3","Hors périmètre"],a:2,e:"Si le transport est réalisé par un prestataire externe, les émissions sont en Scope 3. Seul le transport effectué par les propres véhicules de l'organisation relève du Scope 1."},
-{id:110,cat:"Comptabilisation",type:"mcq",q:"Laquelle de ces affirmations sur le PRG (Potentiel de Réchauffement Global) est correcte ?",o:["Le PRG est constant et ne change jamais","Le PRG du CO₂ est de 1 et sert de référence","Le PRG est calculé sur 50 ans par convention","Le PRG mesure la toxicité d'un gaz"],a:1,e:"Le CO₂ est le gaz de référence avec un PRG = 1 sur 100 ans. Le PRG mesure la capacité d'un GES à piéger la chaleur dans l'atmosphère par rapport au CO₂ sur 100 ans. Il évolue selon les rapports du GIEC (AR4, AR5, AR6) et s'applique sur 100 ans par convention internationale."},
-{id:111,cat:"Objectifs & Principes",type:"mcq",q:"Une entreprise de 300 salariés basée en France métropolitaine est-elle soumise à l'obligation BEGES ?",o:["Oui, le seuil est 250 salariés en France métropolitaine","Non, le seuil est 500 salariés en France métropolitaine","Oui, toutes les entreprises privées y sont soumises","Non, seules les collectivités sont soumises"],a:1,e:"En France métropolitaine, l'obligation BEGES s'applique aux entreprises de plus de 500 salariés. Le seuil de 250 salariés s'applique dans les DOM-TOM. Cette entreprise de 300 salariés n'est donc pas soumise à l'obligation (mais peut réaliser un bilan volontaire)."},
-{id:112,cat:"Périmètre",type:"mcq",q:"Les vols d'affaires d'un employé (billets achetés par l'entreprise) sont comptabilisés dans quel scope ?",o:["Scope 1","Scope 2","Scope 3","Hors périmètre pour les déplacements aériens"],a:2,e:"Les déplacements professionnels réalisés via des prestataires de transport (avion, train, taxi, location) sont en Scope 3. Le Scope 1 s'appliquerait uniquement si l'entreprise possédait ses propres avions. Les déplacements professionnels sont inclus dès le niveau Initial."},
-{id:113,cat:"Historique",type:"mcq",q:"Quelle est la différence principale entre la méthode Bilan Carbone® et le GHG Protocol ?",o:["Il n'y a aucune différence, ce sont les mêmes","Le GHG Protocol est français, le Bilan Carbone® est international","Le Bilan Carbone® est une méthode française (ABC/ADEME), le GHG Protocol est un standard international (WRI/WBCSD)","Le GHG Protocol ne comptabilise pas le Scope 3"],a:2,e:"Le Bilan Carbone® est une méthode française développée par l'ADEME et gérée par l'ABC, avec sa propre structuration en postes et domaines. Le GHG Protocol est le standard international publié par le WRI et le WBCSD, à l'origine des 3 scopes. Les deux méthodes sont compatibles mais distinctes."},
-{id:114,cat:"Comptabilisation",type:"mcq",q:"Quel est le PRG du N₂O (protoxyde d'azote) selon le AR5 du GIEC ?",o:["28","120","265","298"],a:2,e:"Le N₂O a un PRG de 265 selon le AR5 (298 selon l'AR4). Il est principalement émis par l'agriculture (utilisation d'engrais azotés), la combustion et l'industrie chimique. C'est l'un des trois GES les plus importants à retenir avec CO₂ et CH₄."},
-{id:115,cat:"Périmètre",type:"mcq",q:"L'amortissement carbone des bâtiments et équipements (immobilisations) appartient à quel scope ?",o:["Scope 1","Scope 2","Scope 3","Il n'est pas comptabilisé dans le Bilan Carbone®"],a:2,e:"L'empreinte carbone de la fabrication des bâtiments et équipements est amortie sur leur durée de vie et comptabilisée en Scope 3 (immobilisations). On parle de 'carbone gris' ou 'carbone incorporé'. Ce poste est important dans les secteurs à forte intensité capitalistique."},
-{id:116,cat:"Objectifs & Principes",type:"mcq",q:"Quelle loi française a rendu obligatoire la réalisation d'un BEGES pour les grandes entreprises ?",o:["Loi Sapin II (2016)","Loi Vigilance (2017)","Loi Grenelle II — Article 75 (2010)","Loi PACTE (2019)"],a:2,e:"L'article 75 de la loi Grenelle II (2010), mis en application par le décret 2011-829, a rendu obligatoire la réalisation d'un BEGES pour les entreprises >500 sal., collectivités >50 000 hab. et administrations >250 agents."},
-{id:117,cat:"Périmètre",type:"mcq",q:"Dans une approche par contrôle opérationnel, une filiale dans laquelle l'entreprise a le contrôle opérationnel (mais seulement 40% du capital) est-elle incluse dans le périmètre Scope 1 ?",o:["Non, car la participation est inférieure à 50%","Oui, car l'entreprise exerce le contrôle opérationnel","Uniquement à hauteur de 40%","Elle ne peut jamais être incluse dans le Scope 1"],a:1,e:"Dans l'approche par contrôle opérationnel, si l'entreprise a l'autorité d'introduire et de mettre en œuvre des politiques opérationnelles sur cette filiale, ses émissions sont incluses à 100% dans le Scope 1, quelle que soit le taux de participation capitalistique."},
-{id:118,cat:"Synthèse & Restitution",type:"mcq",q:"Quelle directive européenne de 2023 élargit les obligations de reporting non-financier (incluant les GES) aux entreprises de plus de 250 salariés ?",o:["Directive TCFD","Directive SFDR","Directive CSRD","Directive ETS"],a:2,e:"La CSRD (Corporate Sustainability Reporting Directive, 2023) élargit progressivement les obligations de reporting de durabilité (dont les GES) aux entreprises de plus de 250 salariés. Elle remplace la NFRD et s'appuie sur les standards ESRS (dont ESRS E1 pour le climat)."},
-{id:119,cat:"Périmètre",type:"mcq",q:"Une entreprise fait livrer ses produits à ses clients par un transporteur externe. Ces émissions sont classées en :",o:["Scope 1 (combustion mobile)","Scope 3 amont (fret entrant)","Scope 3 aval (fret sortant)","Hors périmètre car c'est un prestataire"],a:2,e:"La livraison des produits finis aux clients par un transporteur externe est du fret aval, classé en Scope 3 aval. Le fret entrant (matières premières arrivant vers l'usine) est Scope 3 amont. Cette distinction amont/aval est importante à maîtriser."},
-{id:120,cat:"Plan de Transition",type:"mcq",q:"Quel référentiel permet aux entreprises de valider des objectifs de réduction de GES alignés sur les scénarios climatiques 1,5°C / 2°C ?",o:["ISO 14001","SBTi (Science Based Targets initiative)","Label Bas Carbone","ISO 14064"],a:1,e:"La Science Based Targets initiative (SBTi) est le référentiel permettant aux entreprises de faire valider des objectifs de réduction GES scientifiquement fondés et alignés sur les trajectoires 1,5°C ou 2°C des Accords de Paris. Le Label Bas Carbone est un outil français de financement de projets de séquestration carbone."},
 ];
 
 const ORD=[
