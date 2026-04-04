@@ -700,7 +700,7 @@
 <body>
 
 <header>
-  <div class="logo">Bilan Carbone® <span>// Révision Certification</span></div>
+  <div class="logo">Bilan Carbone®</div>
   <div class="cert-badge">Développé par : M2 DGRSE V2026</div>
 </header>
 
@@ -710,7 +710,6 @@
   <button class="nav-btn" onclick="showSection('scopes', this)">🔵 Les 3 Scopes</button>
   <button class="nav-btn" onclick="showSection('niveaux', this)">📊 Niveaux BC</button>
   <button class="nav-btn" onclick="showSection('postes', this)">📋 Postes & Domaines</button>
-  <button class="nav-btn" onclick="showSection('methode', this)">⚙️ Méthodologie</button>
   <button class="nav-btn" onclick="showSection('fiches', this)">⚡ Fiches Éclair</button>
   <button class="nav-btn" onclick="showSection('qcm', this)">🎯 QCM Entraînement</button>
   <button class="nav-btn" onclick="showSection('qcm-cours', this)">📚 QCM Cours BC08</button>
@@ -728,8 +727,8 @@
   </div>
 
   <div class="card">
-    <div class="card-title">Les 6 étapes de la démarche BC®</div>
-    <h2>Cadrage → Périmètres → Mobilisation → Comptabilisation → Plan de transition → Restitution</h2>
+    <div class="card-title">Les 7 étapes de la démarche BC®</div>
+    <h2>Cadrage → Périmètres → Mobilisation → Comptabilisation → Plan de transition → Restitution → Évaluation</h2>
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-dot">1</div>
@@ -770,7 +769,14 @@
         <div class="timeline-dot">6</div>
         <div class="timeline-content">
           <h3>Restitution</h3>
-          <p>Synthèse finale, communication des résultats à toutes les parties prenantes avec transparence. Le rapport final est un récapitulatif de toutes les actions de mobilisation — <strong>obligatoire</strong>.</p>
+          <p>Synthèse finale, communication des résultats à toutes les parties prenantes avec transparence. Le rapport final est un récapitulatif de toutes les actions de mobilisation — <strong>obligatoire</strong>. Dépôt du profil GES anonymisé sur l'OCCF.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">7</div>
+        <div class="timeline-content">
+          <h3>Évaluation <span style="font-size:11px;font-weight:400;color:var(--text3)">(facultative)</span></h3>
+          <p>Audit par des évaluateurs indépendants. Vérifie le respect des exigences méthodologiques BC® et confirme le niveau de maturité atteint. 3 résultats possibles : <strong>Validation</strong>, Échec, ou Rejet. Permet d'enchaîner sur ACT, SBTi, CSRD.</p>
         </div>
       </div>
     </div>
@@ -821,63 +827,6 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Pilotage — 3 niveaux d'acteurs</div>
-    <p>Le pilotage s'organise autour de <strong>3 niveaux d'acteurs</strong> complémentaires.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Acteur</th><th>Rôle</th><th>Remarques</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong>Direction</strong></td>
-            <td>Informée/sollicitée, lance la démarche, valide les orientations stratégiques</td>
-            <td>Engagement de la direction = condition de réussite</td>
-          </tr>
-          <tr>
-            <td><strong>Équipe Projet (coordinateur)</strong></td>
-            <td>Pilote opérationnel, formé BC®, appuyé par bureau d'études si besoin</td>
-            <td>Projet ponctuel → prestataire externe / Démarche long terme → portée en interne</td>
-          </tr>
-          <tr>
-            <td><strong>Gouvernance (COPIL/COTECH)</strong></td>
-            <td>Comité de pilotage stratégique + comité technique opérationnel</td>
-            <td>COPIL = stratégique · COTECH = opérationnel</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">La matrice RACI</div>
-    <p>La matrice RACI structure les rôles et responsabilités dans la démarche.</p>
-    <div class="fiche-grid">
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent)">R — RÉALISATEUR</div>
-        <ul class="fiche-list">
-          <li>Exécute concrètement la tâche</li>
-        </ul>
-      </div>
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent2)">A — APPROBATEUR</div>
-        <ul class="fiche-list">
-          <li>Valide et est responsable du résultat</li>
-        </ul>
-      </div>
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent3)">C — CONSULTÉ</div>
-        <ul class="fiche-list">
-          <li>Expert ou partie prenante clé à consulter</li>
-        </ul>
-      </div>
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--text2)">I — INFORMÉ</div>
-        <ul class="fiche-list">
-          <li>Tenu informé de l'avancement et des résultats</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
 </div>
 
@@ -973,92 +922,78 @@
 
   <div class="card">
     <div class="card-title">Les 3 périmètres BC®</div>
-    <h2>Périmètre organisationnel · Temporel · Opérationnel</h2>
+    <h2>Organisationnel · Temporel · Opérationnel</h2>
+    <p style="color:var(--text2);margin-bottom:16px">Tout BC® doit définir précisément ces 3 périmètres avant de comptabiliser. Chaque choix doit être <strong>justifié</strong> dans le rapport.</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+
+      <div style="background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.35);border-radius:8px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start">
+        <div style="background:rgba(255,107,53,.2);color:var(--s1);font-family:var(--font-mono);font-size:11px;font-weight:700;padding:6px 10px;border-radius:5px;white-space:nowrap;letter-spacing:1px">ORG</div>
+        <div>
+          <div style="font-weight:700;color:var(--text);margin-bottom:4px">Périmètre Organisationnel</div>
+          <div style="color:var(--text2);font-size:13px;line-height:1.6"><strong>100% des équipements sous contrôle opérationnel</strong> (sites, bâtiments, filiales exploités par l'organisation). Tout autre choix doit être justifié. Cohérent avec ISO 14064-1 et BEGES réglementaire.</div>
+          <div style="margin-top:6px;font-size:12px;color:var(--text3)">⚙ Pour le BEGES-R : correspond à la Personne Morale (numéro SIREN)</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.3);border-radius:8px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start">
+        <div style="background:rgba(255,209,102,.2);color:var(--s2);font-family:var(--font-mono);font-size:11px;font-weight:700;padding:6px 10px;border-radius:5px;white-space:nowrap;letter-spacing:1px">TPS</div>
+        <div>
+          <div style="font-weight:700;color:var(--text);margin-bottom:4px">Périmètre Temporel</div>
+          <div style="color:var(--text2);font-size:13px;line-height:1.6">Classiquement <strong>1 an</strong> pour couvrir l'ensemble des pics, creux et saisonnalités d'activité. Peut correspondre à la durée d'un événement ou projet (ex : Jeux Olympiques Paris 2024 = plusieurs années).</div>
+          <div style="margin-top:6px;font-size:12px;color:var(--text3)">📅 Pour le BEGES-R : une année complète est obligatoire</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,224,160,.07);border:1px solid rgba(0,224,160,.3);border-radius:8px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start">
+        <div style="background:rgba(0,224,160,.18);color:var(--s3);font-family:var(--font-mono);font-size:11px;font-weight:700;padding:6px 10px;border-radius:5px;white-space:nowrap;letter-spacing:1px">OPE</div>
+        <div>
+          <div style="font-weight:700;color:var(--text);margin-bottom:4px">Périmètre Opérationnel</div>
+          <div style="color:var(--text2);font-size:13px;line-height:1.6">Toutes les sources d'émissions directes <em>et</em> indirectes selon la logique de <strong>dépendance carbone</strong>. Structuré en <strong>10 postes / 48 sous-postes</strong>, défini via la cartographie des flux.</div>
+          <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+            <span style="font-size:11px;background:rgba(0,224,160,.12);color:var(--s3);border-radius:3px;padding:3px 8px">Initial : 100% direct + 80-100% indirect</span>
+            <span style="font-size:11px;background:rgba(61,184,255,.12);color:var(--accent2);border-radius:3px;padding:3px 8px">Standard/Avancé : 100% toutes émissions</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="highlight" style="margin-top:12px">⚠️ Les postes <strong>non significatifs</strong> peuvent être estimés mais <strong>jamais exclus</strong> — toujours justifier.</div>
   </div>
 
-  <div class="scope-grid">
-    <div class="scope-card s1">
-      <div class="scope-number">ORG</div>
-      <h3>Organisationnel</h3>
-      <p style="font-size:12px;margin-bottom:8px">Tous les sites, <strong>100% contrôle opérationnel</strong>. Cohérent ISO 14064-1 et BEGES.</p>
-      <ul>
-        <li>Peut être restreint à 1 site si justifié</li>
-        <li>Cohérent avec ISO 14064-1 et BEGES</li>
-      </ul>
-    </div>
-    <div class="scope-card s2">
-      <div class="scope-number">TPS</div>
-      <h3>Temporel</h3>
-      <p style="font-size:12px;margin-bottom:8px">Classiquement <strong>1 an</strong> — couvre pics, creux et saisonnalités.</p>
-      <ul>
-        <li>Peut = durée d'un événement ou projet</li>
-        <li>Ex : Paris 2024 = plusieurs années</li>
-      </ul>
-    </div>
-    <div class="scope-card s3">
-      <div class="scope-number">OPE</div>
-      <h3>Opérationnel</h3>
-      <p style="font-size:12px;margin-bottom:8px">Toutes sources directes + indirectes — logique <strong>dépendance carbone</strong>. 10 postes / 48 sous-postes.</p>
-      <ul>
-        <li>Défini via cartographie des flux</li>
-        <li>Logique de dépendance carbone</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Argumentaires à réfuter</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Argument reçu</th><th>Réponse correcte</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span style="color:var(--danger)">"Nous n'en sommes pas responsables"</span></td>
-            <td>Les émissions indirectes restent à intégrer dans le périmètre opérationnel</td>
-          </tr>
-          <tr>
-            <td><span style="color:var(--danger)">"C'est compliqué d'obtenir des données"</span></td>
-            <td>Justifie une estimation grossière — <strong>pas une exclusion</strong> du poste</td>
-          </tr>
-          <tr>
-            <td><span style="color:var(--danger)">"Ça fera double compte"</span></td>
-            <td>Le BC® est un exercice d'<strong>introspection</strong>, non cumulable entre organisations</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">Les 3 piliers NZI — STRICTEMENT NON COMBINABLES</div>
-    <p>Le pilier A est <strong>prioritaire</strong> en toutes circonstances. Impossible d'additionner les 3 piliers.</p>
-    <div class="levels-grid">
-      <div class="level-card level-init">
-        <div class="level-name">A — Émissions INDUITES (PRIORITAIRE)</div>
-        <p>Scope 1+2+3, cœur du BC®. À traiter en priorité absolue.</p>
-        <div style="margin-top:10px">
-          <div class="check-item">Réduction à la source — levier principal</div>
-          <div class="check-item">Objectif principal du plan de transition</div>
+    <p style="color:var(--text2);margin-bottom:4px"><strong>NZI = Neutralité Zéro Impact</strong>. Les 3 piliers mesurent 3 réalités <em>distinctes</em> qui ne peuvent ni s'additionner, ni se soustraire.</p>
+    <div class="warning" style="margin-bottom:16px">⚠️ <strong>A + B + C ≠ neutralité carbone.</strong> Prétendre à la neutralité en combinant les 3 piliers est interdit et constitue du greenwashing.</div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+
+      <div style="border:2px solid rgba(255,107,53,.5);border-radius:8px;padding:14px 16px;background:rgba(255,107,53,.06)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="background:var(--s1);color:#000;font-family:var(--font-mono);font-size:13px;font-weight:700;padding:4px 10px;border-radius:4px">PILIER A</span>
+          <span style="font-weight:700;color:var(--text)">Émissions INDUITES</span>
+          <span style="margin-left:auto;background:rgba(255,107,53,.3);color:var(--s1);font-size:10px;font-family:var(--font-mono);padding:3px 8px;border-radius:3px;font-weight:700">PRIORITAIRE</span>
         </div>
+        <div style="color:var(--text2);font-size:13px;line-height:1.6">Scope 1 + Scope 2 + Scope 3 : <strong>toutes les émissions directes et indirectes de l'organisation</strong>. C'est le cœur du Bilan Carbone®. La réduction de ces émissions est l'objectif principal du plan de transition.</div>
       </div>
-      <div class="level-card level-std">
-        <div class="level-name">B — Émissions ÉVITÉES</div>
-        <p>Substitution, financement projets hors CV, achats réductions certifiées.</p>
-        <div style="margin-top:10px">
-          <div class="check-item">Pertinent mais secondaire par rapport à A</div>
-          <div class="cross-item">Non additionnable avec A ou C</div>
+
+      <div style="border:1px solid rgba(255,209,102,.35);border-radius:8px;padding:14px 16px;background:rgba(255,209,102,.05)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="background:rgba(255,209,102,.3);color:var(--s2);font-family:var(--font-mono);font-size:13px;font-weight:700;padding:4px 10px;border-radius:4px">PILIER B</span>
+          <span style="font-weight:700;color:var(--text)">Émissions ÉVITÉES</span>
         </div>
+        <div style="color:var(--text2);font-size:13px;line-height:1.6">Réductions obtenues <em>chez des tiers</em> grâce à l'action de l'organisation : substitution d'un produit carboné, financement de projets hors chaîne de valeur, achats de réductions certifiées. <span style="color:var(--text3)">Pertinent, mais secondaire par rapport au Pilier A.</span></div>
       </div>
-      <div class="level-card level-adv">
-        <div class="level-name">C — Émissions SÉQUESTRÉES</div>
-        <p>Puits de carbone dans/hors CV, financement séquestration.</p>
-        <div style="margin-top:10px">
-          <div class="check-item">Pertinent pour piloter la stratégie</div>
-          <div class="cross-item">Non additionnable avec A ou B</div>
+
+      <div style="border:1px solid rgba(0,224,160,.3);border-radius:8px;padding:14px 16px;background:rgba(0,224,160,.04)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="background:rgba(0,224,160,.2);color:var(--s3);font-family:var(--font-mono);font-size:13px;font-weight:700;padding:4px 10px;border-radius:4px">PILIER C</span>
+          <span style="font-weight:700;color:var(--text)">Émissions SÉQUESTRÉES</span>
         </div>
+        <div style="color:var(--text2);font-size:13px;line-height:1.6">Carbone capturé et stocké dans des puits de carbone (dans ou hors chaîne de valeur) : forêts, sols, procédés industriels de captage. <span style="color:var(--text3)">Pertinent pour piloter la stratégie à long terme.</span></div>
       </div>
+
     </div>
-    <div class="warning">⚠️ Règle absolue : <strong>Pilier A prioritaire</strong>. Les 3 piliers sont STRICTEMENT NON COMBINABLES. Impossible de prétendre à la neutralité en additionnant A + B + C.</div>
   </div>
 
   <div class="card">
@@ -1096,11 +1031,6 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Les 10 postes d'émissions (48 sous-postes)</div>
-    <p>Toujours présenter le profil d'émissions <strong>avec ET sans</strong> le sous-poste "utilisation en dépendance" — les 2 versions sont obligatoires.</p>
-    <div class="highlight">Les <strong>2 versions sont obligatoires</strong> : avec ET sans "utilisation en dépendance". Omettre l'une des deux versions est un piège classique de la certification.</div>
-  </div>
 
   <div class="card">
     <div class="card-title">Chaîne de valeur — Les 3 Scopes BC®</div>
@@ -1202,93 +1132,6 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Tableau comparatif Initial / Standard / Avancé</div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Critère</th>
-            <th style="color:var(--accent2)">Initial</th>
-            <th style="color:var(--text2)">Standard</th>
-            <th style="color:var(--accent)">Avancé</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Périmètre opérationnel</strong></td>
-            <td>Émissions directes + 80-100% indirectes</td>
-            <td>Toutes directes et indirectes</td>
-            <td>Idem + analyse complète</td>
-          </tr>
-          <tr>
-            <td><strong>Cartographie des flux</strong></td>
-            <td>Requise</td>
-            <td>Requise</td>
-            <td>Requise + détaillée</td>
-          </tr>
-          <tr>
-            <td><strong>Mobilisation PP</strong></td>
-            <td>Internes uniquement</td>
-            <td>Internes + ≥1 externe</td>
-            <td>Internes + multiples externes</td>
-          </tr>
-          <tr>
-            <td><strong>Actions mobilisation</strong></td>
-            <td>3 phases min.</td>
-            <td>4 phases chaque étape</td>
-            <td>4 phases approfondies</td>
-          </tr>
-          <tr>
-            <td><strong>Tableau de bord plan</strong></td>
-            <td>Recommandé</td>
-            <td><strong>Obligatoire</strong></td>
-            <td><strong>Obligatoire + KPIs</strong></td>
-          </tr>
-          <tr>
-            <td><strong>Risques climatiques</strong></td>
-            <td>Liste physiques &amp; transition</td>
-            <td>Spécifiques + cartographie flux</td>
-            <td>Analyse complète TCFD</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="highlight"><strong>24 questions clés</strong> pour identifier le niveau adapté à l'organisation.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Exigences de mobilisation par niveau</div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Critère</th>
-            <th style="color:var(--accent2)">Initial</th>
-            <th style="color:var(--text2)">Standard</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Cible PP</strong></td>
-            <td>Internes uniquement</td>
-            <td>Internes + ≥1 externe</td>
-          </tr>
-          <tr>
-            <td><strong>Phases requises</strong></td>
-            <td>Phases 1+2+3 (sensibilisation, responsabilisation, restitution)</td>
-            <td>Les 4 phases (+ co-construction)</td>
-          </tr>
-          <tr>
-            <td><strong>Étapes couvertes</strong></td>
-            <td>Étapes 1, 4 et 6 minimum</td>
-            <td>Toutes les étapes</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="warning">⚠️ <strong>Communication conditionnée</strong> : la communication externe sur le niveau atteint est subordonnée au respect intégral de tous les critères du niveau revendiqué.</div>
-  </div>
 
 </div>
 
@@ -1564,266 +1407,6 @@
 
 </div>
 
-<!-- ============================== METHODE ============================== -->
-<div class="section" id="methode">
-
-  <div class="card">
-    <div class="card-title">Formule fondamentale</div>
-    <div class="formula-box">
-      <div class="formula-label">Formule fondamentale</div>
-      Donnée d'activité × Facteur d'émission = Émissions GES en tCO₂eq
-    </div>
-    <div class="warning">⚠️ La comptabilisation est une <strong>ESTIMATION</strong>, non une mesure exacte. Le niveau d'incertitude doit toujours être indiqué.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Les 4 phases de mobilisation</div>
-    <p>La mobilisation est transversale à toute la démarche. 4 phases liées aux étapes.</p>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot">1</div>
-        <div class="timeline-content">
-          <h3>Sensibilisation &amp; vulgarisation</h3>
-          <p>Étape 1 — Diffuser les enjeux carbone, embarquer les équipes.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot">2</div>
-        <div class="timeline-content">
-          <h3>Responsabilisation</h3>
-          <p>Étape 4 (Collecte) — Impliquer les PP dans la construction des actions.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot">3</div>
-        <div class="timeline-content">
-          <h3>Restitution &amp; communication</h3>
-          <p>Post étape 4 (Profil GES) → restitution intermédiaire. Étape 6 → restitution finale.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot">4</div>
-        <div class="timeline-content">
-          <h3>Co-construction</h3>
-          <p>Étape 5 (Plan de transition) — Associer les PP à l'élaboration du plan.</p>
-        </div>
-      </div>
-    </div>
-    <div class="highlight">Le rapport final = récapitulatif de toutes les actions de mobilisation (<strong>obligatoire</strong>).</div>
-    <div class="table-wrap" style="margin-top:16px">
-      <table>
-        <thead><tr><th>Niveau</th><th>Phases requises</th><th>PP</th><th>Étapes min.</th></tr></thead>
-        <tbody>
-          <tr><td><strong style="color:var(--accent2)">Initial</strong></td><td>Phases 1+2+3</td><td>Internes uniquement</td><td>Étapes 1, 4, 6</td></tr>
-          <tr><td><strong style="color:var(--text2)">Standard</strong></td><td>Les 4 phases</td><td>Internes + ≥1 externe</td><td>Toutes les étapes</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Les 4 outils de mobilisation</div>
-    <div class="fiche-grid">
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent)">Fresque du Bilan Carbone® (ABC/IFC)</div>
-        <ul class="fiche-list">
-          <li>Atelier pédagogique</li>
-          <li>Format idéal pour la restitution</li>
-        </ul>
-      </div>
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent2)">Geste Climat / Calculateur CO₂ (ABC/ADEME)</div>
-        <ul class="fiche-list">
-          <li>Calculateur d'empreinte individuelle</li>
-        </ul>
-      </div>
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent3)">La Fresque du Climat</div>
-        <ul class="fiche-list">
-          <li>Atelier intelligence collective</li>
-          <li>Liens cause/effet changement climatique</li>
-        </ul>
-      </div>
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--text2)">Valco 2 (par 24)</div>
-        <ul class="fiche-list">
-          <li>Animations courtes</li>
-          <li>Format modulable</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Significativité — 6 critères (AU MOINS UN suffit)</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Critère</th><th>Précision</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td><strong>Ampleur</strong></td><td>≥80% des émissions indirectes</td></tr>
-          <tr><td>2</td><td><strong>Niveau d'influence</strong></td><td>L'organisation peut agir sur ce poste</td></tr>
-          <tr><td>3</td><td><strong>Importance stratégique</strong></td><td>Risques ou opportunités climatiques</td></tr>
-          <tr><td>4</td><td><strong>Caractéristique sectorielle</strong></td><td>Significatif pour le secteur</td></tr>
-          <tr><td>5</td><td><strong>Sous-traitance</strong></td><td>Activités de base externalisées</td></tr>
-          <tr><td>6</td><td><strong>Engagement du personnel</strong></td><td>Peut fédérer autour du changement</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="highlight">Seuil d'ampleur : <strong>80%</strong> — un seul critère suffit pour qualifier un poste de significatif.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Risques &amp; Opportunités climatiques</div>
-    <div class="fiche-grid">
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--danger)">Risques</div>
-        <ul class="fiche-list">
-          <li>Dépendance aux énergies fossiles</li>
-          <li>Réglementation (CSRD, BEGES, taxonomie)</li>
-          <li>Image / juridique (greenwashing)</li>
-          <li>Chaîne d'approvisionnement</li>
-          <li>Coûts de l'inaction</li>
-        </ul>
-      </div>
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent)">Opportunités</div>
-        <ul class="fiche-list">
-          <li>Résilience face aux chocs climatiques</li>
-          <li>Investissements bas carbone</li>
-          <li>Leadership sectoriel</li>
-          <li>Réputation renforcée</li>
-          <li>Nouveaux marchés</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Plan de transition — 5 étapes</div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot">1</div>
-        <div class="timeline-content">
-          <h3>Définir les objectifs</h3>
-          <p>CT (3-4 ans), MT (2030), LT (2050) — en valeur absolue — cohérence SNBC.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot">2</div>
-        <div class="timeline-content">
-          <h3>Formaliser le plan d'action</h3>
-          <p>Fiches actions complètes validées selon les 5 catégories.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot">3</div>
-        <div class="timeline-content">
-          <h3>Définir la trajectoire</h3>
-          <p>Approche bottom-up — potentiels de réduction par poste.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot">4</div>
-        <div class="timeline-content">
-          <h3>Planifier la mise en œuvre</h3>
-          <p>Ressources humaines, temporelles, financières — validées par la direction.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot">5</div>
-        <div class="timeline-content">
-          <h3>Suivre &amp; piloter</h3>
-          <p>Tableau de bord — 3 catégories d'indicateurs : mise en œuvre / suivi / performance.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Les 5 catégories d'actions — COMPLÉMENTAIRES</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Catégorie</th><th>Horizon</th><th>Exemples</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td><strong>Immédiates</strong></td><td>CT</td><td>Éteindre équipements, tri, covoiturage</td></tr>
-          <tr><td>2</td><td><strong>Prioritaires</strong></td><td>CT–MT</td><td>Rénovation, flotte, sourcing fournisseurs</td></tr>
-          <tr><td>3</td><td><strong>Stratégiques</strong></td><td>MT–LT</td><td>Nouveau modèle économique, produits bas carbone</td></tr>
-          <tr><td>4</td><td><strong>Amélioration démarche</strong></td><td>Continu</td><td>Collecte, maturité, formation</td></tr>
-          <tr><td>5</td><td><strong>Adaptation</strong></td><td>CT–MT</td><td>Sécurisation sites, approvisionnements</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="warning">⚠️ Ces 5 catégories sont <strong>COMPLÉMENTAIRES</strong> — un plan de transition complet couvre les 5.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Niveaux de pertinence des actions</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Pertinence</th><th>Type d'action</th><th>Priorité</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--accent)">★★★</strong></td>
-            <td>Réduction dans cœur d'activité et chaîne de valeur</td>
-            <td><strong style="color:var(--accent)">A PRIVILÉGIER ABSOLUMENT</strong></td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--accent3)">★★</strong></td>
-            <td>Évitement + séquestration dans la chaîne de valeur</td>
-            <td><span style="color:var(--accent3)">Pertinentes mais secondaires</span></td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--text3)">★</strong></td>
-            <td>Compensation hors chaîne de valeur</td>
-            <td><span style="color:var(--text3)">EN DERNIER RECOURS UNIQUEMENT</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Fiches actions — contenu OBLIGATOIRE</div>
-    <div class="fiche-grid">
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent)">Éléments descriptifs</div>
-        <ul class="fiche-list">
-          <li>Intitulé précis</li>
-          <li>Objectifs et cibles</li>
-          <li>Potentiel réduction (tCO₂e)</li>
-          <li>Porteurs</li>
-          <li>Description détaillée</li>
-        </ul>
-      </div>
-      <div class="fiche">
-        <div class="fiche-label" style="color:var(--accent2)">Éléments de pilotage</div>
-        <ul class="fiche-list">
-          <li>Budget &amp; calendrier</li>
-          <li>Indicateurs (3 catégories)</li>
-          <li>Freins &amp; facilitateurs</li>
-          <li>Catégorie &amp; pertinence (★★★ à ★)</li>
-        </ul>
-      </div>
-    </div>
-    <div class="warning" style="margin-top:12px">⚠️ Fiches actions génériques = <strong>piège classique</strong>. Chaque fiche doit contenir tous les éléments obligatoires.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Suivi — 3 catégories d'indicateurs</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Catégorie</th><th>Questions clés</th></tr></thead>
-        <tbody>
-          <tr><td><strong style="color:var(--accent2)">MISE EN ŒUVRE</strong></td><td>Action programmée ? Lancée ? Prérequis atteints ?</td></tr>
-          <tr><td><strong style="color:var(--accent3)">SUIVI</strong></td><td>Finalisée ? Résultats intermédiaires ? Avancement planning ?</td></tr>
-          <tr><td><strong style="color:var(--accent)">PERFORMANCE</strong></td><td>Amélioration tCO₂e / Efficacité réelle / Écart objectif/réalisé ?</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-</div>
-
 <!-- ============================== FICHES ============================== -->
 <div class="section" id="fiches">
   <div class="card">
@@ -1834,7 +1417,7 @@
   <div class="card">
     <div class="card-title">Les 8 chiffres clés</div>
     <div class="kpi-grid">
-      <div class="kpi"><div class="kpi-value">80%</div><div class="kpi-label">Seuil ampleur — émissions indirectes significatives</div></div>
+      <div class="kpi"><div class="kpi-value">80%</div><div class="kpi-label">Seuil ampleur : couvrir 80% des émissions indirectes suffit à qualifier un poste de significatif (1 critère parmi 6 suffit)</div></div>
       <div class="kpi"><div class="kpi-value">1 an</div><div class="kpi-label">Périmètre temporel classique</div></div>
       <div class="kpi"><div class="kpi-value">10</div><div class="kpi-label">Postes d'émissions</div></div>
       <div class="kpi"><div class="kpi-value">48</div><div class="kpi-label">Sous-postes</div></div>
@@ -1864,10 +1447,12 @@
     <div class="fiche">
       <div class="fiche-label" style="color:var(--accent)">3 piliers NZI — NON COMBINABLES</div>
       <ul class="fiche-list">
-        <li><strong>A</strong> = Émissions induites (S1+S2+S3) — <strong>PRIORITAIRE</strong></li>
-        <li><strong>B</strong> = Émissions évitées (substitution, hors CV)</li>
-        <li><strong>C</strong> = Émissions séquestrées (puits de carbone)</li>
-        <li>Strictement NON COMBINABLES — A + B + C ≠ neutralité</li>
+        <li><strong>NZI</strong> = Neutralité Zéro Impact — cadre de l'action climatique</li>
+        <li><strong>A</strong> = Émissions INDUITES (S1+S2+S3) — <strong>PRIORITAIRE ABSOLU</strong> — cœur du BC®</li>
+        <li><strong>B</strong> = Émissions ÉVITÉES (réductions chez des tiers, substitution)</li>
+        <li><strong>C</strong> = Émissions SÉQUESTRÉES (puits de carbone dans/hors CV)</li>
+        <li>STRICTEMENT NON COMBINABLES — A + B + C ≠ neutralité</li>
+        <li style="color:var(--danger)">⚠ Les additionner = greenwashing interdit</li>
       </ul>
     </div>
     <div class="fiche">
@@ -1900,51 +1485,6 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Les 7 pièges à éviter</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Piège</th><th>Bonne pratique</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Réduire le périmètre par commodité</td>
-            <td><strong style="color:var(--accent)">Estimer, ne jamais exclure</strong></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Combiner / additionner les 3 piliers NZI</td>
-            <td><strong style="color:var(--accent)">Strictement non combinables</strong></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Ratios monétaires pour postes significatifs visés</td>
-            <td>Acceptables uniquement pour services intellectuels et sources non significatives</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Profil d'émissions sans incertitudes</td>
-            <td><strong style="color:var(--accent)">Obligatoire</strong> : 3 niveaux d'incertitude</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Fiches actions génériques</td>
-            <td><strong style="color:var(--accent)">Tous les éléments obligatoires</strong> requis</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Profil sans "utilisation en dépendance"</td>
-            <td><strong style="color:var(--accent)">2 versions obligatoires</strong> : avec ET sans</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Tableur antérieur à v9.0</td>
-            <td><strong style="color:var(--accent)">v9.0 obligatoire</strong> depuis avril 2025</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">Acteurs à connaître</div>
@@ -3189,10 +2729,6 @@ const QBC08 = [
   {id:6,cat:"GES & PRG",q:"Pourquoi le CO₂ a-t-il été adopté comme valeur de référence pour le PRG ?",o:["Parce qu'il est le plus toxique","Parce que c'est le premier gaz d'origine anthropique contribuant aux dérèglements climatiques et responsable de ~3/4 de l'effet de serre additionnel","Parce qu'il est le plus facile à mesurer","Parce qu'il a le PRG le plus élevé"],a:1,e:"Le CO₂ d'origine humaine est responsable de quasiment 3/4 de l'effet de serre additionnel. C'est le premier gaz d'origine anthropique contribuant aux dérèglements climatiques, d'où son adoption comme valeur de référence (PRG = 1)."},
   {id:7,cat:"GES & PRG",q:"Quels sont les 4 GES principaux cités dans le cours BC08 ?",o:["CO₂, SO₂, CH₄, N₂O","CO₂, CH₄, N₂O, Gaz fluorés (ex: CF4)","CO₂, O₃, SF₆, HFC","CO₂, CH₄, HFC, PFC"],a:1,e:"Les 4 GES principaux cités dans le cours : Dioxyde de carbone (CO₂), Méthane (CH₄), Protoxyde d'azote (N₂O), Gaz fluorés (ex: tetrafluorure de carbone CF4 avec PRG=7380)."},
   {id:8,cat:"Calcul BC",q:"Quelle est la formule de base pour calculer les émissions GES dans un Bilan Carbone® ?",o:["Émissions = Facteur d'émission ÷ Donnée d'activité","Émissions = Donnée d'activité × Facteur d'émission","Émissions = Donnée d'activité + Facteur d'émission","Émissions = Facteur d'émission − Donnée d'activité"],a:1,e:"La formule fondamentale est : Émissions = Donnée d'activité × Facteur d'émission. Exemple : 1 km en train × 0,1 kgCO₂e/m (converti en mètres) = 0,1 tCO₂e. Attention aux unités : FE souvent en kg, résultat toujours en tonnes."},
-  {id:9,cat:"Calcul BC",q:"Dans l'exercice du cours (cas laboratoire Néel Grenoble), quel mode de transport a les émissions les plus élevées par km parcouru ?",o:["Autocar","Avion court-courrier (258 gCO₂/km)","Bus","Avion long-courrier (152 gCO₂/km)"],a:1,e:"L'avion court-courrier a le FE le plus élevé : 258 gCO₂/km, devant l'avion long-courrier (152 gCO₂/km), le bus (129 gCO₂/km) et l'autocar (35 gCO₂/km). Le court-courrier est plus émetteur par km car le décollage/atterrissage représente une part plus grande du trajet."},
-  {id:10,cat:"Calcul BC",q:"Dans l'exercice LAMBDA (40 salariés), quel est le total des émissions calculé ?",o:["45,2 tCO₂e","96,823 tCO₂e","120,5 tCO₂e","210,4 tCO₂e"],a:1,e:"Le total de l'entreprise LAMBDA est de 96,823 tCO₂e. Le poste le plus important est les déplacements salariés véhicule gazole (34,08 tCO₂e), suivi du fret (20,765 tCO₂e) et des immobilisations bâtiment (20,625 tCO₂e)."},
-  {id:11,cat:"Calcul BC",q:"Dans l'exercice LAMBDA, quel est l'impact GES de la fuite de climatisation (gaz R125, 1 kg, PRG=3170) ?",o:["0,317 tCO₂e","3,17 tCO₂e","31,7 tCO₂e","0,0317 tCO₂e"],a:1,e:"1 kg × 3170 kgCO₂e/kg ÷ 1000 = 3,17 tCO₂e. Les fuites de gaz frigorigènes peuvent sembler anecdotiques en masse (1 kg) mais leur PRG très élevé en fait un poste significatif."},
-  {id:12,cat:"Calcul BC",q:"Dans l'exercice LAMBDA, comment calcule-t-on l'amortissement carbone du bâtiment (750 m², FE=550 kgCO₂e/m², amorti sur 20 ans) ?",o:["750 × 550 / 1000 = 412,5 tCO₂e","750 × 550 / 1000 / 20 = 20,625 tCO₂e","750 × 550 × 20 / 1000 = 8250 tCO₂e","750 / 550 / 20 = 0,068 tCO₂e"],a:1,e:"Calcul : 750 m² × 550 kgCO₂e/m² ÷ 1000 ÷ 20 ans = 20,625 tCO₂e/an. On divise par la durée d'amortissement pour n'imputer que la quote-part annuelle de l'empreinte carbone du bâtiment."},
   {id:13,cat:"Bilan Carbone®",q:"Selon le cours BC08, qui a développé la méthode Bilan Carbone® et qui la gère depuis 2011 ?",o:["Créée par l'ABC, gérée par l'ADEME depuis 2011","Développée par l'ADEME, gérée par l'ABC (Association pour la transition Bas Carbone) depuis 2011","Créée par le GHG Protocol, gérée par l'ADEME","Développée par Jean-Marc Jancovici seul, gérée par Carbone 4"],a:1,e:"La méthode Bilan Carbone® a été développée par l'ADEME. Depuis 2011, sa gestion est assurée par l'ABC (Association Bilan Carbone, devenue Association pour la transition Bas Carbone). La V9 est mise en application en 2025."},
   {id:14,cat:"Bilan Carbone®",q:"Combien d'étapes compte la démarche Bilan Carbone® selon le cours BC08 ?",o:["5 étapes","6 ou 7 étapes","8 étapes","4 étapes"],a:1,e:"Selon le cours BC08 : la démarche générale comprend 6 ou 7 étapes : Cadrage, Périmètres, Mobilisation, Comptabilisation, Plan de transition, Restitution, et (optionnel) Évaluation."},
   {id:15,cat:"Bilan Carbone®",q:"Quels sont les 3 grands objectifs de la méthode Bilan Carbone® selon le cours BC08 ?",o:["Mesurer, Compenser, Communiquer","Mesurer/identifier les sources, Analyser les risques & opportunités, Mettre en place des actions de décarbonation","Réduire, Certifier, Publier","Inventorier, Financer, Compenser"],a:1,e:"Les 3 objectifs du BC® selon le cours : (1) Mesures — identifier et quantifier les émissions GES, (2) Analyses — évaluer la dépendance aux fossiles et identifier risques/opportunités, (3) Actions — mettre en place des actions de décarbonation (immédiates, prioritaires, stratégiques, d'adaptation)."},
@@ -3206,8 +2742,6 @@ const QBC08 = [
   {id:23,cat:"Base Empreinte",q:"Selon le cours BC08, quelle base de données fournit les facteurs d'émission pour le Bilan Carbone® ?",o:["La base GHG Protocol","La Base Empreinte® de l'ADEME (base-empreinte.ademe.fr)","La base IPCC","La base Ecoinvent"],a:1,e:"La Base Empreinte® (anciennement Base Carbone®) est portée par l'ADEME. C'est la base de données publique officielle de facteurs d'émission. Elle est accessible gratuitement sur base-empreinte.ademe.fr et c'est sur elle que s'appuie le Bilan Carbone®."},
   {id:24,cat:"Base Empreinte",q:"Selon le cours BC08, quelle est la bonne démarche pour convertir des données en tCO₂e ?",o:["Multiplier directement les km par le FE en kg puis diviser par 100","Convertir la donnée d'activité en unité cohérente avec le FE, multiplier, puis convertir en tonnes","Additionner tous les FE et diviser par le nombre de sources","Utiliser uniquement des FE en euros par tonne"],a:1,e:"Le cours insiste sur la rigueur des unités : (1) Vérifier la cohérence des unités (FE souvent en kg, données parfois en g ou en km), (2) Multiplier DA × FE, (3) Convertir en tonnes. Exemple : 1 km train × 0,1 kgCO₂e/m → convertir km en m → (1×1000) × (0,1/1000) = 0,1 tCO₂e."},
   {id:25,cat:"Limites planétaires",q:"Selon le cours BC08, combien de limites planétaires ont été définies ?",o:["6","7","9","12"],a:2,e:"9 limites planétaires ont été définies. Elles définissent un espace de développement sûr et juste pour l'humanité, fondé sur neuf processus biophysiques qui régulent la stabilité de la planète. Le changement climatique n'est qu'UNE thématique parmi ces 9."},
-  {id:26,cat:"Calcul BC",q:"Dans l'exercice LAMBDA, quel est le poste d'émission le plus important (en tCO₂e) ?",o:["Fuite de climatisation","Achat de film plastique","Déplacements salariés en véhicule gazole (34,08 tCO₂e)","Fret de marchandises"],a:2,e:"Le poste le plus important est les déplacements des salariés avec leur propre véhicule gazole : 160 000 km × 0,213 kgCO₂e/km ÷ 1000 = 34,08 tCO₂e, soit ~35% du bilan total de 96,823 tCO₂e."},
-  {id:27,cat:"Calcul BC",q:"Dans le cas laboratoire Néel Grenoble, quel est le total d'émissions (aller-retour) arrondi ?",o:["1 045 kg CO₂e","2 091,58 kg CO₂e soit ~2,09 tCO₂e","500 kg CO₂e","4 183 kg CO₂e"],a:1,e:"Le total aller-retour est ~2 091,58 kg CO₂e soit ~2,09 tCO₂e. La quasi-totalité est due à l'avion long-courrier Francfort-Boston (1 793,6 kg), qui représente 86% des émissions du trajet."},
   {id:28,cat:"Bilan Carbone®",q:"Selon le cours BC08, pour quelle raison principale l'outil Bilan Carbone® s'est-il développé (source : J.-M. Jancovici, 2000) ?",o:["Pour répondre à une obligation légale","Car il était clair, compréhensible, faisable en demi-journée, donnait des ordres de grandeur et surprenait les décideurs par ses résultats","Car il était le seul outil disponible","Car il était imposé par l'Union Européenne"],a:1,e:"Selon un mail de Jancovici (décembre 2000) cité dans le cours : l'approche a séduit car elle était claire, compréhensible, faisable en une demi-journée, donnait des ordres de grandeur, utilisait des tableurs simples, et surtout surprenait les décideurs par ses résultats — déclenchant ainsi l'action."},
   {id:29,cat:"Réglementation",q:"Selon le cours BC08, en quelle année a été publiée la DPEF (Déclaration de Performance Extra-Financière) ?",o:["2015","2018","2021","2025"],a:1,e:"La DPEF a été publiée en première publication en 2018. Son problème identifié dans le cours : beaucoup de socialwashing et greenwashing. Elle est remplacée par la CSRD (première publication 2025)."},
   {id:30,cat:"Formation BC",q:"Selon le cours BC08, quels éléments sont nécessaires pour obtenir la certification Bilan Carbone® ?",o:["Uniquement réussir le QCM final","Suivre plus de 90% du e-learning ET obtenir un score minimal au QCM de l'ABC à l'issue de la session 2","Réaliser un bilan carbone complet d'une entreprise","Passer un entretien oral avec un formateur certifié"],a:1,e:"Pour obtenir la certification : (1) Suivi de plus de 90% du e-learning, (2) Score minimal au QCM de l'ABC à l'issue de la session 2. Le cours prévoit aussi une évaluation master basée sur deux QCM et un PowerPoint de cas pratique."},
@@ -3217,15 +2751,17 @@ const QBC08 = [
   const app = document.getElementById('qcm-cours-app');
   if (!app) return;
 
+  let shuffled = [...QBC08].sort(() => Math.random() - 0.5);
+
   let cur = 0, sel = null, conf = false, score = 0, ans = [];
-  const total = QBC08.length;
+  const total = shuffled.length;
 
   function pct() { return Math.round((cur / total) * 100); }
 
   function render() {
     app.innerHTML = '';
     if (cur >= total) { showResult(); return; }
-    const q = QBC08[cur];
+    const q = shuffled[cur];
 
     // Progress
     const prog = document.createElement('div');
@@ -3333,6 +2869,7 @@ const QBC08 = [
         </div>
       </div>`;
     app.querySelector('.btn').onclick = () => {
+      shuffled = [...QBC08].sort(() => Math.random() - 0.5);
       cur = 0; sel = null; conf = false; score = 0; ans = [];
       render();
     };
