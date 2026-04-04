@@ -712,7 +712,6 @@
   <button class="nav-btn" onclick="showSection('postes', this)">📋 Postes & Domaines</button>
   <button class="nav-btn" onclick="showSection('fiches', this)">⚡ Fiches Éclair</button>
   <button class="nav-btn" onclick="showSection('qcm', this)">🎯 QCM Entraînement</button>
-  <button class="nav-btn" onclick="showSection('qcm-cours', this)">📚 QCM Cours BC08</button>
 </nav>
 
 <main>
@@ -782,50 +781,7 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Les 3 niveaux de maturité — 24 questions clés</div>
-    <p><strong>24 questions clés</strong> permettent d'identifier le niveau de maturité adapté à l'organisation.</p>
-    <div class="highlight">Il n'est <strong>PAS obligatoire</strong> de passer dans l'ordre. Une organisation peut directement viser le niveau Avancé. La <strong>communication est conditionnée au respect intégral des critères</strong> du niveau visé. Les niveaux constituent une <strong>marque de reconnaissance</strong> auprès des financeurs, clients et donneurs d'ordre.</div>
-    <div class="levels-grid">
-      <div class="level-card level-init">
-        <div class="level-name">INITIAL</div>
-        <p>Émissions directes + 80–100% des indirectes.</p>
-        <div style="margin-top:10px">
-          <div class="check-item">Périmètre opérationnel : directes + 80-100% indirectes</div>
-          <div class="check-item">Cartographie des flux : requise</div>
-          <div class="check-item">Mobilisation : PP internes uniquement</div>
-          <div class="check-item">Actions mobilisation : 3 phases min.</div>
-          <div class="check-item">Tableau de bord plan : recommandé</div>
-          <div class="check-item">Risques climatiques : liste physiques &amp; transition</div>
-          <div class="cross-item">PP externes non requises</div>
-        </div>
-      </div>
-      <div class="level-card level-std">
-        <div class="level-name">STANDARD</div>
-        <p>Toutes émissions directes et indirectes.</p>
-        <div style="margin-top:10px">
-          <div class="check-item">Périmètre opérationnel : toutes directes et indirectes</div>
-          <div class="check-item">Cartographie des flux : requise</div>
-          <div class="check-item">Mobilisation : PP internes + ≥1 externe</div>
-          <div class="check-item">Actions mobilisation : 4 phases chaque étape</div>
-          <div class="check-item">Tableau de bord plan : <strong>obligatoire</strong></div>
-          <div class="check-item">Risques climatiques : spécifiques + cartographie flux</div>
-        </div>
-      </div>
-      <div class="level-card level-adv">
-        <div class="level-name">AVANCÉ</div>
-        <p>Idem Standard + analyse complète.</p>
-        <div style="margin-top:10px">
-          <div class="check-item">Périmètre opérationnel : idem Standard + analyse complète</div>
-          <div class="check-item">Cartographie des flux : requise + détaillée</div>
-          <div class="check-item">Mobilisation : PP internes + multiples externes</div>
-          <div class="check-item">Actions mobilisation : 4 phases approfondies</div>
-          <div class="check-item">Tableau de bord plan : obligatoire + KPIs</div>
-          <div class="check-item">Risques climatiques : analyse complète TCFD</div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
 
 </div>
@@ -1511,10 +1467,6 @@
   <div id="qcm-app" style="max-width:680px;margin:0 auto;padding:0 0 40px"></div>
 </div>
 
-<!-- ============================== QCM COURS BC08 ============================== -->
-<div class="section" id="qcm-cours">
-  <div id="qcm-cours-app" style="max-width:680px;margin:0 auto;padding:0 0 40px"></div>
-</div>
 
 </main>
 
@@ -1653,6 +1605,32 @@ const Q=[
 {id:89,cat:"Évaluation & Qualité",type:"mcq",q:"Quelle est la condition d'impartialité requise pour les évaluateurs d'un Bilan Carbone® ?",o:["L'évaluateur peut appartenir à la même organisation s'il est certifié","Les évaluateurs doivent être indépendants de ceux ayant réalisé le bilan","Seul un expert-comptable peut réaliser l'évaluation","L'évaluation doit être réalisée par l'ADEME"],a:1,e:"Les évaluateurs doivent respecter les principes d'impartialité et d'indépendance vis-à-vis de ceux ayant réalisé le bilan. Tous les membres doivent appartenir à des organisations adhérentes à l'ABC. Tout conflit d'intérêt doit être signalé à l'ABC."},
 {id:90,cat:"Évaluation & Qualité",type:"mcq",q:"Quelle est la validité des plans d'action et trajectoires lors d'une évaluation du Bilan Carbone® ?",o:["1 an","2 ans","4 ans","10 ans"],a:1,e:"Les plans d'action et trajectoires ont une validité de 2 ANS lors d'une évaluation. L'analyse des risques au niveau Avancé a une validité de 10 ans. La démarche de mobilisation a une validité de 2 ans. Cela évite les redondances entre renouvellements."},
 {id:91,cat:"Évaluation & Qualité",type:"mcq",q:"Pour quelle raison une organisation peut-elle demander une évaluation externe de son Bilan Carbone® ?",o:["Uniquement pour obtenir un label RSE","Pour la conformité réglementaire, l'assurance de fiabilité, le contrôle qualité ou la transparence de communication","Uniquement si elle est au niveau Avancé","Pour obtenir une réduction de sa taxe carbone"],a:1,e:"Une évaluation externe peut être demandée pour : (1) conformité réglementaire (BEGES-R, CSRD), (2) assurance sur la fiabilité des résultats, (3) contrôle qualité des bilans de parties prenantes, (4) transparence de la communication externe. Elle reste volontaire."},
+
+// ── BC08 Cours ──────────────────────────────────────────────────────────────
+{id:"BC1",type:"mcq",cat:"Changement climatique",q:"Selon le cours BC08, qu'est-ce que le climat ?",o:["L'étude des phénomènes atmosphériques à court terme","La distribution statistique des conditions atmosphériques dans une région sur au moins 30 ans","La mesure des précipitations annuelles","L'évolution quotidienne de la température"],a:1,e:"Le climat est la distribution statistique des conditions de l'atmosphère terrestre dans une région donnée pendant une période donnée (au moins 30 ans par convention). C'est différent de la météo qui renvoie aux phénomènes atmosphériques à court terme."},
+{id:"BC2",type:"mcq",cat:"Changement climatique",q:"Sans l'effet de serre naturel, quelle serait la température moyenne sur Terre ?",o:["0°C","-18°C","-5°C","+5°C"],a:1,e:"Sans l'effet de serre, la température moyenne sur Terre serait de -18°C au lieu des 15°C actuels. L'effet de serre naturel est donc indispensable pour maintenir des températures supportables."},
+{id:"BC3",type:"mcq",cat:"Changement climatique",q:"Qu'est-ce que le forçage radiatif (FR) ?",o:["La quantité de CO₂ émise par l'industrie","La différence entre l'énergie reçue par la Terre et l'énergie qu'elle renvoie vers l'espace","La puissance des panneaux solaires","Le rayonnement infrarouge émis par le soleil"],a:1,e:"Le forçage radiatif (FR) est la différence entre l'énergie reçue par la Terre et l'énergie qu'elle renvoie, soit l'énergie 'forcée' à rester sur Terre. En 2022 : la Terre recevait 340 W/m² et en renvoyait 337,2 W/m², soit un FR de +2,8 W/m²."},
+{id:"BC4",type:"mcq",cat:"GES & PRG",q:"Selon le 6ème rapport du GIEC utilisé dans le cours BC08, quel est le PRG du méthane (CH₄) sur 100 ans ?",o:["21","28","36","273"],a:1,e:"Selon le 6ème rapport du GIEC (utilisé dans le cours BC08), le PRG du CH₄ est de 28. Attention : le cours BC08 s'appuie sur le AR6 (PRG CH₄=28), alors que la Base Empreinte® française utilise l'AR5 (28 aussi). Le N₂O est à 273 selon l'AR6."},
+{id:"BC5",type:"mcq",cat:"GES & PRG",q:"Selon le cours BC08 (6ème rapport GIEC), quel est le PRG du protoxyde d'azote (N₂O) sur 100 ans ?",o:["28","265","273","298"],a:2,e:"Selon le 6ème rapport du GIEC (AR6), le PRG du N₂O est de 273. (Il était de 298 selon l'AR4 et de 265 selon l'AR5.) Les gaz fluorés comme le CF4 ont un PRG de 7 380."},
+{id:"BC6",type:"mcq",cat:"GES & PRG",q:"Pourquoi le CO₂ a-t-il été adopté comme valeur de référence pour le PRG ?",o:["Parce qu'il est le plus toxique","Parce que c'est le premier gaz d'origine anthropique contribuant aux dérèglements climatiques et responsable de ~3/4 de l'effet de serre additionnel","Parce qu'il est le plus facile à mesurer","Parce qu'il a le PRG le plus élevé"],a:1,e:"Le CO₂ d'origine humaine est responsable de quasiment 3/4 de l'effet de serre additionnel. C'est le premier gaz d'origine anthropique contribuant aux dérèglements climatiques, d'où son adoption comme valeur de référence (PRG = 1)."},
+{id:"BC7",type:"mcq",cat:"GES & PRG",q:"Quels sont les 4 GES principaux cités dans le cours BC08 ?",o:["CO₂, SO₂, CH₄, N₂O","CO₂, CH₄, N₂O, Gaz fluorés (ex: CF4)","CO₂, O₃, SF₆, HFC","CO₂, CH₄, HFC, PFC"],a:1,e:"Les 4 GES principaux cités dans le cours : Dioxyde de carbone (CO₂), Méthane (CH₄), Protoxyde d'azote (N₂O), Gaz fluorés (ex: tetrafluorure de carbone CF4 avec PRG=7380)."},
+{id:"BC8",type:"mcq",cat:"Calcul BC",q:"Quelle est la formule de base pour calculer les émissions GES dans un Bilan Carbone® ?",o:["Émissions = Facteur d'émission ÷ Donnée d'activité","Émissions = Donnée d'activité × Facteur d'émission","Émissions = Donnée d'activité + Facteur d'émission","Émissions = Facteur d'émission − Donnée d'activité"],a:1,e:"La formule fondamentale est : Émissions = Donnée d'activité × Facteur d'émission. Exemple : 1 km en train × 0,1 kgCO₂e/m (converti en mètres) = 0,1 tCO₂e. Attention aux unités : FE souvent en kg, résultat toujours en tonnes."},
+{id:"BC13",type:"mcq",cat:"Bilan Carbone®",q:"Selon le cours BC08, qui a développé la méthode Bilan Carbone® et qui la gère depuis 2011 ?",o:["Créée par l'ABC, gérée par l'ADEME depuis 2011","Développée par l'ADEME, gérée par l'ABC (Association pour la transition Bas Carbone) depuis 2011","Créée par le GHG Protocol, gérée par l'ADEME","Développée par Jean-Marc Jancovici seul, gérée par Carbone 4"],a:1,e:"La méthode Bilan Carbone® a été développée par l'ADEME. Depuis 2011, sa gestion est assurée par l'ABC (Association Bilan Carbone, devenue Association pour la transition Bas Carbone). La V9 est mise en application en 2025."},
+{id:"BC14",type:"mcq",cat:"Bilan Carbone®",q:"Combien d'étapes compte la démarche Bilan Carbone® selon le cours BC08 ?",o:["5 étapes","6 ou 7 étapes","8 étapes","4 étapes"],a:1,e:"Selon le cours BC08 : la démarche générale comprend 6 ou 7 étapes : Cadrage, Périmètres, Mobilisation, Comptabilisation, Plan de transition, Restitution, et (optionnel) Évaluation."},
+{id:"BC15",type:"mcq",cat:"Bilan Carbone®",q:"Quels sont les 3 grands objectifs de la méthode Bilan Carbone® selon le cours BC08 ?",o:["Mesurer, Compenser, Communiquer","Mesurer/identifier les sources, Analyser les risques & opportunités, Mettre en place des actions de décarbonation","Réduire, Certifier, Publier","Inventorier, Financer, Compenser"],a:1,e:"Les 3 objectifs du BC® selon le cours : (1) Mesures — identifier et quantifier les émissions GES, (2) Analyses — évaluer la dépendance aux fossiles et identifier risques/opportunités, (3) Actions — mettre en place des actions de décarbonation (immédiates, prioritaires, stratégiques, d'adaptation)."},
+{id:"BC16",type:"mcq",cat:"Bilan Carbone®",q:"La démarche Bilan Carbone® est-elle obligatoire ou volontaire selon le cours BC08 ?",o:["Obligatoire pour toutes les entreprises depuis 2025","Volontaire","Obligatoire pour les entreprises de plus de 250 salariés","Obligatoire uniquement pour les entreprises cotées"],a:1,e:"Selon le cours BC08, la démarche Bilan Carbone® est une 'démarche volontaire'. À ne pas confondre avec le BEGES réglementaire qui est obligatoire pour certaines organisations."},
+{id:"BC17",type:"mcq",cat:"Réglementation",q:"Selon le cours BC08, quelle réglementation européenne remplace la DPEF et vise à éviter le greenwashing ?",o:["La Taxonomie européenne","La CSRD (Corporate Sustainability Reporting Directive)","La directive ETS","La TCFD"],a:1,e:"La CSRD remplace la DPEF. Elle vise à éviter le greenwashing et assurer une meilleure comparabilité des données sociales et environnementales via 12 standards de reporting de durabilité (première publication 2025). La norme VSME est son adaptation pour les PME."},
+{id:"BC18",type:"mcq",cat:"Réglementation",q:"Qu'est-ce que la Taxonomie européenne selon le cours BC08 ?",o:["Un système de certification des bilans carbone","Un outil qui recense les activités durables des entreprises répondant à un des 6 objectifs environnementaux sans porter préjudice aux autres","Une directive imposant des objectifs de réduction de CO₂","Un standard de reporting extra-financier pour les PME"],a:1,e:"La Taxonomie européenne (2021) recense les activités durables des entreprises, c'est-à-dire les activités qui répondent à un des 6 objectifs environnementaux sans porter préjudice aux autres. Problème actuel : les informations sont difficilement comparables entre entreprises (source AMF)."},
+{id:"BC19",type:"mcq",cat:"Réglementation",q:"Selon le cours BC08, quel est l'objectif de répartition des GES en France par personne ?",o:["5 tCO₂eq par personne","2 tCO₂eq par personne","10 tCO₂eq par personne","0,5 tCO₂eq par personne"],a:1,e:"L'objectif affiché dans le cours BC08 est de 2 tCO₂eq par personne en France. Cet objectif est lié aux engagements de l'Accord de Paris pour limiter le réchauffement à 1,5°C."},
+{id:"BC20",type:"mcq",cat:"Réglementation",q:"Selon le cours BC08, quelle est la principale source d'émissions mondiales de GES ?",o:["L'agriculture","L'industrie","Le secteur de l'énergie","Les transports"],a:2,e:"Selon le cours BC08 (slide 13) : 'Les principales sources d'émissions de GES anthropiques sont liées au secteur de l'énergie.' Cela inclut la production d'électricité, la chaleur et les carburants fossiles."},
+{id:"BC21",type:"mcq",cat:"Transition énergétique",q:"Selon le cours BC08, quels sont les 2 axes prioritaires de la transition énergétique ?",o:["Nucléaire et solaire","Consommer moins d'énergie (sobriété) et produire une énergie décarbonée","Compenser les émissions et planter des arbres","Taxer le carbone et subventionner les renouvelables"],a:1,e:"Les 2 axes prioritaires selon le cours : (1) Consommer moins d'énergie = sobriété énergétique (directe : baisser le chauffage ; indirecte : mieux isoler), (2) Produire une énergie décarbonée (réduire fossiles, électrifier, déployer les ENR, mix avec nucléaire)."},
+{id:"BC22",type:"mcq",cat:"Transition énergétique",q:"Dans le cours BC08, quelle analogie est utilisée pour expliquer la différence entre météo et climat ?",o:["L'analogie du thermomètre","L'analogie de la baignoire","L'analogie du glacier","L'analogie du moteur"],a:1,e:"Le cours utilise l'analogie de la baignoire : les fluctuations rapides lors d'un objet jeté dans la baignoire = météo ; l'augmentation lente du niveau moyen de l'eau = phénomène climatique. Cela illustre les deux échelles temporelles différentes."},
+{id:"BC23",type:"mcq",cat:"Base Empreinte",q:"Selon le cours BC08, quelle base de données fournit les facteurs d'émission pour le Bilan Carbone® ?",o:["La base GHG Protocol","La Base Empreinte® de l'ADEME (base-empreinte.ademe.fr)","La base IPCC","La base Ecoinvent"],a:1,e:"La Base Empreinte® (anciennement Base Carbone®) est portée par l'ADEME. C'est la base de données publique officielle de facteurs d'émission. Elle est accessible gratuitement sur base-empreinte.ademe.fr et c'est sur elle que s'appuie le Bilan Carbone®."},
+{id:"BC24",type:"mcq",cat:"Base Empreinte",q:"Selon le cours BC08, quelle est la bonne démarche pour convertir des données en tCO₂e ?",o:["Multiplier directement les km par le FE en kg puis diviser par 100","Convertir la donnée d'activité en unité cohérente avec le FE, multiplier, puis convertir en tonnes","Additionner tous les FE et diviser par le nombre de sources","Utiliser uniquement des FE en euros par tonne"],a:1,e:"Le cours insiste sur la rigueur des unités : (1) Vérifier la cohérence des unités (FE souvent en kg, données parfois en g ou en km), (2) Multiplier DA × FE, (3) Convertir en tonnes. Exemple : 1 km train × 0,1 kgCO₂e/m → convertir km en m → (1×1000) × (0,1/1000) = 0,1 tCO₂e."},
+{id:"BC25",type:"mcq",cat:"Limites planétaires",q:"Selon le cours BC08, combien de limites planétaires ont été définies ?",o:["6","7","9","12"],a:2,e:"9 limites planétaires ont été définies. Elles définissent un espace de développement sûr et juste pour l'humanité, fondé sur neuf processus biophysiques qui régulent la stabilité de la planète. Le changement climatique n'est qu'UNE thématique parmi ces 9."},
+{id:"BC28",type:"mcq",cat:"Bilan Carbone®",q:"Selon le cours BC08, pour quelle raison principale l'outil Bilan Carbone® s'est-il développé (source : J.-M. Jancovici, 2000) ?",o:["Pour répondre à une obligation légale","Car il était clair, compréhensible, faisable en demi-journée, donnait des ordres de grandeur et surprenait les décideurs par ses résultats","Car il était le seul outil disponible","Car il était imposé par l'Union Européenne"],a:1,e:"Selon un mail de Jancovici (décembre 2000) cité dans le cours : l'approche a séduit car elle était claire, compréhensible, faisable en une demi-journée, donnait des ordres de grandeur, utilisait des tableurs simples, et surtout surprenait les décideurs par ses résultats — déclenchant ainsi l'action."},
+{id:"BC29",type:"mcq",cat:"Réglementation",q:"Selon le cours BC08, en quelle année a été publiée la DPEF (Déclaration de Performance Extra-Financière) ?",o:["2015","2018","2021","2025"],a:1,e:"La DPEF a été publiée en première publication en 2018. Son problème identifié dans le cours : beaucoup de socialwashing et greenwashing. Elle est remplacée par la CSRD (première publication 2025)."},
+{id:"BC30",type:"mcq",cat:"Formation BC",q:"Selon le cours BC08, quels éléments sont nécessaires pour obtenir la certification Bilan Carbone® ?",o:["Uniquement réussir le QCM final","Suivre plus de 90% du e-learning ET obtenir un score minimal au QCM de l'ABC à l'issue de la session 2","Réaliser un bilan carbone complet d'une entreprise","Passer un entretien oral avec un formateur certifié"],a:1,e:"Pour obtenir la certification : (1) Suivi de plus de 90% du e-learning, (2) Score minimal au QCM de l'ABC à l'issue de la session 2. Le cours prévoit aussi une évaluation master basée sur deux QCM et un PowerPoint de cas pratique."},
 ];
 
 const ORD=[
@@ -2718,165 +2696,6 @@ function buildReview(){
 render();
 </script>
 
-<script>
-// ======================== QCM COURS BC08 ========================
-const QBC08 = [
-  {id:1,cat:"Changement climatique",q:"Selon le cours BC08, qu'est-ce que le climat ?",o:["L'étude des phénomènes atmosphériques à court terme","La distribution statistique des conditions atmosphériques dans une région sur au moins 30 ans","La mesure des précipitations annuelles","L'évolution quotidienne de la température"],a:1,e:"Le climat est la distribution statistique des conditions de l'atmosphère terrestre dans une région donnée pendant une période donnée (au moins 30 ans par convention). C'est différent de la météo qui renvoie aux phénomènes atmosphériques à court terme."},
-  {id:2,cat:"Changement climatique",q:"Sans l'effet de serre naturel, quelle serait la température moyenne sur Terre ?",o:["0°C","-18°C","-5°C","+5°C"],a:1,e:"Sans l'effet de serre, la température moyenne sur Terre serait de -18°C au lieu des 15°C actuels. L'effet de serre naturel est donc indispensable pour maintenir des températures supportables."},
-  {id:3,cat:"Changement climatique",q:"Qu'est-ce que le forçage radiatif (FR) ?",o:["La quantité de CO₂ émise par l'industrie","La différence entre l'énergie reçue par la Terre et l'énergie qu'elle renvoie vers l'espace","La puissance des panneaux solaires","Le rayonnement infrarouge émis par le soleil"],a:1,e:"Le forçage radiatif (FR) est la différence entre l'énergie reçue par la Terre et l'énergie qu'elle renvoie, soit l'énergie 'forcée' à rester sur Terre. En 2022 : la Terre recevait 340 W/m² et en renvoyait 337,2 W/m², soit un FR de +2,8 W/m²."},
-  {id:4,cat:"GES & PRG",q:"Selon le 6ème rapport du GIEC utilisé dans le cours BC08, quel est le PRG du méthane (CH₄) sur 100 ans ?",o:["21","28","36","273"],a:1,e:"Selon le 6ème rapport du GIEC (utilisé dans le cours BC08), le PRG du CH₄ est de 28. Attention : le cours BC08 s'appuie sur le AR6 (PRG CH₄=28), alors que la Base Empreinte® française utilise l'AR5 (28 aussi). Le N₂O est à 273 selon l'AR6."},
-  {id:5,cat:"GES & PRG",q:"Selon le cours BC08 (6ème rapport GIEC), quel est le PRG du protoxyde d'azote (N₂O) sur 100 ans ?",o:["28","265","273","298"],a:2,e:"Selon le 6ème rapport du GIEC (AR6), le PRG du N₂O est de 273. (Il était de 298 selon l'AR4 et de 265 selon l'AR5.) Les gaz fluorés comme le CF4 ont un PRG de 7 380."},
-  {id:6,cat:"GES & PRG",q:"Pourquoi le CO₂ a-t-il été adopté comme valeur de référence pour le PRG ?",o:["Parce qu'il est le plus toxique","Parce que c'est le premier gaz d'origine anthropique contribuant aux dérèglements climatiques et responsable de ~3/4 de l'effet de serre additionnel","Parce qu'il est le plus facile à mesurer","Parce qu'il a le PRG le plus élevé"],a:1,e:"Le CO₂ d'origine humaine est responsable de quasiment 3/4 de l'effet de serre additionnel. C'est le premier gaz d'origine anthropique contribuant aux dérèglements climatiques, d'où son adoption comme valeur de référence (PRG = 1)."},
-  {id:7,cat:"GES & PRG",q:"Quels sont les 4 GES principaux cités dans le cours BC08 ?",o:["CO₂, SO₂, CH₄, N₂O","CO₂, CH₄, N₂O, Gaz fluorés (ex: CF4)","CO₂, O₃, SF₆, HFC","CO₂, CH₄, HFC, PFC"],a:1,e:"Les 4 GES principaux cités dans le cours : Dioxyde de carbone (CO₂), Méthane (CH₄), Protoxyde d'azote (N₂O), Gaz fluorés (ex: tetrafluorure de carbone CF4 avec PRG=7380)."},
-  {id:8,cat:"Calcul BC",q:"Quelle est la formule de base pour calculer les émissions GES dans un Bilan Carbone® ?",o:["Émissions = Facteur d'émission ÷ Donnée d'activité","Émissions = Donnée d'activité × Facteur d'émission","Émissions = Donnée d'activité + Facteur d'émission","Émissions = Facteur d'émission − Donnée d'activité"],a:1,e:"La formule fondamentale est : Émissions = Donnée d'activité × Facteur d'émission. Exemple : 1 km en train × 0,1 kgCO₂e/m (converti en mètres) = 0,1 tCO₂e. Attention aux unités : FE souvent en kg, résultat toujours en tonnes."},
-  {id:13,cat:"Bilan Carbone®",q:"Selon le cours BC08, qui a développé la méthode Bilan Carbone® et qui la gère depuis 2011 ?",o:["Créée par l'ABC, gérée par l'ADEME depuis 2011","Développée par l'ADEME, gérée par l'ABC (Association pour la transition Bas Carbone) depuis 2011","Créée par le GHG Protocol, gérée par l'ADEME","Développée par Jean-Marc Jancovici seul, gérée par Carbone 4"],a:1,e:"La méthode Bilan Carbone® a été développée par l'ADEME. Depuis 2011, sa gestion est assurée par l'ABC (Association Bilan Carbone, devenue Association pour la transition Bas Carbone). La V9 est mise en application en 2025."},
-  {id:14,cat:"Bilan Carbone®",q:"Combien d'étapes compte la démarche Bilan Carbone® selon le cours BC08 ?",o:["5 étapes","6 ou 7 étapes","8 étapes","4 étapes"],a:1,e:"Selon le cours BC08 : la démarche générale comprend 6 ou 7 étapes : Cadrage, Périmètres, Mobilisation, Comptabilisation, Plan de transition, Restitution, et (optionnel) Évaluation."},
-  {id:15,cat:"Bilan Carbone®",q:"Quels sont les 3 grands objectifs de la méthode Bilan Carbone® selon le cours BC08 ?",o:["Mesurer, Compenser, Communiquer","Mesurer/identifier les sources, Analyser les risques & opportunités, Mettre en place des actions de décarbonation","Réduire, Certifier, Publier","Inventorier, Financer, Compenser"],a:1,e:"Les 3 objectifs du BC® selon le cours : (1) Mesures — identifier et quantifier les émissions GES, (2) Analyses — évaluer la dépendance aux fossiles et identifier risques/opportunités, (3) Actions — mettre en place des actions de décarbonation (immédiates, prioritaires, stratégiques, d'adaptation)."},
-  {id:16,cat:"Bilan Carbone®",q:"La démarche Bilan Carbone® est-elle obligatoire ou volontaire selon le cours BC08 ?",o:["Obligatoire pour toutes les entreprises depuis 2025","Volontaire","Obligatoire pour les entreprises de plus de 250 salariés","Obligatoire uniquement pour les entreprises cotées"],a:1,e:"Selon le cours BC08, la démarche Bilan Carbone® est une 'démarche volontaire'. À ne pas confondre avec le BEGES réglementaire qui est obligatoire pour certaines organisations."},
-  {id:17,cat:"Réglementation",q:"Selon le cours BC08, quelle réglementation européenne remplace la DPEF et vise à éviter le greenwashing ?",o:["La Taxonomie européenne","La CSRD (Corporate Sustainability Reporting Directive)","La directive ETS","La TCFD"],a:1,e:"La CSRD remplace la DPEF. Elle vise à éviter le greenwashing et assurer une meilleure comparabilité des données sociales et environnementales via 12 standards de reporting de durabilité (première publication 2025). La norme VSME est son adaptation pour les PME."},
-  {id:18,cat:"Réglementation",q:"Qu'est-ce que la Taxonomie européenne selon le cours BC08 ?",o:["Un système de certification des bilans carbone","Un outil qui recense les activités durables des entreprises répondant à un des 6 objectifs environnementaux sans porter préjudice aux autres","Une directive imposant des objectifs de réduction de CO₂","Un standard de reporting extra-financier pour les PME"],a:1,e:"La Taxonomie européenne (2021) recense les activités durables des entreprises, c'est-à-dire les activités qui répondent à un des 6 objectifs environnementaux sans porter préjudice aux autres. Problème actuel : les informations sont difficilement comparables entre entreprises (source AMF)."},
-  {id:19,cat:"Réglementation",q:"Selon le cours BC08, quel est l'objectif de répartition des GES en France par personne ?",o:["5 tCO₂eq par personne","2 tCO₂eq par personne","10 tCO₂eq par personne","0,5 tCO₂eq par personne"],a:1,e:"L'objectif affiché dans le cours BC08 est de 2 tCO₂eq par personne en France. Cet objectif est lié aux engagements de l'Accord de Paris pour limiter le réchauffement à 1,5°C."},
-  {id:20,cat:"Réglementation",q:"Selon le cours BC08, quelle est la principale source d'émissions mondiales de GES ?",o:["L'agriculture","L'industrie","Le secteur de l'énergie","Les transports"],a:2,e:"Selon le cours BC08 (slide 13) : 'Les principales sources d'émissions de GES anthropiques sont liées au secteur de l'énergie.' Cela inclut la production d'électricité, la chaleur et les carburants fossiles."},
-  {id:21,cat:"Transition énergétique",q:"Selon le cours BC08, quels sont les 2 axes prioritaires de la transition énergétique ?",o:["Nucléaire et solaire","Consommer moins d'énergie (sobriété) et produire une énergie décarbonée","Compenser les émissions et planter des arbres","Taxer le carbone et subventionner les renouvelables"],a:1,e:"Les 2 axes prioritaires selon le cours : (1) Consommer moins d'énergie = sobriété énergétique (directe : baisser le chauffage ; indirecte : mieux isoler), (2) Produire une énergie décarbonée (réduire fossiles, électrifier, déployer les ENR, mix avec nucléaire)."},
-  {id:22,cat:"Transition énergétique",q:"Dans le cours BC08, quelle analogie est utilisée pour expliquer la différence entre météo et climat ?",o:["L'analogie du thermomètre","L'analogie de la baignoire","L'analogie du glacier","L'analogie du moteur"],a:1,e:"Le cours utilise l'analogie de la baignoire : les fluctuations rapides lors d'un objet jeté dans la baignoire = météo ; l'augmentation lente du niveau moyen de l'eau = phénomène climatique. Cela illustre les deux échelles temporelles différentes."},
-  {id:23,cat:"Base Empreinte",q:"Selon le cours BC08, quelle base de données fournit les facteurs d'émission pour le Bilan Carbone® ?",o:["La base GHG Protocol","La Base Empreinte® de l'ADEME (base-empreinte.ademe.fr)","La base IPCC","La base Ecoinvent"],a:1,e:"La Base Empreinte® (anciennement Base Carbone®) est portée par l'ADEME. C'est la base de données publique officielle de facteurs d'émission. Elle est accessible gratuitement sur base-empreinte.ademe.fr et c'est sur elle que s'appuie le Bilan Carbone®."},
-  {id:24,cat:"Base Empreinte",q:"Selon le cours BC08, quelle est la bonne démarche pour convertir des données en tCO₂e ?",o:["Multiplier directement les km par le FE en kg puis diviser par 100","Convertir la donnée d'activité en unité cohérente avec le FE, multiplier, puis convertir en tonnes","Additionner tous les FE et diviser par le nombre de sources","Utiliser uniquement des FE en euros par tonne"],a:1,e:"Le cours insiste sur la rigueur des unités : (1) Vérifier la cohérence des unités (FE souvent en kg, données parfois en g ou en km), (2) Multiplier DA × FE, (3) Convertir en tonnes. Exemple : 1 km train × 0,1 kgCO₂e/m → convertir km en m → (1×1000) × (0,1/1000) = 0,1 tCO₂e."},
-  {id:25,cat:"Limites planétaires",q:"Selon le cours BC08, combien de limites planétaires ont été définies ?",o:["6","7","9","12"],a:2,e:"9 limites planétaires ont été définies. Elles définissent un espace de développement sûr et juste pour l'humanité, fondé sur neuf processus biophysiques qui régulent la stabilité de la planète. Le changement climatique n'est qu'UNE thématique parmi ces 9."},
-  {id:28,cat:"Bilan Carbone®",q:"Selon le cours BC08, pour quelle raison principale l'outil Bilan Carbone® s'est-il développé (source : J.-M. Jancovici, 2000) ?",o:["Pour répondre à une obligation légale","Car il était clair, compréhensible, faisable en demi-journée, donnait des ordres de grandeur et surprenait les décideurs par ses résultats","Car il était le seul outil disponible","Car il était imposé par l'Union Européenne"],a:1,e:"Selon un mail de Jancovici (décembre 2000) cité dans le cours : l'approche a séduit car elle était claire, compréhensible, faisable en une demi-journée, donnait des ordres de grandeur, utilisait des tableurs simples, et surtout surprenait les décideurs par ses résultats — déclenchant ainsi l'action."},
-  {id:29,cat:"Réglementation",q:"Selon le cours BC08, en quelle année a été publiée la DPEF (Déclaration de Performance Extra-Financière) ?",o:["2015","2018","2021","2025"],a:1,e:"La DPEF a été publiée en première publication en 2018. Son problème identifié dans le cours : beaucoup de socialwashing et greenwashing. Elle est remplacée par la CSRD (première publication 2025)."},
-  {id:30,cat:"Formation BC",q:"Selon le cours BC08, quels éléments sont nécessaires pour obtenir la certification Bilan Carbone® ?",o:["Uniquement réussir le QCM final","Suivre plus de 90% du e-learning ET obtenir un score minimal au QCM de l'ABC à l'issue de la session 2","Réaliser un bilan carbone complet d'une entreprise","Passer un entretien oral avec un formateur certifié"],a:1,e:"Pour obtenir la certification : (1) Suivi de plus de 90% du e-learning, (2) Score minimal au QCM de l'ABC à l'issue de la session 2. Le cours prévoit aussi une évaluation master basée sur deux QCM et un PowerPoint de cas pratique."},
-];
-
-(function() {
-  const app = document.getElementById('qcm-cours-app');
-  if (!app) return;
-
-  let shuffled = [...QBC08].sort(() => Math.random() - 0.5);
-
-  let cur = 0, sel = null, conf = false, score = 0, ans = [];
-  const total = shuffled.length;
-
-  function pct() { return Math.round((cur / total) * 100); }
-
-  function render() {
-    app.innerHTML = '';
-    if (cur >= total) { showResult(); return; }
-    const q = shuffled[cur];
-
-    // Progress
-    const prog = document.createElement('div');
-    prog.className = 'progress-bar';
-    prog.innerHTML = `<div class="progress-fill" style="width:${pct()}%"></div>`;
-    app.appendChild(prog);
-
-    // Header
-    const hdr = document.createElement('div');
-    hdr.className = 'qcm-header';
-    hdr.innerHTML = `
-      <div>
-        <div class="score-label">Question</div>
-        <div class="score-display">${cur + 1} <span style="font-size:16px;color:var(--text3)">/ ${total}</span></div>
-      </div>
-      <div style="text-align:right">
-        <div class="score-label">Score</div>
-        <div class="score-display" style="color:var(--accent2)">${score}</div>
-      </div>`;
-    app.appendChild(hdr);
-
-    // Card
-    const card = document.createElement('div');
-    card.className = 'question-card';
-
-    const cat = document.createElement('div');
-    cat.className = 'q-number';
-    cat.textContent = q.cat + ' — BC08 Cours';
-    card.appendChild(cat);
-
-    const qt = document.createElement('div');
-    qt.className = 'q-text';
-    qt.textContent = q.q;
-    card.appendChild(qt);
-
-    const opts = document.createElement('div');
-    opts.className = 'q-options';
-    q.o.forEach((o, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'q-option';
-      if (conf) {
-        if (i === q.a) btn.classList.add('correct');
-        else if (i === sel) btn.classList.add('wrong');
-        btn.classList.add('disabled');
-        btn.disabled = true;
-      } else {
-        if (i === sel) btn.style.border = '2px solid var(--accent2)';
-        btn.onclick = () => { sel = i; render(); };
-      }
-      btn.innerHTML = `<span class="opt-letter">${'ABCD'[i]}</span>${o}`;
-      opts.appendChild(btn);
-    });
-    card.appendChild(opts);
-
-    // Explication
-    if (conf) {
-      const exp = document.createElement('div');
-      exp.className = 'q-explanation show';
-      exp.textContent = q.e;
-      card.appendChild(exp);
-    }
-
-    // Nav
-    const nav = document.createElement('div');
-    nav.className = 'qcm-nav';
-    nav.style.marginTop = '16px';
-
-    if (!conf) {
-      const valBtn = document.createElement('button');
-      valBtn.className = 'btn';
-      valBtn.textContent = 'Valider';
-      valBtn.disabled = sel === null;
-      valBtn.style.opacity = sel === null ? '0.4' : '1';
-      valBtn.onclick = () => {
-        if (sel === null) return;
-        conf = true;
-        const ok = sel === q.a;
-        if (ok) score++;
-        ans.push({ id: q.id, ok });
-        render();
-      };
-      nav.appendChild(valBtn);
-    } else {
-      const nextBtn = document.createElement('button');
-      nextBtn.className = 'btn';
-      nextBtn.textContent = cur + 1 < total ? 'Question suivante →' : 'Voir les résultats';
-      nextBtn.onclick = () => { cur++; sel = null; conf = false; render(); };
-      nav.appendChild(nextBtn);
-    }
-
-    card.appendChild(nav);
-    app.appendChild(card);
-  }
-
-  function showResult() {
-    const pctScore = Math.round((score / total) * 100);
-    const pass = pctScore >= 70;
-    app.innerHTML = `
-      <div class="qcm-result show">
-        <div class="result-score ${pass ? 'pass' : 'fail'}">${score}/${total}</div>
-        <div class="result-msg">${pass ? '🎉 Bravo !' : '📚 Continuez à réviser'}</div>
-        <div class="result-detail">${pctScore}% de bonnes réponses — QCM Cours BC08 (M2 DGRSE)</div>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px">
-          <button class="btn" onclick="(function(){window._bc08restart=true;})(); document.getElementById('qcm-cours-app').innerHTML='';">Recommencer</button>
-        </div>
-      </div>`;
-    app.querySelector('.btn').onclick = () => {
-      shuffled = [...QBC08].sort(() => Math.random() - 0.5);
-      cur = 0; sel = null; conf = false; score = 0; ans = [];
-      render();
-    };
-  }
-
-  render();
-})();
-</script>
+<script></script>
 </body>
 </html>
