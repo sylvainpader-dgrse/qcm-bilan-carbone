@@ -2036,17 +2036,12 @@ function buildMenu(){
     )
   );
 
-  const modeToggle=div({className:"mode-toggle"},
-    btn({className:"mode-btn"+(state.quizMode==="study"?" active":""),onClick:()=>setState({quizMode:"study"})},"Étude"),
-    btn({className:"mode-btn"+(state.quizMode==="exam"?" active":""),onClick:()=>setState({quizMode:"exam"})},"Examen"),
-  );
-
   const timerToggle=div({
     style:{display:"flex",alignItems:"center",gap:"8px",marginBottom:"12px",cursor:"pointer"},
     onClick:()=>setState({timerActive:!state.timerActive})
   },
     span({style:{fontSize:"18px"}},state.timerActive?"☑":"☐"),
-    span({style:{fontSize:"13px",color:"#8A9DB5"}},"Timer 45 min"),
+    span({style:{fontSize:"13px",color:"#666"}},"Timer 45 min"),
   );
 
   const actionBtns=[
@@ -2062,8 +2057,7 @@ function buildMenu(){
     p({className:"subtitle"},"Maîtrisez la méthode Bilan Carbone® v9"),
     p({className:"desc"},`${total} questions • 6 types • ${CATS.length} thèmes • BC® v9`),
     div({className:"chips"},...chips),
-    div({style:{display:"flex",flexDirection:"column",alignItems:"center",marginBottom:"8px"}},
-      modeToggle,
+    div({style:{display:"flex",flexDirection:"column",alignItems:"center",marginTop:"12px"}},
       timerToggle,
     ),
     div({style:{display:"flex",gap:"8px",justifyContent:"center",flexWrap:"wrap"}},...actionBtns),
